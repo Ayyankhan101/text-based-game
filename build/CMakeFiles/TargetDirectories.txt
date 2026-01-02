@@ -1,0 +1,3 @@
+/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles/WolfGame.dir
+/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles/edit_cache.dir
+/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles/rebuild_cache.dir

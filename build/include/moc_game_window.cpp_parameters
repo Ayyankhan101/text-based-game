@@ -1,0 +1,4 @@
+-I/home/ayyan/DSA-LAB-PROJECT/include
+-o
+/home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp
+/home/ayyan/DSA-LAB-PROJECT/include/game_window.h
