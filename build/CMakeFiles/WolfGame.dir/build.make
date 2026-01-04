@@ -118,10 +118,24 @@ CMakeFiles/WolfGame.dir/src/game_stack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WolfGame.dir/src/game_stack.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp -o CMakeFiles/WolfGame.dir/src/game_stack.cpp.s
 
+CMakeFiles/WolfGame.dir/src/game_window.cpp.o: CMakeFiles/WolfGame.dir/flags.make
+CMakeFiles/WolfGame.dir/src/game_window.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
+CMakeFiles/WolfGame.dir/src/game_window.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/WolfGame.dir/src/game_window.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/src/game_window.cpp.o -MF CMakeFiles/WolfGame.dir/src/game_window.cpp.o.d -o CMakeFiles/WolfGame.dir/src/game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
+
+CMakeFiles/WolfGame.dir/src/game_window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/WolfGame.dir/src/game_window.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp > CMakeFiles/WolfGame.dir/src/game_window.cpp.i
+
+CMakeFiles/WolfGame.dir/src/game_window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WolfGame.dir/src/game_window.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp -o CMakeFiles/WolfGame.dir/src/game_window.cpp.s
+
 CMakeFiles/WolfGame.dir/src/inventory.cpp.o: CMakeFiles/WolfGame.dir/flags.make
 CMakeFiles/WolfGame.dir/src/inventory.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
 CMakeFiles/WolfGame.dir/src/inventory.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/WolfGame.dir/src/inventory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/WolfGame.dir/src/inventory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/src/inventory.cpp.o -MF CMakeFiles/WolfGame.dir/src/inventory.cpp.o.d -o CMakeFiles/WolfGame.dir/src/inventory.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
 
 CMakeFiles/WolfGame.dir/src/inventory.cpp.i: cmake_force
@@ -135,7 +149,7 @@ CMakeFiles/WolfGame.dir/src/inventory.cpp.s: cmake_force
 CMakeFiles/WolfGame.dir/src/main.cpp.o: CMakeFiles/WolfGame.dir/flags.make
 CMakeFiles/WolfGame.dir/src/main.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/main.cpp
 CMakeFiles/WolfGame.dir/src/main.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/WolfGame.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/WolfGame.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/src/main.cpp.o -MF CMakeFiles/WolfGame.dir/src/main.cpp.o.d -o CMakeFiles/WolfGame.dir/src/main.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/main.cpp
 
 CMakeFiles/WolfGame.dir/src/main.cpp.i: cmake_force
@@ -149,7 +163,7 @@ CMakeFiles/WolfGame.dir/src/main.cpp.s: cmake_force
 CMakeFiles/WolfGame.dir/src/pack.cpp.o: CMakeFiles/WolfGame.dir/flags.make
 CMakeFiles/WolfGame.dir/src/pack.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
 CMakeFiles/WolfGame.dir/src/pack.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/WolfGame.dir/src/pack.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/WolfGame.dir/src/pack.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/src/pack.cpp.o -MF CMakeFiles/WolfGame.dir/src/pack.cpp.o.d -o CMakeFiles/WolfGame.dir/src/pack.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
 
 CMakeFiles/WolfGame.dir/src/pack.cpp.i: cmake_force
@@ -163,7 +177,7 @@ CMakeFiles/WolfGame.dir/src/pack.cpp.s: cmake_force
 CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o: CMakeFiles/WolfGame.dir/flags.make
 CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
 CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o -MF CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o.d -o CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
 
 CMakeFiles/WolfGame.dir/src/priority_queue.cpp.i: cmake_force
@@ -177,7 +191,7 @@ CMakeFiles/WolfGame.dir/src/priority_queue.cpp.s: cmake_force
 CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o: CMakeFiles/WolfGame.dir/flags.make
 CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o: include/moc_game_window.cpp
 CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o: CMakeFiles/WolfGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o -MF CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o.d -o CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp
 
 CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.i: cmake_force
@@ -193,6 +207,7 @@ WolfGame_OBJECTS = \
 "CMakeFiles/WolfGame.dir/src/action_queue.cpp.o" \
 "CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o" \
 "CMakeFiles/WolfGame.dir/src/game_stack.cpp.o" \
+"CMakeFiles/WolfGame.dir/src/game_window.cpp.o" \
 "CMakeFiles/WolfGame.dir/src/inventory.cpp.o" \
 "CMakeFiles/WolfGame.dir/src/main.cpp.o" \
 "CMakeFiles/WolfGame.dir/src/pack.cpp.o" \
@@ -205,6 +220,7 @@ WolfGame_EXTERNAL_OBJECTS =
 WolfGame: CMakeFiles/WolfGame.dir/src/action_queue.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/src/game_stack.cpp.o
+WolfGame: CMakeFiles/WolfGame.dir/src/game_window.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/src/inventory.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/src/main.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/src/pack.cpp.o
@@ -218,7 +234,7 @@ WolfGame: /usr/lib/x86_64-linux-gnu/libGLX.so
 WolfGame: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.9.2
 WolfGame: CMakeFiles/WolfGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable WolfGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable WolfGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/WolfGame.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

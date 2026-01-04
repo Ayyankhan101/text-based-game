@@ -64,10 +64,14 @@ CMAKE_BINARY_DIR = /home/ayyan/DSA-LAB-PROJECT/build
 
 # The main recursive "all" target.
 all: CMakeFiles/WolfGame.dir/all
+all: CMakeFiles/Validator.dir/all
+all: CMakeFiles/BalanceTester.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/WolfGame.dir/codegen
+codegen: CMakeFiles/Validator.dir/codegen
+codegen: CMakeFiles/BalanceTester.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -76,6 +80,8 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/WolfGame.dir/clean
+clean: CMakeFiles/Validator.dir/clean
+clean: CMakeFiles/BalanceTester.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -85,12 +91,12 @@ clean: CMakeFiles/WolfGame.dir/clean
 CMakeFiles/WolfGame.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target WolfGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33 "Built target WolfGame"
 .PHONY : CMakeFiles/WolfGame.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/WolfGame.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/WolfGame.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 0
 .PHONY : CMakeFiles/WolfGame.dir/rule
@@ -102,13 +108,77 @@ WolfGame: CMakeFiles/WolfGame.dir/rule
 # codegen rule for target.
 CMakeFiles/WolfGame.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Finished codegen for target WolfGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33 "Finished codegen for target WolfGame"
 .PHONY : CMakeFiles/WolfGame.dir/codegen
 
 # clean rule for target.
 CMakeFiles/WolfGame.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/clean
 .PHONY : CMakeFiles/WolfGame.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Validator.dir
+
+# All Build rule for target.
+CMakeFiles/Validator.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22 "Built target Validator"
+.PHONY : CMakeFiles/Validator.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/Validator.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 11
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Validator.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 0
+.PHONY : CMakeFiles/Validator.dir/rule
+
+# Convenience name for target.
+Validator: CMakeFiles/Validator.dir/rule
+.PHONY : Validator
+
+# codegen rule for target.
+CMakeFiles/Validator.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22 "Finished codegen for target Validator"
+.PHONY : CMakeFiles/Validator.dir/codegen
+
+# clean rule for target.
+CMakeFiles/Validator.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/clean
+.PHONY : CMakeFiles/Validator.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/BalanceTester.dir
+
+# All Build rule for target.
+CMakeFiles/BalanceTester.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target BalanceTester"
+.PHONY : CMakeFiles/BalanceTester.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/BalanceTester.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 11
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/BalanceTester.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 0
+.PHONY : CMakeFiles/BalanceTester.dir/rule
+
+# Convenience name for target.
+BalanceTester: CMakeFiles/BalanceTester.dir/rule
+.PHONY : BalanceTester
+
+# codegen rule for target.
+CMakeFiles/BalanceTester.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target BalanceTester"
+.PHONY : CMakeFiles/BalanceTester.dir/codegen
+
+# clean rule for target.
+CMakeFiles/BalanceTester.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/clean
+.PHONY : CMakeFiles/BalanceTester.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

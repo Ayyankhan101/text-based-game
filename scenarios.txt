@@ -1,0 +1,140 @@
+# Wolf Pack Survival Adventure Game - Scenarios
+
+## Introduction Scenarios
+1: You awaken in a misty forest, echoes of your ancestors whispering in your mind. The First Pack calls to you - a legendary wolf alliance that once ruled these lands. But hunger gnaws at you. Do you heed the echoes or hunt for survival?
+   A: Follow the ancestral echoes (Spirit +10)
+   B: Ignore echoes and hunt (Energy -5)
+
+## Echoes Path
+2: The echoes lead you to an ancient stone circle, glowing with ethereal light. A spirit wolf appears, offering guidance. 'Join the spirits or claim the wild?' it asks.
+   A: Embrace the spirits (Spirit +20, Energy -10)
+   B: Reject spirits, mark territory (Reputation +15)
+
+4: The spirits grant you visions of the First Pack's glory. But they demand a sacrifice - your connection to the mortal world weakens.
+   A: Accept visions (Spirit +30, Health -20)
+   B: Pull away (Spirit +10, normal)
+
+8: Visions show you the path to the First Pack's den, but spirits possess you briefly, draining your life force.
+   A: Follow vision to den (Spirit +40, Health -40)
+   B: Resist and hunt (Spirit +20, Hunger -10)
+
+16: You reach the First Pack's den. Spirits welcome you as guardian.
+   Ending: Spirit Ally: Eternal peace with ancestors.
+
+9: You break free, but the spirits curse you with weakness. A lone traveler approaches.
+   A: Attack traveler (Reputation -20, Hunger -50)
+   B: Spare traveler (Spirit +15, Energy -5)
+
+## Hunt Path
+3: You stalk a deer through the underbrush, but the forest seems alive with unseen eyes. A rival wolf pack watches from the shadows.
+   A: Confront the pack (Reputation +10, Health risk)
+   B: Steal prey and flee (Hunger -20, Spirit -5)
+
+6: The pack alpha challenges you. Prove your worth or submit?
+   A: Challenge alpha (Health -25, Reputation +30)
+   B: Submit and join (Spirit -15, Pack +1)
+
+7: You escape with the prey, but the pack pursues. A storm brews overhead.
+   A: Weather the storm (Health -15, Hunger -30)
+   B: Seek shelter in ruins (Energy -10, Spirit +5)
+
+## Territory Path
+5: You howl to claim the land, but a territorial bear responds. Fight or flee?
+   A: Fight the bear (Health -30, Reputation +20)
+   B: Flee and hide (Energy -15, Spirit -10)
+
+10: You defeat the bear but are gravely wounded. Echoes guide you to a healing spring.
+   A: Drink from spring (Health +50, Spirit +10)
+   B: Avoid spring (Health -10, Spirit -5)
+   17: The spring heals you completely. You become a legendary healer. (Healer of the Wild: Restored balance.)
+
+11: You hide in shadows, but the bear's roar shakes your resolve. Ancestors whisper of cowardice.
+   A: Embrace shame (Spirit -20, Energy +10)
+   B: Deny weakness (Spirit +5, Health -5)
+   18: You encounter a rival pack. They challenge your authority.
+      A: Fight for dominance (Reputation +20, Health risk)
+      B: Submit and join (Spirit -20, Pack +1)
+
+## Pack Challenge Path
+12: You defeat the alpha! The pack submits. But leadership brings new burdens.
+   A: Lead with strength (Reputation +40, Spirit -10)
+   B: Lead with wisdom (Spirit +20, Energy -10)
+
+13: You join the pack as beta. Loyalty or betrayal?
+   A: Prove loyalty (Spirit +10, Pack grows)
+   B: Plot betrayal (Reputation -15, Spirit -20)
+
+## Storm Path
+14: The storm rages, testing your endurance. Lightning reveals a spirit totem.
+   A: Claim totem (Spirit +25, Health -20)
+   B: Leave it (Spirit -5, Energy +5)
+   19: A mysterious cave glows with ethereal light. Ancient runes cover the walls.
+      A: Enter the cave (Spirit +15, Energy -20)
+      B: Avoid the cave (Energy +5, Spirit -5)
+      24: Inside the cave, you find ancient wisdom that guides you to inner peace. (Cave Wisdom: Achieved spiritual enlightenment.)
+      22: The moonlight reveals a path through the forest that seems to shimmer.
+         A: Follow the moonlit path (Unknown outcome)
+         B: Stay on the main trail (Safe but slow)
+         27: The moonlit path leads to a clearing where the First Pack once gathered. (Moon Path: Discovered ancient pack grounds.)
+
+## Ruins Path
+15: Ruins hold ancient secrets. A guardian spirit blocks your path.
+   A: Bargain with spirit (Spirit +30, Energy -20)
+   B: Fight spirit (Health -35, Reputation +25)
+   20: You discover an abandoned wolf den. Signs suggest it was recently inhabited.
+      A: Investigate the den (Energy -10, Find item)
+      B: Leave it be (Spirit -5, No risk)
+      25: The abandoned den contains supplies left by previous wolves. You're not alone. (Supply Discovery: Found resources for survival.)
+
+## Additional Scenarios
+21: A wounded wolf pup cries for help. Its pack is nowhere to be seen.
+   A: Help the pup (Spirit +20, Energy -10)
+   B: Leave it (Energy +5, Spirit -15)
+   26: Helping the pup leads to reuniting it with its pack. They accept you as an ally. (Pup Rescue: Gained pack allies through compassion.)
+
+## Endings
+23: You successfully integrate into the rival pack. Your strength earns respect. (Pack Integration: Found your place in a new pack.)
+
+## Story Flowchart
+[Start: Lost Wolf]
+├── Follow Echoes (ID: 1)
+│   ├── Embrace Spirits (ID: 2)
+│   │   ├── Accept Visions (ID: 4)
+│   │   │   ├── Follow Vision to Den (ID: 8)
+│   │   │   │   └── Spirit Ally Ending (ID: 16)
+│   │   │   └── Pull Away (ID: 4)
+│   │   │       ├── Attack Traveler (ID: 9)
+│   │   │       └── Spare Traveler (ID: 9)
+│   │   └── Reject Spirits (ID: 2)
+│   │       ├── Fight Bear (ID: 5)
+│   │       │   ├── Drink from Spring (ID: 10)
+│   │       │   │   └── Healer Ending (ID: 17)
+│   │       │   └── Avoid Spring (ID: 10)
+│   │       └── Flee and Hide (ID: 5)
+│   │           ├── Embrace Shame (ID: 11)
+│   │           │   └── Encounter Rival Pack (ID: 18)
+│   │           │       ├── Fight for Dominance (ID: 18)
+│   │           │       │   └── Pack Integration Ending (ID: 23)
+│   │           │       └── Submit and Join (ID: 18)
+│   │           └── Deny Weakness (ID: 11)
+├── Ignore Echoes, Hunt (ID: 1)
+│   ├── Confront Pack (ID: 3)
+│   │   ├── Challenge Alpha (ID: 6)
+│   │   │   └── Lead with Strength/Wisdom (ID: 12)
+│   │   └── Submit and Join (ID: 6)
+│   │       └── Prove Loyalty/Plot Betrayal (ID: 13)
+│   └── Steal Prey and Flee (ID: 3)
+│       ├── Weather Storm (ID: 7)
+│       │   └── Claim Totem (ID: 14)
+│       │       └── Enter Cave (ID: 19)
+│       │           ├── Cave Wisdom Ending (ID: 24)
+│       │           └── Moonlit Path (ID: 22)
+│       │               └── Moon Path Ending (ID: 27)
+│       └── Seek Shelter (ID: 7)
+│           └── Fight Spirit (ID: 15)
+│               └── Investigate Den (ID: 20)
+│                   └── Supply Discovery Ending (ID: 25)
+│
+└── Additional Scenarios
+    └── Help Pup (ID: 21)
+        └── Pup Rescue Ending (ID: 26)

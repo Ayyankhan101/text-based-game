@@ -38,12 +38,15 @@ template <> constexpr inline auto StatBar::qt_create_metaobjectdata<qt_meta_tag_
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "StatBar"
+        "StatBar",
+        "value"
     };
 
     QtMocHelpers::UintData qt_methods {
     };
     QtMocHelpers::UintData qt_properties {
+        // property 'value'
+        QtMocHelpers::PropertyData<int>(1, QMetaType::Int, QMC::DefaultPropertyFlags | QMC::Writable | QMC::StdCppSet),
     };
     QtMocHelpers::UintData qt_enums {
     };
@@ -63,10 +66,20 @@ Q_CONSTINIT const QMetaObject StatBar::staticMetaObject = { {
 void StatBar::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<StatBar *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::ReadProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast<int*>(_v) = _t->value(); break;
+        default: break;
+        }
+    }
+    if (_c == QMetaObject::WriteProperty) {
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: _t->setValue(*reinterpret_cast<int*>(_v)); break;
+        default: break;
+        }
+    }
 }
 
 const QMetaObject *StatBar::metaObject() const
@@ -85,6 +98,14 @@ void *StatBar::qt_metacast(const char *_clname)
 int StatBar::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+            || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
+            || _c == QMetaObject::RegisterPropertyMetaType) {
+        qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
     return _id;
 }
 namespace {

@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o.d"
   "CMakeFiles/WolfGame.dir/src/game_stack.cpp.o"
   "CMakeFiles/WolfGame.dir/src/game_stack.cpp.o.d"
+  "CMakeFiles/WolfGame.dir/src/game_window.cpp.o"
+  "CMakeFiles/WolfGame.dir/src/game_window.cpp.o.d"
   "CMakeFiles/WolfGame.dir/src/inventory.cpp.o"
   "CMakeFiles/WolfGame.dir/src/inventory.cpp.o.d"
   "CMakeFiles/WolfGame.dir/src/main.cpp.o"
