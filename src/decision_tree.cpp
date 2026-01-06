@@ -37,6 +37,11 @@ void DecisionTree::setCurrentNode(DecisionNode* node) {
 }
 
 void DecisionTree::buildSampleTree() {
+    // Default to classic story
+    buildClassicStory();
+}
+
+void DecisionTree::buildClassicStory() {
     // Day 1: The Awakening - Need Food and Shelter
     root = new DecisionNode();
     root->scenarioID = 1;
@@ -395,4 +400,352 @@ DecisionNode* DecisionTree::findNodeById(int id) {
     };
 
     return search(root);
+}
+
+void DecisionTree::buildSurvivalStory() {
+    // Survival mode - harsher, resource-focused story
+    root = new DecisionNode();
+    root->scenarioID = 101;
+    root->description = "SURVIVAL MODE: You wake up injured and disoriented in a frozen wasteland. A blizzard approaches from the north. Your health is critically low (40/100) and hunger gnaws at you (80/100). You must find shelter immediately or perish.";
+    root->choiceA_text = "Search for a cave before the storm hits (risky but necessary)";
+    root->choiceB_text = "Try to outrun the storm and find lower ground";
+    root->isEnding = false;
+
+    // Path A: Cave search
+    DecisionNode* cave1 = new DecisionNode();
+    cave1->scenarioID = 102;
+    cave1->description = "You find a small cave, but it's occupied by a hibernating bear. The storm is nearly upon you. Fighting the bear could be fatal in your weakened state, but you need shelter NOW.";
+    cave1->choiceA_text = "Fight the bear despite your injuries (-30 health risk)";
+    cave1->choiceB_text = "Risk the storm and search for another shelter";
+    cave1->isEnding = false;
+    insertNode(root, cave1, true);
+
+    // Path B: Outrun storm
+    DecisionNode* run1 = new DecisionNode();
+    run1->scenarioID = 103;
+    run1->description = "You run desperately through the snow. Your energy depletes rapidly (-15 energy). You spot what looks like an abandoned hunter's cabin in the distance, but the storm is catching up.";
+    run1->choiceA_text = "Sprint to the cabin (risk energy depletion)";
+    run1->choiceB_text = "Dig into a snowdrift for temporary shelter";
+    run1->isEnding = false;
+    insertNode(root, run1, false);
+
+    // Cave - Fight bear
+    DecisionNode* fightBear = new DecisionNode();
+    fightBear->scenarioID = 104;
+    fightBear->description = "You attack the bear in a desperate fury! It awakens and mauls you badly (-25 health), but you drive it out into the storm. The cave is yours. You find the bear's food cache: dried fish and roots. [GAINED: Fish x3, Roots x2]";
+    fightBear->choiceA_text = "Eat immediately to recover";
+    fightBear->choiceB_text = "Save food and rest to recover health naturally";
+    fightBear->isEnding = false;
+    insertNode(cave1, fightBear, true);
+
+    // Cave - Search more
+    DecisionNode* searchMore = new DecisionNode();
+    searchMore->scenarioID = 105;
+    searchMore->description = "The storm hits before you find shelter. You're caught in the blizzard (-20 health, -10 energy). Through the whiteout, you see a fallen tree with a hollow underneath.";
+    searchMore->choiceA_text = "Take shelter in the hollow";
+    searchMore->choiceB_text = "Keep moving, you might freeze if you stop";
+    searchMore->isEnding = false;
+    insertNode(cave1, searchMore, false);
+
+    // Run - Sprint to cabin
+    DecisionNode* cabin = new DecisionNode();
+    cabin->scenarioID = 106;
+    cabin->description = "You reach the cabin just as the storm hits! Inside, you find supplies: canned food, matches, and a first aid kit. [GAINED: Canned Food x5, First Aid Kit x1]. But the door is damaged and won't close properly.";
+    cabin->choiceA_text = "Use energy to repair the door (-15 energy)";
+    cabin->choiceB_text = "Block it with furniture and hope for the best";
+    cabin->isEnding = false;
+    insertNode(run1, cabin, true);
+
+    // Run - Snowdrift shelter
+    DecisionNode* snowdrift = new DecisionNode();
+    snowdrift->scenarioID = 107;
+    snowdrift->description = "You dig frantically into the snowdrift. It provides basic shelter from the wind (-5 health). The storm rages for hours. When it finally passes, you're alive but severely weakened. You spot wolf tracks heading east.";
+    snowdrift->choiceA_text = "Follow the tracks (might lead to a pack)";
+    snowdrift->choiceB_text = "Head west toward what might be human settlement";
+    snowdrift->isEnding = false;
+    insertNode(run1, snowdrift, false);
+
+    // Fight Bear - Eat immediately
+    DecisionNode* eatNow = new DecisionNode();
+    eatNow->scenarioID = 108;
+    eatNow->description = "You devour the fish ravenously. Your hunger decreases significantly. The storm passes. At dawn, you hear howling - a pack is nearby. They might accept you or see you as a threat.";
+    eatNow->choiceA_text = "Approach the pack (risky but need allies)";
+    eatNow->choiceB_text = "Avoid them and continue alone";
+    eatNow->isEnding = false;
+    insertNode(fightBear, eatNow, true);
+
+    // Fight Bear - Save food
+    DecisionNode* saveFood = new DecisionNode();
+    saveFood->scenarioID = 109;
+    saveFood->description = "You rest to heal naturally. Your body slowly recovers. By morning, you're stronger. You venture out and find a frozen lake with fish visible under the ice.";
+    saveFood->choiceA_text = "Break the ice to fish (risky but rewarding)";
+    saveFood->choiceB_text = "Move on to find easier food";
+    saveFood->isEnding = false;
+    insertNode(fightBear, saveFood, false);
+
+    // Search More - Take shelter in hollow
+    DecisionNode* hollow = new DecisionNode();
+    hollow->scenarioID = 110;
+    hollow->description = "The hollow tree saves your life. You survive the blizzard barely. At dawn, you're weak but alive. You see smoke rising in the distance - humans or perhaps another wolf's den?";
+    hollow->choiceA_text = "Investigate the smoke";
+    hollow->choiceB_text = "Stay hidden and hunt nearby";
+    hollow->isEnding = false;
+    insertNode(searchMore, hollow, true);
+
+    // Search More - Keep moving
+    DecisionNode* keepMoving = new DecisionNode();
+    keepMoving->scenarioID = 111;
+    keepMoving->description = "You push through the storm with sheer willpower. You collapse from exhaustion but wake up in a protected valley. A deer herd grazes nearby - easy prey in your desperate state.";
+    keepMoving->choiceA_text = "Hunt the deer while you can";
+    keepMoving->choiceB_text = "Rest first, you're too weak";
+    keepMoving->isEnding = false;
+    insertNode(searchMore, keepMoving, false);
+
+    // Cabin - Repair door
+    DecisionNode* repairDoor = new DecisionNode();
+    repairDoor->scenarioID = 112;
+    repairDoor->description = "You spend energy repairing the door properly. The cabin is secure. You survive the storm in comfort. Days later, you're recovered and strong. Time to venture out and establish territory.";
+    repairDoor->choiceA_text = "Scout for permanent den site";
+    repairDoor->choiceB_text = "Stay in cabin and stockpile food";
+    repairDoor->isEnding = false;
+    insertNode(cabin, repairDoor, true);
+
+    // Cabin - Block with furniture
+    DecisionNode* blockDoor = new DecisionNode();
+    blockDoor->scenarioID = 113;
+    blockDoor->description = "The furniture blocks most of the wind, but the cabin is freezing. You burn furniture for warmth. You survive but the cabin is now unusable. You must move on.";
+    blockDoor->choiceA_text = "Head north to higher ground";
+    blockDoor->choiceB_text = "Head south to lower valleys";
+    blockDoor->isEnding = false;
+    insertNode(cabin, blockDoor, false);
+
+    // Snowdrift - Follow tracks
+    DecisionNode* followTracks = new DecisionNode();
+    followTracks->scenarioID = 114;
+    followTracks->description = "You follow the tracks and find a pack of 4 wolves. They're cautious but not hostile. Their alpha approaches you carefully. This is your chance to join a pack and survive together.";
+    followTracks->choiceA_text = "Show submission and ask to join";
+    followTracks->choiceB_text = "Show strength and offer alliance";
+    followTracks->isEnding = false;
+    insertNode(snowdrift, followTracks, true);
+
+    // Snowdrift - Head west
+    DecisionNode* headWest = new DecisionNode();
+    headWest->scenarioID = 115;
+    headWest->description = "You head toward human territory. You find a campsite with food scraps and supplies. But humans are dangerous. You hear vehicles approaching.";
+    headWest->choiceA_text = "Grab food quickly and run";
+    headWest->choiceB_text = "Hide and observe the humans";
+    headWest->isEnding = false;
+    insertNode(snowdrift, headWest, false);
+
+    // Add endings for survival paths
+    DecisionNode* survivalEnd1 = new DecisionNode();
+    survivalEnd1->scenarioID = 120;
+    survivalEnd1->description = "Against impossible odds, you survived the brutal wilderness. Your resourcefulness and determination kept you alive through the harshest conditions.";
+    survivalEnd1->isEnding = true;
+    survivalEnd1->endingText = "SURVIVOR'S TRIUMPH: You conquered the wilderness through pure survival instinct! Days survived: " + std::to_string(30);
+    insertNode(repairDoor, survivalEnd1, true);
+
+    DecisionNode* survivalEnd2 = new DecisionNode();
+    survivalEnd2->scenarioID = 121;
+    survivalEnd2->description = "You joined the pack and together survived the winter. Strength in numbers proved to be the key to survival.";
+    survivalEnd2->isEnding = true;
+    survivalEnd2->endingText = "PACK SURVIVOR: Together, you overcame the wilderness!";
+    insertNode(followTracks, survivalEnd2, true);
+
+    DecisionNode* survivalEnd3 = new DecisionNode();
+    survivalEnd3->scenarioID = 122;
+    survivalEnd3->description = "You learned to thrive in the harsh wilderness alone. Every challenge made you stronger.";
+    survivalEnd3->isEnding = true;
+    survivalEnd3->endingText = "LONE SURVIVOR: The wilderness respects your strength!";
+    insertNode(eatNow, survivalEnd3, false);
+
+    DecisionNode* survivalEnd4 = new DecisionNode();
+    survivalEnd4->scenarioID = 123;
+    survivalEnd4->description = "You found a balance between caution and boldness. Your wisdom kept you alive.";
+    survivalEnd4->isEnding = true;
+    survivalEnd4->endingText = "WISE SURVIVOR: Intelligence triumphed over brute force!";
+    insertNode(saveFood, survivalEnd4, true);
+
+    DecisionNode* survivalEnd5 = new DecisionNode();
+    survivalEnd5->scenarioID = 124;
+    survivalEnd5->description = "The wilderness tested you beyond measure, but you persevered. You are forever changed.";
+    survivalEnd5->isEnding = true;
+    survivalEnd5->endingText = "HARDENED SURVIVOR: What doesn't kill you makes you stronger!";
+    insertNode(hollow, survivalEnd5, true);
+
+    currentNode = root;
+}
+
+void DecisionTree::buildPackStory() {
+    // Pack mode - focus on social dynamics and leadership
+    root = new DecisionNode();
+    root->scenarioID = 201;
+    root->description = "PACK MODE: You are the omega of a struggling pack. The alpha is old and weak. Food is scarce, and tensions run high. Three pack members challenge the alpha's leadership tonight. You must choose a side.";
+    root->choiceA_text = "Support the alpha (loyalty but risk losing)";
+    root->choiceB_text = "Join the challengers (opportunity but betrayal)";
+    root->isEnding = false;
+
+    // Path A: Support alpha
+    DecisionNode* supportAlpha = new DecisionNode();
+    supportAlpha->scenarioID = 202;
+    supportAlpha->description = "You stand beside the alpha. The challengers are impressed by your loyalty (+20 reputation). The alpha wins but is mortally wounded. With his dying breath, he names YOU as the new alpha. The pack looks to you for leadership.";
+    supportAlpha->choiceA_text = "Accept leadership and prove yourself (hunt immediately)";
+    supportAlpha->choiceB_text = "Suggest the beta take over (humble approach)";
+    supportAlpha->isEnding = false;
+    insertNode(root, supportAlpha, true);
+
+    // Path B: Join challengers
+    DecisionNode* joinChallengers = new DecisionNode();
+    joinChallengers->scenarioID = 203;
+    joinChallengers->description = "You join the challengers. Together, you overpower the alpha. The victory is swift. The lead challenger, Scar, becomes the new alpha. He respects your choice but doesn't fully trust you yet. (Loyalty: 50)";
+    joinChallengers->choiceA_text = "Prove your worth by finding food for the pack";
+    joinChallengers->choiceB_text = "Offer to scout for new territory";
+    joinChallengers->isEnding = false;
+    insertNode(root, joinChallengers, false);
+
+    // Support Alpha - Accept leadership
+    DecisionNode* acceptLeadership = new DecisionNode();
+    acceptLeadership->scenarioID = 204;
+    acceptLeadership->description = "You lead the pack on a hunt immediately to prove yourself. You track a deer herd. Your pack of 5 wolves looks to you. The beta suggests splitting up for better coverage.";
+    acceptLeadership->choiceA_text = "Split the pack (efficient but risky)";
+    acceptLeadership->choiceB_text = "Keep pack together (safer but harder hunt)";
+    acceptLeadership->isEnding = false;
+    insertNode(supportAlpha, acceptLeadership, true);
+
+    // Support Alpha - Suggest beta
+    DecisionNode* suggestBeta = new DecisionNode();
+    suggestBeta->scenarioID = 205;
+    suggestBeta->description = "The beta gratefully accepts leadership. You remain as second-in-command with high respect (+30 reputation). The pack's morale improves. However, a rival pack has been encroaching on your territory.";
+    suggestBeta->choiceA_text = "Suggest aggressive defense of territory";
+    suggestBeta->choiceB_text = "Suggest negotiation and sharing territory";
+    suggestBeta->isEnding = false;
+    insertNode(supportAlpha, suggestBeta, false);
+
+    // Join Challengers - Find food
+    DecisionNode* findFood = new DecisionNode();
+    findFood->scenarioID = 206;
+    findFood->description = "You successfully hunt rabbits alone, bringing back food for 3 days. [GAINED: Rabbit x6] Scar is impressed (+20 loyalty). He asks if you want to recruit more wolves to strengthen the pack.";
+    findFood->choiceA_text = "Yes, bigger pack means more power";
+    findFood->choiceB_text = "No, keep the pack small and agile";
+    findFood->isEnding = false;
+    insertNode(joinChallengers, findFood, true);
+
+    // Join Challengers - Scout territory  
+    DecisionNode* scoutTerritory = new DecisionNode();
+    scoutTerritory->scenarioID = 207;
+    scoutTerritory->description = "You discover rich hunting grounds to the north, but they're controlled by a powerful pack of 8 wolves. You also find a hidden valley to the east - smaller but unclaimed.";
+    scoutTerritory->choiceA_text = "Report the northern grounds (challenge the rival pack)";
+    scoutTerritory->choiceB_text = "Report the eastern valley (safe but limited)";
+    scoutTerritory->isEnding = false;
+    insertNode(joinChallengers, scoutTerritory, false);
+
+    // Accept Leadership - Split pack
+    DecisionNode* splitPack = new DecisionNode();
+    splitPack->scenarioID = 208;
+    splitPack->description = "You split the pack into two hunting groups. Your group successfully takes down a deer! The other group also succeeds. The pack feasts tonight. Your leadership is proven. [GAINED: Deer Meat x8]";
+    splitPack->choiceA_text = "Celebrate and strengthen pack bonds";
+    splitPack->choiceB_text = "Immediately plan next hunt (ambitious)";
+    splitPack->isEnding = false;
+    insertNode(acceptLeadership, splitPack, true);
+
+    // Accept Leadership - Keep together
+    DecisionNode* keepTogether = new DecisionNode();
+    keepTogether->scenarioID = 209;
+    keepTogether->description = "Your pack hunts as one unit. The coordination is perfect. You bring down a massive elk! The pack celebrates your cautious but effective leadership. [GAINED: Elk Meat x12]";
+    keepTogether->choiceA_text = "Share meat equally with all";
+    keepTogether->choiceB_text = "Reward the best hunters more";
+    keepTogether->isEnding = false;
+    insertNode(acceptLeadership, keepTogether, false);
+
+    // Suggest Beta - Aggressive defense
+    DecisionNode* aggressiveDefense = new DecisionNode();
+    aggressiveDefense->scenarioID = 210;
+    aggressiveDefense->description = "The beta leads an aggressive patrol. You encounter the rival pack at the border. A fight breaks out! Your pack wins but suffers injuries. The rivals retreat.";
+    aggressiveDefense->choiceA_text = "Pursue them to show dominance";
+    aggressiveDefense->choiceB_text = "Let them go and treat wounded";
+    aggressiveDefense->isEnding = false;
+    insertNode(suggestBeta, aggressiveDefense, true);
+
+    // Suggest Beta - Negotiation
+    DecisionNode* negotiate = new DecisionNode();
+    negotiate->scenarioID = 211;
+    negotiate->description = "You arrange a meeting with the rival alpha. They agree to share territory if you help them hunt large prey together occasionally. An alliance forms.";
+    negotiate->choiceA_text = "Accept the alliance";
+    negotiate->choiceB_text = "Reject, demand they leave entirely";
+    negotiate->isEnding = false;
+    insertNode(suggestBeta, negotiate, false);
+
+    // Find Food - Recruit more
+    DecisionNode* recruitMore = new DecisionNode();
+    recruitMore->scenarioID = 212;
+    recruitMore->description = "You recruit 3 lone wolves. Your pack grows to 8 strong! [PACK SIZE: 8] But food consumption increases dramatically. You need a large hunting ground.";
+    recruitMore->choiceA_text = "Challenge rival pack for their territory";
+    recruitMore->choiceB_text = "Search for unclaimed land further away";
+    recruitMore->isEnding = false;
+    insertNode(findFood, recruitMore, true);
+
+    // Find Food - Keep small
+    DecisionNode* keepSmall = new DecisionNode();
+    keepSmall->scenarioID = 213;
+    keepSmall->description = "Your small pack of 5 remains agile and efficient. You control a modest but sustainable territory. Life is good, though not glorious.";
+    keepSmall->choiceA_text = "Be content with this life";
+    keepSmall->choiceB_text = "Seek to expand slowly over time";
+    keepSmall->isEnding = false;
+    insertNode(findFood, keepSmall, false);
+
+    // Scout Territory - Northern grounds
+    DecisionNode* northernGrounds = new DecisionNode();
+    northernGrounds->scenarioID = 214;
+    northernGrounds->description = "Scar decides to challenge the northern pack for their rich territory. Your pack of 5 faces their pack of 8. It's a massive battle! Your pack fights bravely.";
+    northernGrounds->choiceA_text = "Fight to the death";
+    northernGrounds->choiceB_text = "Retreat strategically";
+    northernGrounds->isEnding = false;
+    insertNode(scoutTerritory, northernGrounds, true);
+
+    // Scout Territory - Eastern valley
+    DecisionNode* easternValley = new DecisionNode();
+    easternValley->scenarioID = 215;
+    easternValley->description = "Your pack claims the peaceful eastern valley. It's smaller but safe. You build a stable, peaceful territory. Life is calm and sustainable.";
+    easternValley->choiceA_text = "Settle here permanently";
+    easternValley->choiceB_text = "Use as base to expand later";
+    easternValley->isEnding = false;
+    insertNode(scoutTerritory, easternValley, false);
+
+    // Pack endings
+    DecisionNode* packEnd1 = new DecisionNode();
+    packEnd1->scenarioID = 220;
+    packEnd1->description = "Your pack has grown to become the most powerful in the region. Your leadership is legendary.";
+    packEnd1->isEnding = true;
+    packEnd1->endingText = "LEGENDARY ALPHA: Your pack dominates through strength and unity!";
+    insertNode(recruitMore, packEnd1, true);
+
+    DecisionNode* packEnd2 = new DecisionNode();
+    packEnd2->scenarioID = 221;
+    packEnd2->description = "Your diplomatic skills created a peaceful alliance. Two packs live in harmony.";
+    packEnd2->isEnding = true;
+    packEnd2->endingText = "WISE DIPLOMAT: Peace through understanding!";
+    insertNode(negotiate, packEnd2, true);
+
+    DecisionNode* packEnd3 = new DecisionNode();
+    packEnd3->scenarioID = 222;
+    packEnd3->description = "Your small but loyal pack thrives. Quality over quantity proved wise.";
+    packEnd3->isEnding = true;
+    packEnd3->endingText = "ELITE PACK: Small numbers, maximum efficiency!";
+    insertNode(keepSmall, packEnd3, true);
+
+    DecisionNode* packEnd4 = new DecisionNode();
+    packEnd4->scenarioID = 223;
+    packEnd4->description = "Through bold action, you proved yourself a decisive leader. The pack respects strength.";
+    packEnd4->isEnding = true;
+    packEnd4->endingText = "BOLD LEADER: Fortune favors the brave!";
+    insertNode(splitPack, packEnd4, true);
+
+    DecisionNode* packEnd5 = new DecisionNode();
+    packEnd5->scenarioID = 224;
+    packEnd5->description = "Your careful, considerate leadership built a strong foundation. The pack thrives under your wisdom.";
+    packEnd5->isEnding = true;
+    packEnd5->endingText = "THOUGHTFUL ALPHA: Wisdom and unity prevail!";
+    insertNode(keepTogether, packEnd5, true);
+
+    currentNode = root;
 }

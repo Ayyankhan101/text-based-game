@@ -24,10 +24,13 @@ public:
     ~DecisionTree();
     void insertNode(DecisionNode* parent, DecisionNode* child, bool isLeft);
     DecisionNode* getCurrentNode() const;
-    void setCurrentNode(DecisionNode* node);
-    DecisionNode* getRoot();
-    void buildSampleTree();
-    DecisionNode* findNodeById(int id);  // Add function to find node by ID
+        DecisionNode* getRoot();
+        void setCurrentNode(DecisionNode* node);
+        void buildSampleTree();
+        void buildClassicStory();
+        void buildSurvivalStory();
+        void buildPackStory();
+        DecisionNode* findNodeById(int id);
 };
 
 #endif

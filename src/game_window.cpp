@@ -1109,15 +1109,83 @@ void GameWindow::updateStats() {
 
     // Check for game over conditions
     if (!wolf.isAlive()) {
-        QMessageBox::critical(this, "Game Over", "Your wolf has died! Game Over.");
-        QTimer::singleShot(0, this, &QWidget::close); // Close the window after showing the message
+        // Disable choice buttons
+        buttonA->setEnabled(true);
+        buttonB->setEnabled(true);
+        buttonA->setText("🔄 New Game");
+        buttonB->setText("❌ Exit Game");
+        
+        // Disconnect old signals
+        buttonA->disconnect();
+        buttonB->disconnect();
+        
+        // Connect to new actions
+        connect(buttonA, &QPushButton::clicked, this, &GameWindow::onNewGame);
+        connect(buttonB, &QPushButton::clicked, this, [this]() {
+            cleanupFallbackNodes();
+            qApp->quit();
+        });
+        
+        QString deathSummary = QString("💀 Game Over - Your wolf has died!\n\n"
+                                      "📊 Final Statistics:\n"
+                                      "Days Survived: %1\n"
+                                      "Final Health: %2\n"
+                                      "Final Hunger: %3\n"
+                                      "Final Energy: %4\n"
+                                      "Pack Size: %5")
+                                 .arg(dayCounter)
+                                 .arg(wolf.health)
+                                 .arg(wolf.hunger)
+                                 .arg(wolf.energy)
+                                 .arg(pack.getSize());
+        
+        QMessageBox::critical(this, "Game Over", deathSummary);
+        
+        if (statusBar) {
+            statusBar->showMessage("Game Over! Choose 'New Game' or 'Exit Game'", 0);
+        }
+        
+        return; // Don't continue processing
     }
 
     // Check for win condition (survive 30 days)
     if (dayCounter >= 30) {
-        QString winMessage = QString("Congratulations! You survived 30 days in the wilderness!\nFinal pack size: %1").arg(pack.getSize());
-        QMessageBox::information(this, "Victory!", winMessage);
-        QTimer::singleShot(0, this, &QWidget::close); // Close the window after showing the message
+        // Disable choice buttons
+        buttonA->setEnabled(true);
+        buttonB->setEnabled(true);
+        buttonA->setText("🔄 New Game");
+        buttonB->setText("❌ Exit Game");
+        
+        // Disconnect old signals
+        buttonA->disconnect();
+        buttonB->disconnect();
+        
+        // Connect to new actions
+        connect(buttonA, &QPushButton::clicked, this, &GameWindow::onNewGame);
+        connect(buttonB, &QPushButton::clicked, this, [this]() {
+            cleanupFallbackNodes();
+            qApp->quit();
+        });
+        
+        QString winSummary = QString("🏆 Victory! You survived 30 days!\n\n"
+                                    "📊 Final Statistics:\n"
+                                    "Days Survived: %1\n"
+                                    "Final Health: %2\n"
+                                    "Final Pack Size: %3\n"
+                                    "Final Reputation: %4\n\n"
+                                    "Congratulations on your survival!")
+                               .arg(dayCounter)
+                               .arg(wolf.health)
+                               .arg(pack.getSize())
+                               .arg(wolf.reputation);
+        
+        QMessageBox::information(this, "Victory!", winSummary);
+        
+        if (statusBar) {
+            statusBar->showMessage("Victory! Choose 'New Game' or 'Exit Game'", 0);
+        }
+        
+        return; // Don't continue processing
     }
 
     // Check for events
@@ -1145,10 +1213,22 @@ void GameWindow::updateDisplay() {
 
     if (current->isEnding) {
         qDebug() << "updateDisplay: ending detected";
-        buttonA->setEnabled(false);
-        buttonB->setEnabled(false);
-        buttonA->setText("🎯 GAME COMPLETE");
-        buttonB->setText("🎯 GAME COMPLETE");
+        buttonA->setEnabled(true);
+        buttonB->setEnabled(true);
+        buttonA->setText("🔄 New Game");
+        buttonB->setText("❌ Exit Game");
+        
+        // Disconnect old signals to prevent conflicts
+        buttonA->disconnect();
+        buttonB->disconnect();
+        
+        // Connect to new ending actions
+        connect(buttonA, &QPushButton::clicked, this, &GameWindow::onNewGame);
+        connect(buttonB, &QPushButton::clicked, this, [this]() {
+            cleanupFallbackNodes();
+            qApp->quit();
+        });
+        
         storyLabel->setText(QString::fromStdString(current->description));
 
         // Update wolf graphic based on scenario
@@ -1173,11 +1253,31 @@ void GameWindow::updateDisplay() {
 
         // Show ending message with clear conclusion
         QString endingTitle = "🎯 Journey Complete";
-        QMessageBox::information(this, endingTitle, QString::fromStdString(current->endingText));
-        QTimer::singleShot(100, this, [this]() {
-            cleanupFallbackNodes();
-            qApp->quit();
-        });
+        
+        // Build detailed ending summary
+        QString endingSummary = QString::fromStdString(current->endingText);
+        endingSummary += QString("\n\n📊 Final Statistics:\n"
+                                "Days Survived: %1\n"
+                                "Health: %2\n"
+                                "Hunger: %3\n"
+                                "Energy: %4\n"
+                                "Spirit: %5\n"
+                                "Reputation: %6\n"
+                                "Pack Size: %7")
+                           .arg(dayCounter)
+                           .arg(wolf.health)
+                           .arg(wolf.hunger)
+                           .arg(wolf.energy)
+                           .arg(wolf.spirit)
+                           .arg(wolf.reputation)
+                           .arg(pack.getSize());
+        
+        QMessageBox::information(this, endingTitle, endingSummary);
+        
+        // Update status bar
+        if (statusBar) {
+            statusBar->showMessage("Game Complete! Choose 'New Game' or 'Exit Game'", 0);
+        }
     } else {
         bool canChooseA = wolf.canMakeChoice(5);
         bool canChooseB = wolf.canMakeChoice(3);
@@ -1285,12 +1385,7 @@ void GameWindow::processChoice(bool isA) {
 
     // Check for death conditions
     if (!wolf.isAlive()) {
-        QMessageBox::critical(this, "Game Over", "Your wolf has died from exhaustion, starvation, or injury. The pack survives, but your journey ends here.");
-        // Use delayed quit to avoid cleanup conflicts
-        QTimer::singleShot(100, this, [this]() {
-            cleanupFallbackNodes();
-            qApp->quit();
-        });
+        updateStats(); // This will handle the death screen properly
         return;
     }
 
@@ -1300,13 +1395,7 @@ void GameWindow::processChoice(bool isA) {
 
     // Check for day limit
     if (dayCounter >= 30) {
-        QString winMessage = QString("Congratulations! You survived 30 days in the wilderness!\n\nFinal Pack Size: %1").arg(pack.getSize());
-        QMessageBox::information(this, "Victory!", winMessage);
-        // Use delayed quit to avoid cleanup conflicts
-        QTimer::singleShot(100, this, [this]() {
-            cleanupFallbackNodes();
-            qApp->quit();
-        });
+        updateStats(); // This will handle the victory screen properly
         return;
     }
 

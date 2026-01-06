@@ -52,8 +52,7 @@ int runGuiGame(QApplication& app, Wolf& wolf, DecisionTree& tree, PriorityQueue&
 int main(int argc, char* argv[]) {
     // Terminal mode
     DecisionTree tree;
-    tree.buildSampleTree();
-
+        // Tree will be built based on storyline selection
     // Define event functions that take Wolf reference
     auto bearAttack = [](Wolf& w){ w.updateHealth(-20); };
     auto foundBerries = [](Wolf& w){ w.updateHunger(-10); };
@@ -92,16 +91,34 @@ int main(int argc, char* argv[]) {
         std::cin >> menuChoice;
         switch (menuChoice) {
             case 1: // Start New Game (Terminal)
-                currentMode = TERMINAL;
-                wolf = Wolf(); // Reset
-                applyDifficulty();
-                switch (storyline) {
-                    case SURVIVAL: wolf.health = 80; break;
-                    case PACK: wolf.reputation = 20; break;
-                    case CLASSIC: break;
-                }
-                loaded = false;
-                break;
+                        currentMode = TERMINAL;
+                        wolf = Wolf(); // Reset
+                        applyDifficulty();
+                        
+                        // Build appropriate story tree
+                        switch (storyline) {
+                            case CLASSIC:
+                                tree.buildClassicStory();
+                                std::cout << GREEN << "\nStarting CLASSIC storyline - Balanced adventure!\n" << RESET << std::endl;
+                                break;
+                            case SURVIVAL:
+                                tree.buildSurvivalStory();
+                                wolf.health = 40;
+                                wolf.hunger = 80;
+                                wolf.energy = 60;
+                                std::cout << YELLOW << "\nStarting SURVIVAL storyline - Extreme difficulty!\n" << RESET << std::endl;
+                                break;
+                            case PACK:
+                                tree.buildPackStory();
+                                wolf.reputation = 20;
+                                pack.addMember("Beta", "Second-in-Command", 70);
+                                pack.addMember("Scout", "Scout", 60);
+                                std::cout << BLUE << "\nStarting PACK storyline - Leadership focus!\n" << RESET << std::endl;
+                                break;
+                        }
+                        
+                        loaded = false;
+                        break;
             case 2: // Load Game (Terminal)
                 currentMode = TERMINAL;
                 std::cout << "Enter load slot (1-3): ";
@@ -114,17 +131,32 @@ int main(int argc, char* argv[]) {
                 applyDifficulty();
                 loaded = true;
                 break;
-            case 3: // Start New Game (GUI)
-                currentMode = GUI;
-                wolf = Wolf(); // Reset
-                applyDifficulty();
-                switch (storyline) {
-                    case SURVIVAL: wolf.health = 80; break;
-                    case PACK: wolf.reputation = 20; break;
-                    case CLASSIC: break;
-                }
-                loaded = false;
-                break;
+           case 3: // Start New Game (GUI)
+                       currentMode = GUI;
+                       wolf = Wolf(); // Reset
+                       applyDifficulty();
+                       
+                       // Build appropriate story tree
+                       switch (storyline) {
+                           case CLASSIC:
+                               tree.buildClassicStory();
+                               break;
+                           case SURVIVAL:
+                               tree.buildSurvivalStory();
+                               wolf.health = 40;
+                               wolf.hunger = 80;
+                               wolf.energy = 60;
+                               break;
+                           case PACK:
+                               tree.buildPackStory();
+                               wolf.reputation = 20;
+                               pack.addMember("Beta", "Second-in-Command", 70);
+                               pack.addMember("Scout", "Scout", 60);
+                               break;
+                       }
+                       
+                       loaded = false;
+                       break;
             case 4: // Load Game (GUI)
                 currentMode = GUI;
                 std::cout << "Enter load slot (1-3): ";
@@ -170,6 +202,11 @@ int main(int argc, char* argv[]) {
     } while (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4);
 
     if (currentMode == TERMINAL) {
+
+        std::cout << "\n" << CYAN << "Press Enter to begin your journey..." << RESET;
+                std::cin.ignore();
+                std::cin.get();
+
         while (wolf.isAlive()) {
             if (!actions.isEmpty()) {
                 actions.processNext(wolf);
