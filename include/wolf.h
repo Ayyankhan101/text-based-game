@@ -15,10 +15,14 @@ struct Wolf {
     }
 
     void updateHunger(int amount) {
+        int oldHunger = hunger;
         hunger += amount;
         if (hunger < 0) hunger = 0;
         if (hunger > 100) hunger = 100;
-        if (hunger > 80) health -= 5; // Hunger affects health
+        // Only penalize health when hunger INCREASES past 80 (not when eating)
+        if (oldHunger <= 80 && hunger > 80) {
+            health -= 5; // Hunger affects health when it gets too high
+        }
         if (health < 0) health = 0;
     }
 

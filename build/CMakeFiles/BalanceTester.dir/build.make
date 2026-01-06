@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ayyan/DSA-LAB-PROJECT
+CMAKE_SOURCE_DIR = /home/ayyan/text-based-game
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ayyan/DSA-LAB-PROJECT/build
+CMAKE_BINARY_DIR = /home/ayyan/text-based-game/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/BalanceTester.dir/depend.make
@@ -69,138 +69,106 @@ include CMakeFiles/BalanceTester.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/BalanceTester.dir/flags.make
 
-include/moc_game_window.cpp: /home/ayyan/DSA-LAB-PROJECT/include/game_window.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/moc_game_window.cpp"
-	cd /home/ayyan/DSA-LAB-PROJECT/build/include && /usr/lib/qt6/libexec/moc @/home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp_parameters
-
 CMakeFiles/BalanceTester.dir/codegen:
 .PHONY : CMakeFiles/BalanceTester.dir/codegen
 
 CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp
+CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: /home/ayyan/text-based-game/src/balance_tester.cpp
 CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o -MF CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o -MF CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o -c /home/ayyan/text-based-game/src/balance_tester.cpp
 
 CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp > CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/balance_tester.cpp > CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp -o CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/balance_tester.cpp -o CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp
+CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o: /home/ayyan/text-based-game/src/action_queue.cpp
 CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o -MF CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o -MF CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o -c /home/ayyan/text-based-game/src/action_queue.cpp
 
 CMakeFiles/BalanceTester.dir/src/action_queue.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/action_queue.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp > CMakeFiles/BalanceTester.dir/src/action_queue.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/action_queue.cpp > CMakeFiles/BalanceTester.dir/src/action_queue.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/action_queue.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/action_queue.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp -o CMakeFiles/BalanceTester.dir/src/action_queue.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/action_queue.cpp -o CMakeFiles/BalanceTester.dir/src/action_queue.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp
+CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o: /home/ayyan/text-based-game/src/decision_tree.cpp
 CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o -MF CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o -MF CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o -c /home/ayyan/text-based-game/src/decision_tree.cpp
 
 CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp > CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/decision_tree.cpp > CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp -o CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/decision_tree.cpp -o CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp
+CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o: /home/ayyan/text-based-game/src/game_stack.cpp
 CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o -MF CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o -MF CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o -c /home/ayyan/text-based-game/src/game_stack.cpp
 
 CMakeFiles/BalanceTester.dir/src/game_stack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/game_stack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp > CMakeFiles/BalanceTester.dir/src/game_stack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/game_stack.cpp > CMakeFiles/BalanceTester.dir/src/game_stack.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/game_stack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/game_stack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp -o CMakeFiles/BalanceTester.dir/src/game_stack.cpp.s
-
-CMakeFiles/BalanceTester.dir/src/game_window.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/game_window.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
-CMakeFiles/BalanceTester.dir/src/game_window.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BalanceTester.dir/src/game_window.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/game_window.cpp.o -MF CMakeFiles/BalanceTester.dir/src/game_window.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
-
-CMakeFiles/BalanceTester.dir/src/game_window.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/game_window.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp > CMakeFiles/BalanceTester.dir/src/game_window.cpp.i
-
-CMakeFiles/BalanceTester.dir/src/game_window.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/game_window.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp -o CMakeFiles/BalanceTester.dir/src/game_window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/game_stack.cpp -o CMakeFiles/BalanceTester.dir/src/game_stack.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/inventory.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/inventory.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
+CMakeFiles/BalanceTester.dir/src/inventory.cpp.o: /home/ayyan/text-based-game/src/inventory.cpp
 CMakeFiles/BalanceTester.dir/src/inventory.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BalanceTester.dir/src/inventory.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/inventory.cpp.o -MF CMakeFiles/BalanceTester.dir/src/inventory.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/inventory.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BalanceTester.dir/src/inventory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/inventory.cpp.o -MF CMakeFiles/BalanceTester.dir/src/inventory.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/inventory.cpp.o -c /home/ayyan/text-based-game/src/inventory.cpp
 
 CMakeFiles/BalanceTester.dir/src/inventory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/inventory.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp > CMakeFiles/BalanceTester.dir/src/inventory.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/inventory.cpp > CMakeFiles/BalanceTester.dir/src/inventory.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/inventory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/inventory.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp -o CMakeFiles/BalanceTester.dir/src/inventory.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/inventory.cpp -o CMakeFiles/BalanceTester.dir/src/inventory.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/pack.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/pack.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
+CMakeFiles/BalanceTester.dir/src/pack.cpp.o: /home/ayyan/text-based-game/src/pack.cpp
 CMakeFiles/BalanceTester.dir/src/pack.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/BalanceTester.dir/src/pack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/pack.cpp.o -MF CMakeFiles/BalanceTester.dir/src/pack.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/pack.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BalanceTester.dir/src/pack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/pack.cpp.o -MF CMakeFiles/BalanceTester.dir/src/pack.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/pack.cpp.o -c /home/ayyan/text-based-game/src/pack.cpp
 
 CMakeFiles/BalanceTester.dir/src/pack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/pack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp > CMakeFiles/BalanceTester.dir/src/pack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/pack.cpp > CMakeFiles/BalanceTester.dir/src/pack.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/pack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/pack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp -o CMakeFiles/BalanceTester.dir/src/pack.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/pack.cpp -o CMakeFiles/BalanceTester.dir/src/pack.cpp.s
 
 CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
+CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o: /home/ayyan/text-based-game/src/priority_queue.cpp
 CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o -MF CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o -MF CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o.d -o CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o -c /home/ayyan/text-based-game/src/priority_queue.cpp
 
 CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp > CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/priority_queue.cpp > CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.i
 
 CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp -o CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.s
-
-CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o: CMakeFiles/BalanceTester.dir/flags.make
-CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o: include/moc_game_window.cpp
-CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o -MF CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o.d -o CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp
-
-CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp > CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.i
-
-CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp -o CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/priority_queue.cpp -o CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.s
 
 # Object files for target BalanceTester
 BalanceTester_OBJECTS = \
@@ -208,11 +176,9 @@ BalanceTester_OBJECTS = \
 "CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o" \
 "CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o" \
 "CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o" \
-"CMakeFiles/BalanceTester.dir/src/game_window.cpp.o" \
 "CMakeFiles/BalanceTester.dir/src/inventory.cpp.o" \
 "CMakeFiles/BalanceTester.dir/src/pack.cpp.o" \
-"CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o" \
-"CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o"
+"CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o"
 
 # External object files for target BalanceTester
 BalanceTester_EXTERNAL_OBJECTS =
@@ -221,20 +187,13 @@ BalanceTester: CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o
-BalanceTester: CMakeFiles/BalanceTester.dir/src/game_window.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/inventory.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/pack.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o
-BalanceTester: CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o
 BalanceTester: CMakeFiles/BalanceTester.dir/build.make
 BalanceTester: CMakeFiles/BalanceTester.dir/compiler_depend.ts
-BalanceTester: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.9.2
-BalanceTester: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.9.2
-BalanceTester: /usr/lib/x86_64-linux-gnu/libGLX.so
-BalanceTester: /usr/lib/x86_64-linux-gnu/libOpenGL.so
-BalanceTester: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.9.2
 BalanceTester: CMakeFiles/BalanceTester.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable BalanceTester"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable BalanceTester"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BalanceTester.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -245,7 +204,7 @@ CMakeFiles/BalanceTester.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/BalanceTester.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/BalanceTester.dir/clean
 
-CMakeFiles/BalanceTester.dir/depend: include/moc_game_window.cpp
-	cd /home/ayyan/DSA-LAB-PROJECT/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ayyan/DSA-LAB-PROJECT /home/ayyan/DSA-LAB-PROJECT /home/ayyan/DSA-LAB-PROJECT/build /home/ayyan/DSA-LAB-PROJECT/build /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles/BalanceTester.dir/DependInfo.cmake "--color=$(COLOR)"
+CMakeFiles/BalanceTester.dir/depend:
+	cd /home/ayyan/text-based-game/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ayyan/text-based-game /home/ayyan/text-based-game /home/ayyan/text-based-game/build /home/ayyan/text-based-game/build /home/ayyan/text-based-game/build/CMakeFiles/BalanceTester.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/BalanceTester.dir/depend
 

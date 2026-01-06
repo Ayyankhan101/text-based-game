@@ -273,74 +273,111 @@ void DecisionTree::buildSampleTree() {
     insertNode(threat1, end4, false);
 
     DecisionNode* end5 = new DecisionNode();
-    end5->scenarioID = 23;
-    end5->description = "Your pack grows strong through careful resource management and wise leadership.";
+    end5->scenarioID = 31;
+    end5->description = "You choose to be selective about new members. Your pack remains small but highly skilled and loyal.";
     end5->isEnding = true;
-    end5->endingText = "WISE LEADER: Your pack prospers through intelligence, not just strength.";
-    insertNode(loyalty1, end5, false);
+    end5->endingText = "ELITE GUARDIANS: Quality over quantity - your pack is legendary for its skill and unity.";
+    // Note: end5 is not connected to maintain tree structure integrity
+    // It can be connected later if needed for extended gameplay
 
-    // Add more intermediate nodes to make paths longer
-    DecisionNode* mid1 = new DecisionNode();
-    mid1->scenarioID = 24;
-    mid1->description = "The rescued wolf, Fenrir, proves to be an excellent hunter. [PACK MEMBER ADDED: Fenrir - Hunter] Your pack's hunting success rate increases significantly.";
-    mid1->choiceA_text = "Focus on building a larger pack";
-    mid1->choiceB_text = "Focus on training current members";
-    mid1->isEnding = false;
-    insertNode(pack1, mid1, false);
 
-    DecisionNode* mid2 = new DecisionNode();
-    mid2->scenarioID = 25;
-    mid2->description = "You find an abandoned wolf den with supplies left behind. [GAINED: Territory Map, Wolf Scent Marker] These items will help you navigate and recruit more wolves.";
-    mid2->choiceA_text = "Use the map to find more wolves";
-    mid2->choiceB_text = "Use scent markers to claim territory";
-    mid2->isEnding = false;
-    insertNode(mid1, mid2, true);
 
-    // Add children for mid2 to prevent null pointer crashes
-    DecisionNode* mapPath = new DecisionNode();
-    mapPath->scenarioID = 26;
-    mapPath->description = "Using the territory map, you discover a hidden valley where lone wolves gather. You can recruit them or challenge their leader.";
-    mapPath->choiceA_text = "Recruit the lone wolves peacefully";
-    mapPath->choiceB_text = "Challenge their leader for dominance";
-    mapPath->isEnding = false;
-    insertNode(mid2, mapPath, true);
+    // Add continuations for incomplete branches to prevent crashes
+    // grab1 continuation (scenario 8)
+    DecisionNode* dropItems = new DecisionNode();
+    dropItems->scenarioID = 36;
+    dropItems->description = "You drop some items to run faster. The humans give chase but you escape into the woods. You lost some meat but gained valuable experience.";
+    dropItems->choiceA_text = "Continue deeper into the forest";
+    dropItems->choiceB_text = "Find a safe place to rest";
+    dropItems->isEnding = false;
+    insertNode(grab1, dropItems, true);
 
-    DecisionNode* scentPath = new DecisionNode();
-    scentPath->scenarioID = 27;
-    scentPath->description = "You mark the territory with your scent, claiming it as your own. Other wolves respect your claim and some approach to join your pack.";
-    scentPath->choiceA_text = "Welcome all wolves who approach";
-    scentPath->choiceB_text = "Be selective about pack members";
-    scentPath->isEnding = false;
-    insertNode(mid2, scentPath, false);
+    // safe1 continuation (scenario 9)
+    DecisionNode* safeContinue = new DecisionNode();
+    safeContinue->scenarioID = 37;
+    safeContinue->description = "You carefully dismantle the traps and take only the safe items. Your methodical approach pays off - you find additional resources.";
+    safeContinue->choiceA_text = "Use the traps as hunting tools";
+    safeContinue->choiceB_text = "Leave the area to avoid humans";
+    safeContinue->isEnding = false;
+    insertNode(safe1, safeContinue, true);
 
-    // Add endings for these paths
-    DecisionNode* recruitEnd = new DecisionNode();
-    recruitEnd->scenarioID = 28;
-    recruitEnd->description = "Your peaceful approach wins over the lone wolves. Your pack grows strong through unity.";
-    recruitEnd->isEnding = true;
-    recruitEnd->endingText = "PEACEFUL RECRUITER: You built a strong pack through diplomacy and respect.";
-    insertNode(mapPath, recruitEnd, true);
+    // bear1 continuation (scenario 10)
+    DecisionNode* bearContinue = new DecisionNode();
+    bearContinue->scenarioID = 38;
+    bearContinue->description = "The bear's defeat establishes your dominance in this territory. Other predators avoid your path, but you sense greater challenges ahead.";
+    bearContinue->choiceA_text = "Claim this area as your territory";
+    bearContinue->choiceB_text = "Continue traveling to find easier hunting";
+    bearContinue->isEnding = false;
+    insertNode(bear1, bearContinue, true);
 
-    DecisionNode* challengeEnd = new DecisionNode();
-    challengeEnd->scenarioID = 29;
-    challengeEnd->description = "You defeat the leader and absorb their followers. Your pack becomes the dominant force in the region.";
-    challengeEnd->isEnding = true;
-    challengeEnd->endingText = "DOMINANT ALPHA: Through strength, you united multiple wolf groups under your leadership.";
-    insertNode(mapPath, challengeEnd, false);
+    // wait1 continuation (scenario 35)
+    DecisionNode* waitContinue = new DecisionNode();
+    waitContinue->scenarioID = 39;
+    waitContinue->description = "The storm finally passes. The landscape has changed, revealing new opportunities and challenges. Your patience has been rewarded.";
+    waitContinue->choiceA_text = "Explore the changed terrain";
+    waitContinue->choiceB_text = "Return to familiar hunting grounds";
+    waitContinue->isEnding = false;
+    insertNode(wait1, waitContinue, true);
 
-    DecisionNode* welcomeEnd = new DecisionNode();
-    welcomeEnd->scenarioID = 30;
-    welcomeEnd->description = "Your open territory policy attracts many wolves. Your pack becomes a haven for the lost and lonely.";
-    welcomeEnd->isEnding = true;
-    welcomeEnd->endingText = "SANCTUARY LEADER: Your territory became a safe haven for wolves in need.";
-    insertNode(scentPath, welcomeEnd, true);
+    // Connect continuations to existing paths (avoid multiple parents to prevent double delete)
+    insertNode(dropItems, territory1, true);  // grab1 -> territory (instead of pack1)
+    insertNode(safeContinue, territory1, true);  // safe1 -> territory
+    insertNode(bearContinue, resources1, true);  // bear1 -> resources
+    insertNode(waitContinue, crisis1, true);  // wait1 -> crisis
 
-    DecisionNode* selectiveEnd = new DecisionNode();
-    selectiveEnd->scenarioID = 31;
-    selectiveEnd->description = "By being selective, you build a small but elite pack of the finest wolves in the wilderness.";
-    selectiveEnd->isEnding = true;
-    selectiveEnd->endingText = "ELITE PACK LEADER: Quality over quantity - your small pack is legendary for its skill.";
-    insertNode(scentPath, selectiveEnd, false);
+    // ========== EXTEND STORY PATHS TO ENSURE ALL ENDINGS AFTER DAY 10 ==========
+
+    // Extend Tragedy Path (end3 -> 64 -> end2)
+    DecisionNode* tragedyRecovery = new DecisionNode();
+    tragedyRecovery->scenarioID = 64;
+    tragedyRecovery->description = "Despite tragic losses, your surviving pack members look to you for leadership. The wilderness has taken much, but together you can rebuild and survive.";
+    tragedyRecovery->choiceA_text = "Push forward with determination - survival waits for no one";
+    tragedyRecovery->choiceB_text = "Take a moment to honor the fallen and strengthen resolve";
+    tragedyRecovery->isEnding = false;
+    insertNode(end3, tragedyRecovery, true);  // end3 = scenario 21 (tragic death)
+
+    DecisionNode* tragedyFinale = new DecisionNode();
+    tragedyFinale->scenarioID = 65;
+    tragedyFinale->description = "Through hardship and loss, you've proven yourself a true survivor. The pack that remains is stronger for having endured the worst together.";
+    tragedyFinale->isEnding = true;
+    tragedyFinale->endingText = "SURVIVOR'S LEGACY: Not all who wander are lost - you found your way through tragedy and emerged stronger.";
+    insertNode(tragedyRecovery, end2, true);  // Connects to PEACEFUL LEADER ending
+
+    // Extend Diplomacy Path (end4 -> 66 -> end1)
+    DecisionNode* allianceBuilding = new DecisionNode();
+    allianceBuilding->scenarioID = 66;
+    allianceBuilding->description = "Your diplomatic victory opens new possibilities. The rival pack offers a formal alliance, but it comes with responsibilities and shared burdens.";
+    allianceBuilding->choiceA_text = "Accept full alliance - share territory and resources equally";
+    allianceBuilding->choiceB_text = "Accept limited alliance - maintain clear boundaries";
+    allianceBuilding->isEnding = false;
+    insertNode(end4, allianceBuilding, true);  // end4 = scenario 22 (diplomatic ending)
+
+    DecisionNode* diplomacyFinale = new DecisionNode();
+    diplomacyFinale->scenarioID = 67;
+    diplomacyFinale->description = "Your wisdom in diplomacy has created something rare in the wilderness - two packs working as one. The forest recognizes your vision for peace.";
+    diplomacyFinale->isEnding = true;
+    diplomacyFinale->endingText = "DIPLOMATIC MASTER: A true alpha leads not through strength alone, but through understanding and cooperation.";
+    insertNode(allianceBuilding, end1, true);  // Connects to LEGENDARY ALPHA ending
+
+    // ========== ADD PACK PLAYER CHOICES ==========
+
+    // Recruitment Decision Node (scenario 68)
+    DecisionNode* recruitmentChoice = new DecisionNode();
+    recruitmentChoice->scenarioID = 68;
+    recruitmentChoice->description = "A lone wolf approaches your pack, showing respect and submission. They want to join, but adding members means more mouths to feed and potential loyalty issues.";
+    recruitmentChoice->choiceA_text = "Welcome them (Pack +1, Hunger +10, potential benefits)";
+    recruitmentChoice->choiceB_text = "Turn them away (Keep current pack, no additional burden)";
+    recruitmentChoice->isEnding = false;
+    insertNode(loyalty1, recruitmentChoice, true);  // Insert after loyalty test
+
+    // Training Decision Node (scenario 69)
+    DecisionNode* trainingChoice = new DecisionNode();
+    trainingChoice->scenarioID = 69;
+    trainingChoice->description = "Your pack has some energy to spare. How should you use it to improve your pack's capabilities?";
+    trainingChoice->choiceA_text = "Train for hunting (Energy -20, better food gains in future)";
+    trainingChoice->choiceB_text = "Train for scouting (Energy -15, better event chances)";
+    trainingChoice->isEnding = false;
+    insertNode(territory1, trainingChoice, true);  // Insert after territory establishment
 
     currentNode = root;
 }

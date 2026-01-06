@@ -1,7 +1,7 @@
 CMakeFiles/Validator.dir/src/game_stack.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp \
+ /home/ayyan/text-based-game/src/game_stack.cpp \
  /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/game_stack.h \
+ /home/ayyan/text-based-game/src/../include/game_stack.h \
  /usr/include/c++/15/vector /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \
@@ -53,7 +53,7 @@ CMakeFiles/Validator.dir/src/game_stack.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/15/include/stddef.h \
  /usr/include/c++/15/bits/uses_allocator.h \
  /usr/include/c++/15/bits/uses_allocator_args.h /usr/include/c++/15/tuple \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/inventory.h \
+ /home/ayyan/text-based-game/src/../include/inventory.h \
  /usr/include/c++/15/string /usr/include/c++/15/bits/stringfwd.h \
  /usr/include/c++/15/bits/char_traits.h \
  /usr/include/c++/15/bits/postypes.h /usr/include/c++/15/cwchar \
@@ -121,7 +121,7 @@ CMakeFiles/Validator.dir/src/game_stack.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/15/bits/charconv.h \
  /usr/include/c++/15/bits/basic_string.tcc \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/wolf.h \
+ /home/ayyan/text-based-game/src/../include/wolf.h \
  /usr/include/c++/15/stdexcept /usr/include/c++/15/exception \
  /usr/include/c++/15/bits/exception_ptr.h \
  /usr/include/c++/15/bits/cxxabi_init_exception.h \

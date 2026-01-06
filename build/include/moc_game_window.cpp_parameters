@@ -1,4 +1,4 @@
--I/home/ayyan/DSA-LAB-PROJECT/include
+-I/home/ayyan/text-based-game/include
 -o
-/home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp
-/home/ayyan/DSA-LAB-PROJECT/include/game_window.h
+/home/ayyan/text-based-game/build/include/moc_game_window.cpp
+/home/ayyan/text-based-game/include/game_window.h

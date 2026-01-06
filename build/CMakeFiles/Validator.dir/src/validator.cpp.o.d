@@ -1,5 +1,5 @@
 CMakeFiles/Validator.dir/src/validator.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/validator.cpp /usr/include/stdc-predef.h \
+ /home/ayyan/text-based-game/src/validator.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/15/iostream /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \
@@ -172,4 +172,4 @@ CMakeFiles/Validator.dir/src/validator.cpp.o: \
  /usr/include/c++/15/deque /usr/include/c++/15/bits/stl_deque.h \
  /usr/include/c++/15/bits/deque.tcc /usr/include/c++/15/bits/stl_stack.h \
  /usr/include/c++/15/utility /usr/include/c++/15/bits/stl_relops.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/decision_tree.h
+ /home/ayyan/text-based-game/src/../include/decision_tree.h

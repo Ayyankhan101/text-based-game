@@ -1,6 +1,6 @@
 CMakeFiles/BalanceTester.dir/src/pack.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/pack.h \
+ /home/ayyan/text-based-game/src/pack.cpp /usr/include/stdc-predef.h \
+ /home/ayyan/text-based-game/src/../include/pack.h \
  /usr/include/c++/15/string /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \

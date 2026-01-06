@@ -1,6 +1,6 @@
 CMakeFiles/WolfGame.dir/src/inventory.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/inventory.h \
+ /home/ayyan/text-based-game/src/inventory.cpp /usr/include/stdc-predef.h \
+ /home/ayyan/text-based-game/src/../include/inventory.h \
  /usr/include/c++/15/string /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \
@@ -117,7 +117,7 @@ CMakeFiles/WolfGame.dir/src/inventory.cpp.o: \
  /usr/include/c++/15/bits/memory_resource.h /usr/include/c++/15/cstddef \
  /usr/include/c++/15/bits/uses_allocator.h \
  /usr/include/c++/15/bits/uses_allocator_args.h /usr/include/c++/15/tuple \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/wolf.h \
+ /home/ayyan/text-based-game/src/../include/wolf.h \
  /usr/include/c++/15/iostream /usr/include/c++/15/ostream \
  /usr/include/c++/15/bits/ostream.h /usr/include/c++/15/ios \
  /usr/include/c++/15/exception /usr/include/c++/15/bits/exception_ptr.h \

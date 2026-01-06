@@ -131,3 +131,15 @@ bool Inventory::useItem(std::string name, Wolf& wolf) {
     }
     return false; // Item not found
 }
+
+void Inventory::clear() {
+    // Clear all items safely without causing double delete
+    Item* current = head;
+    while (current) {
+        Item* next = current->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr;
+    count = 0;
+}

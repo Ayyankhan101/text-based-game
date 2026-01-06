@@ -1,7 +1,7 @@
 CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp \
+ /home/ayyan/text-based-game/src/action_queue.cpp \
  /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/action_queue.h \
+ /home/ayyan/text-based-game/src/../include/action_queue.h \
  /usr/include/c++/15/queue /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \

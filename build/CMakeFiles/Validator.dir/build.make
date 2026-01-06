@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ayyan/DSA-LAB-PROJECT
+CMAKE_SOURCE_DIR = /home/ayyan/text-based-game
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ayyan/DSA-LAB-PROJECT/build
+CMAKE_BINARY_DIR = /home/ayyan/text-based-game/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Validator.dir/depend.make
@@ -69,138 +69,106 @@ include CMakeFiles/Validator.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Validator.dir/flags.make
 
-include/moc_game_window.cpp: /home/ayyan/DSA-LAB-PROJECT/include/game_window.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating include/moc_game_window.cpp"
-	cd /home/ayyan/DSA-LAB-PROJECT/build/include && /usr/lib/qt6/libexec/moc @/home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp_parameters
-
 CMakeFiles/Validator.dir/codegen:
 .PHONY : CMakeFiles/Validator.dir/codegen
 
 CMakeFiles/Validator.dir/src/validator.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/validator.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/validator.cpp
+CMakeFiles/Validator.dir/src/validator.cpp.o: /home/ayyan/text-based-game/src/validator.cpp
 CMakeFiles/Validator.dir/src/validator.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Validator.dir/src/validator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/validator.cpp.o -MF CMakeFiles/Validator.dir/src/validator.cpp.o.d -o CMakeFiles/Validator.dir/src/validator.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/validator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Validator.dir/src/validator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/validator.cpp.o -MF CMakeFiles/Validator.dir/src/validator.cpp.o.d -o CMakeFiles/Validator.dir/src/validator.cpp.o -c /home/ayyan/text-based-game/src/validator.cpp
 
 CMakeFiles/Validator.dir/src/validator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/validator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/validator.cpp > CMakeFiles/Validator.dir/src/validator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/validator.cpp > CMakeFiles/Validator.dir/src/validator.cpp.i
 
 CMakeFiles/Validator.dir/src/validator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/validator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/validator.cpp -o CMakeFiles/Validator.dir/src/validator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/validator.cpp -o CMakeFiles/Validator.dir/src/validator.cpp.s
 
 CMakeFiles/Validator.dir/src/action_queue.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/action_queue.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp
+CMakeFiles/Validator.dir/src/action_queue.cpp.o: /home/ayyan/text-based-game/src/action_queue.cpp
 CMakeFiles/Validator.dir/src/action_queue.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Validator.dir/src/action_queue.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/action_queue.cpp.o -MF CMakeFiles/Validator.dir/src/action_queue.cpp.o.d -o CMakeFiles/Validator.dir/src/action_queue.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Validator.dir/src/action_queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/action_queue.cpp.o -MF CMakeFiles/Validator.dir/src/action_queue.cpp.o.d -o CMakeFiles/Validator.dir/src/action_queue.cpp.o -c /home/ayyan/text-based-game/src/action_queue.cpp
 
 CMakeFiles/Validator.dir/src/action_queue.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/action_queue.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp > CMakeFiles/Validator.dir/src/action_queue.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/action_queue.cpp > CMakeFiles/Validator.dir/src/action_queue.cpp.i
 
 CMakeFiles/Validator.dir/src/action_queue.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/action_queue.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp -o CMakeFiles/Validator.dir/src/action_queue.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/action_queue.cpp -o CMakeFiles/Validator.dir/src/action_queue.cpp.s
 
 CMakeFiles/Validator.dir/src/decision_tree.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/decision_tree.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp
+CMakeFiles/Validator.dir/src/decision_tree.cpp.o: /home/ayyan/text-based-game/src/decision_tree.cpp
 CMakeFiles/Validator.dir/src/decision_tree.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Validator.dir/src/decision_tree.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/decision_tree.cpp.o -MF CMakeFiles/Validator.dir/src/decision_tree.cpp.o.d -o CMakeFiles/Validator.dir/src/decision_tree.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Validator.dir/src/decision_tree.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/decision_tree.cpp.o -MF CMakeFiles/Validator.dir/src/decision_tree.cpp.o.d -o CMakeFiles/Validator.dir/src/decision_tree.cpp.o -c /home/ayyan/text-based-game/src/decision_tree.cpp
 
 CMakeFiles/Validator.dir/src/decision_tree.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/decision_tree.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp > CMakeFiles/Validator.dir/src/decision_tree.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/decision_tree.cpp > CMakeFiles/Validator.dir/src/decision_tree.cpp.i
 
 CMakeFiles/Validator.dir/src/decision_tree.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/decision_tree.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp -o CMakeFiles/Validator.dir/src/decision_tree.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/decision_tree.cpp -o CMakeFiles/Validator.dir/src/decision_tree.cpp.s
 
 CMakeFiles/Validator.dir/src/game_stack.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/game_stack.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp
+CMakeFiles/Validator.dir/src/game_stack.cpp.o: /home/ayyan/text-based-game/src/game_stack.cpp
 CMakeFiles/Validator.dir/src/game_stack.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Validator.dir/src/game_stack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/game_stack.cpp.o -MF CMakeFiles/Validator.dir/src/game_stack.cpp.o.d -o CMakeFiles/Validator.dir/src/game_stack.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Validator.dir/src/game_stack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/game_stack.cpp.o -MF CMakeFiles/Validator.dir/src/game_stack.cpp.o.d -o CMakeFiles/Validator.dir/src/game_stack.cpp.o -c /home/ayyan/text-based-game/src/game_stack.cpp
 
 CMakeFiles/Validator.dir/src/game_stack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/game_stack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp > CMakeFiles/Validator.dir/src/game_stack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/game_stack.cpp > CMakeFiles/Validator.dir/src/game_stack.cpp.i
 
 CMakeFiles/Validator.dir/src/game_stack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/game_stack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp -o CMakeFiles/Validator.dir/src/game_stack.cpp.s
-
-CMakeFiles/Validator.dir/src/game_window.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/game_window.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
-CMakeFiles/Validator.dir/src/game_window.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Validator.dir/src/game_window.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/game_window.cpp.o -MF CMakeFiles/Validator.dir/src/game_window.cpp.o.d -o CMakeFiles/Validator.dir/src/game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp
-
-CMakeFiles/Validator.dir/src/game_window.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/game_window.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp > CMakeFiles/Validator.dir/src/game_window.cpp.i
-
-CMakeFiles/Validator.dir/src/game_window.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/game_window.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp -o CMakeFiles/Validator.dir/src/game_window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/game_stack.cpp -o CMakeFiles/Validator.dir/src/game_stack.cpp.s
 
 CMakeFiles/Validator.dir/src/inventory.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/inventory.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
+CMakeFiles/Validator.dir/src/inventory.cpp.o: /home/ayyan/text-based-game/src/inventory.cpp
 CMakeFiles/Validator.dir/src/inventory.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Validator.dir/src/inventory.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/inventory.cpp.o -MF CMakeFiles/Validator.dir/src/inventory.cpp.o.d -o CMakeFiles/Validator.dir/src/inventory.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Validator.dir/src/inventory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/inventory.cpp.o -MF CMakeFiles/Validator.dir/src/inventory.cpp.o.d -o CMakeFiles/Validator.dir/src/inventory.cpp.o -c /home/ayyan/text-based-game/src/inventory.cpp
 
 CMakeFiles/Validator.dir/src/inventory.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/inventory.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp > CMakeFiles/Validator.dir/src/inventory.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/inventory.cpp > CMakeFiles/Validator.dir/src/inventory.cpp.i
 
 CMakeFiles/Validator.dir/src/inventory.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/inventory.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp -o CMakeFiles/Validator.dir/src/inventory.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/inventory.cpp -o CMakeFiles/Validator.dir/src/inventory.cpp.s
 
 CMakeFiles/Validator.dir/src/pack.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/pack.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
+CMakeFiles/Validator.dir/src/pack.cpp.o: /home/ayyan/text-based-game/src/pack.cpp
 CMakeFiles/Validator.dir/src/pack.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Validator.dir/src/pack.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/pack.cpp.o -MF CMakeFiles/Validator.dir/src/pack.cpp.o.d -o CMakeFiles/Validator.dir/src/pack.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Validator.dir/src/pack.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/pack.cpp.o -MF CMakeFiles/Validator.dir/src/pack.cpp.o.d -o CMakeFiles/Validator.dir/src/pack.cpp.o -c /home/ayyan/text-based-game/src/pack.cpp
 
 CMakeFiles/Validator.dir/src/pack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/pack.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp > CMakeFiles/Validator.dir/src/pack.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/pack.cpp > CMakeFiles/Validator.dir/src/pack.cpp.i
 
 CMakeFiles/Validator.dir/src/pack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/pack.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/pack.cpp -o CMakeFiles/Validator.dir/src/pack.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/pack.cpp -o CMakeFiles/Validator.dir/src/pack.cpp.s
 
 CMakeFiles/Validator.dir/src/priority_queue.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/src/priority_queue.cpp.o: /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
+CMakeFiles/Validator.dir/src/priority_queue.cpp.o: /home/ayyan/text-based-game/src/priority_queue.cpp
 CMakeFiles/Validator.dir/src/priority_queue.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Validator.dir/src/priority_queue.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/priority_queue.cpp.o -MF CMakeFiles/Validator.dir/src/priority_queue.cpp.o.d -o CMakeFiles/Validator.dir/src/priority_queue.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Validator.dir/src/priority_queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/src/priority_queue.cpp.o -MF CMakeFiles/Validator.dir/src/priority_queue.cpp.o.d -o CMakeFiles/Validator.dir/src/priority_queue.cpp.o -c /home/ayyan/text-based-game/src/priority_queue.cpp
 
 CMakeFiles/Validator.dir/src/priority_queue.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/src/priority_queue.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp > CMakeFiles/Validator.dir/src/priority_queue.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/text-based-game/src/priority_queue.cpp > CMakeFiles/Validator.dir/src/priority_queue.cpp.i
 
 CMakeFiles/Validator.dir/src/priority_queue.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/src/priority_queue.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp -o CMakeFiles/Validator.dir/src/priority_queue.cpp.s
-
-CMakeFiles/Validator.dir/include/moc_game_window.cpp.o: CMakeFiles/Validator.dir/flags.make
-CMakeFiles/Validator.dir/include/moc_game_window.cpp.o: include/moc_game_window.cpp
-CMakeFiles/Validator.dir/include/moc_game_window.cpp.o: CMakeFiles/Validator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Validator.dir/include/moc_game_window.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Validator.dir/include/moc_game_window.cpp.o -MF CMakeFiles/Validator.dir/include/moc_game_window.cpp.o.d -o CMakeFiles/Validator.dir/include/moc_game_window.cpp.o -c /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp
-
-CMakeFiles/Validator.dir/include/moc_game_window.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Validator.dir/include/moc_game_window.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp > CMakeFiles/Validator.dir/include/moc_game_window.cpp.i
-
-CMakeFiles/Validator.dir/include/moc_game_window.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Validator.dir/include/moc_game_window.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp -o CMakeFiles/Validator.dir/include/moc_game_window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ayyan/text-based-game/src/priority_queue.cpp -o CMakeFiles/Validator.dir/src/priority_queue.cpp.s
 
 # Object files for target Validator
 Validator_OBJECTS = \
@@ -208,11 +176,9 @@ Validator_OBJECTS = \
 "CMakeFiles/Validator.dir/src/action_queue.cpp.o" \
 "CMakeFiles/Validator.dir/src/decision_tree.cpp.o" \
 "CMakeFiles/Validator.dir/src/game_stack.cpp.o" \
-"CMakeFiles/Validator.dir/src/game_window.cpp.o" \
 "CMakeFiles/Validator.dir/src/inventory.cpp.o" \
 "CMakeFiles/Validator.dir/src/pack.cpp.o" \
-"CMakeFiles/Validator.dir/src/priority_queue.cpp.o" \
-"CMakeFiles/Validator.dir/include/moc_game_window.cpp.o"
+"CMakeFiles/Validator.dir/src/priority_queue.cpp.o"
 
 # External object files for target Validator
 Validator_EXTERNAL_OBJECTS =
@@ -221,20 +187,13 @@ Validator: CMakeFiles/Validator.dir/src/validator.cpp.o
 Validator: CMakeFiles/Validator.dir/src/action_queue.cpp.o
 Validator: CMakeFiles/Validator.dir/src/decision_tree.cpp.o
 Validator: CMakeFiles/Validator.dir/src/game_stack.cpp.o
-Validator: CMakeFiles/Validator.dir/src/game_window.cpp.o
 Validator: CMakeFiles/Validator.dir/src/inventory.cpp.o
 Validator: CMakeFiles/Validator.dir/src/pack.cpp.o
 Validator: CMakeFiles/Validator.dir/src/priority_queue.cpp.o
-Validator: CMakeFiles/Validator.dir/include/moc_game_window.cpp.o
 Validator: CMakeFiles/Validator.dir/build.make
 Validator: CMakeFiles/Validator.dir/compiler_depend.ts
-Validator: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.9.2
-Validator: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.9.2
-Validator: /usr/lib/x86_64-linux-gnu/libGLX.so
-Validator: /usr/lib/x86_64-linux-gnu/libOpenGL.so
-Validator: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.9.2
 Validator: CMakeFiles/Validator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable Validator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable Validator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Validator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -245,7 +204,7 @@ CMakeFiles/Validator.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/Validator.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/Validator.dir/clean
 
-CMakeFiles/Validator.dir/depend: include/moc_game_window.cpp
-	cd /home/ayyan/DSA-LAB-PROJECT/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ayyan/DSA-LAB-PROJECT /home/ayyan/DSA-LAB-PROJECT /home/ayyan/DSA-LAB-PROJECT/build /home/ayyan/DSA-LAB-PROJECT/build /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles/Validator.dir/DependInfo.cmake "--color=$(COLOR)"
+CMakeFiles/Validator.dir/depend:
+	cd /home/ayyan/text-based-game/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ayyan/text-based-game /home/ayyan/text-based-game /home/ayyan/text-based-game/build /home/ayyan/text-based-game/build /home/ayyan/text-based-game/build/CMakeFiles/Validator.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Validator.dir/depend
 

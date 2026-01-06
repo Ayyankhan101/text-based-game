@@ -1,5 +1,5 @@
 CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp \
+ /home/ayyan/text-based-game/src/balance_tester.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/15/iostream \
  /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
@@ -207,9 +207,9 @@ CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: \
  /usr/include/c++/15/bits/locale_conv.h \
  /usr/include/c++/15/bits/quoted_string.h /usr/include/c++/15/sstream \
  /usr/include/c++/15/bits/sstream.tcc \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/wolf.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/decision_tree.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/priority_queue.h \
+ /home/ayyan/text-based-game/src/../include/wolf.h \
+ /home/ayyan/text-based-game/src/../include/decision_tree.h \
+ /home/ayyan/text-based-game/src/../include/priority_queue.h \
  /usr/include/c++/15/functional /usr/include/c++/15/bits/std_function.h \
  /usr/include/c++/15/unordered_map \
  /usr/include/c++/15/bits/unordered_map.h \
@@ -220,11 +220,11 @@ CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o: \
  /usr/include/c++/15/bits/node_handle.h \
  /usr/include/c++/15/bits/erase_if.h /usr/include/c++/15/array \
  /usr/include/c++/15/compare \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/game_stack.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/inventory.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/wolf.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/pack.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/action_queue.h \
+ /home/ayyan/text-based-game/src/../include/game_stack.h \
+ /home/ayyan/text-based-game/src/../include/inventory.h \
+ /home/ayyan/text-based-game/src/../include/wolf.h \
+ /home/ayyan/text-based-game/src/../include/pack.h \
+ /home/ayyan/text-based-game/src/../include/action_queue.h \
  /usr/include/c++/15/queue /usr/include/c++/15/deque \
  /usr/include/c++/15/bits/stl_deque.h /usr/include/c++/15/bits/deque.tcc \
  /usr/include/c++/15/bits/stl_heap.h /usr/include/c++/15/bits/stl_queue.h

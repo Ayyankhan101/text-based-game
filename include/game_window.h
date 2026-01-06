@@ -1,6 +1,7 @@
 #ifndef GAME_WINDOW_H
 #define GAME_WINDOW_H
 
+#include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -8,39 +9,53 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QProgressBar>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QDockWidget>
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QTreeWidgetItem>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QApplication>
 #include <fstream>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QScrollArea>
 #include <QtCore/QPropertyAnimation>
 #include <QtGui/QPainter>
 #include <QtCore/QTimer>
 #include <random>
-#include "../include/wolf.h"
-#include "../include/decision_tree.h"
-#include "../include/priority_queue.h"
-#include "../include/game_stack.h"
-#include "../include/action_queue.h"
-#include "../include/inventory.h"
-#include "../include/pack.h"
+#include "wolf.h"
+#include "decision_tree.h"
+#include "priority_queue.h"
+#include "game_stack.h"
+#include "action_queue.h"
+#include "inventory.h"
+#include "pack.h"
 
 class StatBar : public QWidget {
     Q_OBJECT
     Q_PROPERTY(int value READ value WRITE setValue)
 
 public:
-    StatBar(QWidget* parent = nullptr);
+    StatBar(const QString& label, QWidget* parent = nullptr);
     int value() const;
     void setValue(int value);
     void animateTo(int value);
+    void setLabel(const QString& label);
 protected:
     void paintEvent(QPaintEvent* event) override;
 private:
     int currentValue;
+    QString labelText;
     QPropertyAnimation* animation;
 };
 
-class GameWindow : public QWidget {
+class GameWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -55,6 +70,12 @@ private slots:
     void onInventory();
     void onPack();
     void updateStats();
+    void onNewGame();
+    void onAbout();
+    void onExit();
+
+private:
+    void checkBasicAchievements();
 
 private:
     Wolf& wolf;
@@ -66,7 +87,12 @@ private:
     Pack& pack;
     int& dayCounter; // Add reference to day counter
 
-    QTextEdit* storyLabel;
+    // Main layout components
+    QMenuBar* menuBar;
+    QStatusBar* statusBar;
+    QSplitter* mainSplitter;
+    QScrollArea* storyScrollArea;
+    QLabel* storyLabel;
     QLabel* statsLabel;
     QLabel* dayLabel;
     QLabel* packLabel;
@@ -83,16 +109,37 @@ private:
     StatBar* spiritBar;
     QLabel* wolfGraphic;
 
+    // Sidebar components (disabled in simplified GUI mode - initialized to nullptr)
+    QDockWidget* sidebarDock = nullptr;
+    QTabWidget* sidebarTabs = nullptr;
+    QWidget* inventoryWidget = nullptr;
+    QWidget* packWidget = nullptr;
+    QListWidget* inventoryList = nullptr;
+    QTreeWidget* packTree = nullptr;
+    QGroupBox* gameInfoGroup = nullptr;
+    QLabel* gameInfoLabel = nullptr;
+
     std::random_device rd;
     std::mt19937 gen{rd()};
     std::uniform_real_distribution<> dis{0.0, 1.0};
 
+    // Track fallback nodes for proper memory management
+    std::vector<DecisionNode*> fallbackNodes;
+
+    void setupMenuBar();
+    void setupStatusBar();
+    void setupCentralWidget();
+    void setupSidebar();
     void updateDisplay();
+    void cleanupFallbackNodes();
     void processChoice(bool isA);
     void checkEvents();
     void updateWolfGraphic(int scenarioId);
     void updateDayDisplay();
     void updatePackDisplay();
+    void updateInventoryDisplay();
+    void updatePackDisplaySidebar();
+    void updateGameInfo();
 };
 
 #endif

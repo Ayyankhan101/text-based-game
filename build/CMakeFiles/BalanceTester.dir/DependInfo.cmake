@@ -8,15 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ayyan/DSA-LAB-PROJECT/build/include/moc_game_window.cpp" "CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/action_queue.cpp" "CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/balance_tester.cpp" "CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp" "CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/game_stack.cpp" "CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/game_window.cpp" "CMakeFiles/BalanceTester.dir/src/game_window.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/game_window.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/inventory.cpp" "CMakeFiles/BalanceTester.dir/src/inventory.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/inventory.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/pack.cpp" "CMakeFiles/BalanceTester.dir/src/pack.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/pack.cpp.o.d"
-  "/home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp" "CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o.d"
+  "/home/ayyan/text-based-game/src/action_queue.cpp" "CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/action_queue.cpp.o.d"
+  "/home/ayyan/text-based-game/src/balance_tester.cpp" "CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/balance_tester.cpp.o.d"
+  "/home/ayyan/text-based-game/src/decision_tree.cpp" "CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/decision_tree.cpp.o.d"
+  "/home/ayyan/text-based-game/src/game_stack.cpp" "CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/game_stack.cpp.o.d"
+  "/home/ayyan/text-based-game/src/inventory.cpp" "CMakeFiles/BalanceTester.dir/src/inventory.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/inventory.cpp.o.d"
+  "/home/ayyan/text-based-game/src/pack.cpp" "CMakeFiles/BalanceTester.dir/src/pack.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/pack.cpp.o.d"
+  "/home/ayyan/text-based-game/src/priority_queue.cpp" "CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o" "gcc" "CMakeFiles/BalanceTester.dir/src/priority_queue.cpp.o.d"
   "" "BalanceTester" "gcc" "CMakeFiles/BalanceTester.dir/link.d"
   )
 

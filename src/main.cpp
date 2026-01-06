@@ -29,7 +29,13 @@ enum GameMode { TERMINAL, GUI };
 
 Difficulty difficulty = NORMAL;
 Storyline storyline = CLASSIC;
-GameMode currentMode = TERMINAL; // Default to terminal mode
+GameMode currentMode = TERMINAL;
+
+
+
+// Function declarations
+void showMenu();
+void showSettings(); // Default to terminal mode
 
 // Global variables
 float eventChance = 0.3f;
@@ -178,6 +184,10 @@ int main(int argc, char* argv[]) {
 
             DecisionNode* current = tree.getCurrentNode();
             // Display ASCII art for the current scenario
+            if (!current) {
+                std::cout << RED << "ERROR: No current scenario available!" << RESET << std::endl;
+                break;
+            }
             std::cout << AsciiArt::getScenarioArt(current->scenarioID) << std::endl;
             std::cout << BOLD << current->description << RESET << std::endl;
             if (current->isEnding) {
@@ -223,17 +233,21 @@ int main(int argc, char* argv[]) {
                     }
                     continue;
                 }
+                if (!current->left) {
+                    std::cout << RED << "ERROR: Invalid choice - no next scenario!" << RESET << std::endl;
+                    continue;
+                }
                 tree.setCurrentNode(current->left);
-                if (current->left && current->left->scenarioID == 2) {
+                if (current->left->scenarioID == 2) {
                     actions.enqueue({"Tracking the deer...", [](Wolf& w){ w.updateEnergy(-10); std::cout << "Spent energy tracking." << std::endl; }});
                     actions.enqueue({"Attacking the deer...", [](Wolf& w){ w.updateHunger(-30); std::cout << "Killed deer! Hunger reduced." << std::endl; }});
                 }
                 // Add items
-                if (current->left && current->left->scenarioID == 4) inventory.addItem("Rabbit Meat", FOOD, -30, 1);
-                if (current->left && current->left->scenarioID == 6) inventory.addItem("Berries", FOOD, -10, 1);
+                if (current->left->scenarioID == 4) inventory.addItem("Rabbit Meat", FOOD, -30, 1);
+                // Removed: Scenario 6 is about helping injured wolf, not finding berries
                 // Add reputation changes based on scenario
-                if (current->left && current->left->scenarioID == 12) wolf.updateReputation(20); // Leading with strength
-                if (current->left && current->left->scenarioID == 9) wolf.updateReputation(-10); // Sparing traveler
+                if (current->left->scenarioID == 12) wolf.updateReputation(20); // Leading with strength
+                if (current->left->scenarioID == 9) wolf.updateReputation(-10); // Sparing traveler
             } else if (input == 'B') {
                 // Check if the wolf can make this choice
                 if (!wolf.canMakeChoice(3)) { // Assume choice B requires 3 energy
@@ -304,6 +318,28 @@ int main(int argc, char* argv[]) {
             if (current->scenarioID == 13) pack.addMember("Luna", "Hunter", 80);
             if (current->scenarioID == 16) pack.addMember("Ally", "Guard", 60);
 
+            // Pack player choice effects
+            if (current->scenarioID == 68 && input == 'A') {
+                // Accepted recruitment
+                pack.addMember("Recruit", "Scout", 65);
+                wolf.updateHunger(10); // More mouths to feed
+                std::cout << GREEN << "🐺 New pack member recruited! Scout added." << RESET << std::endl;
+            }
+            if (current->scenarioID == 69) {
+                // Training choice
+                if (input == 'A') {
+                    // Hunting training
+                    wolf.energy -= 20;
+                    std::cout << GREEN << "🐺 Pack hunting skills improved!" << RESET << std::endl;
+                    // Future food gains increased (this would need more complex implementation)
+                } else {
+                    // Scouting training
+                    wolf.energy -= 15;
+                    eventChance += 0.1f; // Better event chances
+                    std::cout << GREEN << "👁️ Pack scouting skills improved!" << RESET << std::endl;
+                }
+            }
+
             // Calculate dynamic hunger increase based on difficulty and pack size
             int currentHungerIncrease = hungerIncrease;
 
@@ -320,6 +356,33 @@ int main(int argc, char* argv[]) {
 
             // Increment day counter after each decision/action
             dayCounter++;
+
+            // ========== INVENTORY CONSUMPTION SYSTEM ==========
+            // Food consumption every 5 days
+            if (dayCounter % 5 == 0 && dayCounter > 1) {
+                std::cout << CYAN << "\n📅 Day " << dayCounter << " - Time to eat!" << RESET << std::endl;
+
+                if (inventory.useItem("Rabbit Meat", wolf)) {
+                    std::cout << GREEN << "  ✓ Ate Rabbit Meat (hunger reduced)" << RESET << std::endl;
+                } else if (inventory.useItem("Berries", wolf)) {
+                    std::cout << GREEN << "  ✓ Ate Berries (hunger reduced)" << RESET << std::endl;
+                } else {
+                    std::cout << RED << "  ✗ No food! Your pack goes hungry." << RESET << std::endl;
+                    wolf.updateHunger(10);  // Extra hunger penalty
+                }
+            }
+
+            // Healing item usage when injured
+            if (wolf.health < 40 && dayCounter > 1) {
+                std::cout << YELLOW << "\n💊 Your wolf is injured!" << RESET << std::endl;
+
+                if (inventory.useItem("Healing Herbs", wolf)) {
+                    std::cout << GREEN << "  ✓ Used Healing Herbs (+30 health)" << RESET << std::endl;
+                    wolf.updateHealth(30);
+                } else {
+                    std::cout << RED << "  ✗ No healing items available!" << RESET << std::endl;
+                }
+            }
 
             // Random event check
             if (dis(gen) < eventChance) {
@@ -420,22 +483,48 @@ int main(int argc, char* argv[]) {
 }
 
 void showMenu() {
-    std::cout << BOLD << "=== Wolf Survival Game ===" << RESET << std::endl;
-    std::cout << "1. Start New Game (Terminal)" << std::endl;
-    std::cout << "2. Load Game (Terminal)" << std::endl;
-    std::cout << "3. Start New Game (GUI)" << std::endl;
-    std::cout << "4. Load Game (GUI)" << std::endl;
-    std::cout << "5. Settings" << std::endl;
-    std::cout << "6. Quit" << std::endl;
-    std::cout << "Choose an option: ";
+    std::cout << BOLD << CYAN << R"(
+╔═══════════════════════════════════════════╗
+║         🐺 WOLF SURVIVAL GAME 🐺          ║
+╚═══════════════════════════════════════════╝
+)" << RESET << std::endl;
+
+    std::cout << "  " << BOLD << GREEN << "▶ Start New Game (Terminal)" << RESET << std::endl;
+    std::cout << "    Load Game (Terminal)" << std::endl;
+    std::cout << "  " << BOLD << GREEN << "▶ Start New Game (GUI)" << RESET << std::endl;
+    std::cout << "    Load Game (GUI)" << std::endl;
+    std::cout << "  " << YELLOW << "⚙️ Settings" << RESET << std::endl;
+    std::cout << "  " << RED << "❌ Quit" << RESET << std::endl;
+    std::cout << std::endl << CYAN << "Choose an option: " << RESET;
 }
 
+
+
 void showSettings() {
-    std::cout << BOLD << "=== Settings ===" << RESET << std::endl;
-    std::cout << "1. Difficulty" << std::endl;
-    std::cout << "2. Storyline" << std::endl;
-    std::cout << "3. Back" << std::endl;
-    std::cout << "Choose an option: ";
+    std::cout << BOLD << YELLOW << R"(
+╔═══════════════════════════════════════════╗
+║              ⚙️ SETTINGS ⚙️               ║
+╚═══════════════════════════════════════════╝
+)" << RESET << std::endl;
+
+    std::cout << "  " << GREEN << "⚔️ Difficulty: " << RESET;
+    switch (difficulty) {
+        case EASY: std::cout << GREEN << "[EASY]" << RESET; break;
+        case NORMAL: std::cout << YELLOW << "[NORMAL]" << RESET; break;
+        case HARD: std::cout << RED << "[HARD]" << RESET; break;
+    }
+    std::cout << std::endl;
+
+    std::cout << "  " << BLUE << "📖 Storyline: " << RESET;
+    switch (storyline) {
+        case CLASSIC: std::cout << CYAN << "[CLASSIC]" << RESET; break;
+        case SURVIVAL: std::cout << GREEN << "[SURVIVAL]" << RESET; break;
+        case PACK: std::cout << YELLOW << "[PACK]" << RESET; break;
+    }
+    std::cout << std::endl;
+
+    std::cout << std::endl << "  " << RED << "⬅️ Back" << RESET << std::endl;
+    std::cout << std::endl << CYAN << "Choose an option: " << RESET;
 }
 
 void applyDifficulty() {
@@ -554,14 +643,8 @@ void loadGame(Wolf& wolf, DecisionTree& tree, Inventory& inventory, Pack& pack, 
             tree.setCurrentNode(tree.getRoot());
         }
 
-        // Clear current inventory
-        Item* current = inventory.getHead();
-        while (current) {
-            Item* next = current->next;
-            delete current;
-            current = next;
-        }
-        inventory = Inventory(); // Reset inventory
+        // Clear current inventory using safe clear method
+        inventory.clear();
 
         // Load inventory
         int itemCount;
@@ -609,7 +692,16 @@ void loadGame(Wolf& wolf, DecisionTree& tree, Inventory& inventory, Pack& pack, 
 }
 
 int runGuiGame(QApplication& app, Wolf& wolf, DecisionTree& tree, PriorityQueue& events, GameStack& history, ActionQueue& actions, Inventory& inventory, Pack& pack, int& dayCounter) {
+    qDebug() << "runGuiGame: starting";
+    tree.buildSampleTree();
+    qDebug() << "runGuiGame: tree built";
     GameWindow gameWindow(wolf, tree, events, history, actions, inventory, pack, dayCounter);
+
+    qDebug() << "runGuiGame: window created";
+
     gameWindow.show();
+
+    qDebug() << "runGuiGame: window shown";
+
     return app.exec();
 }

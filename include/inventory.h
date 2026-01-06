@@ -29,6 +29,7 @@ public:
     Inventory* clone() const; // Add method to create a deep copy of the inventory
     void replaceWith(Inventory* other); // Add method to replace contents with another inventory
     bool useItem(std::string name, Wolf& wolf); // Add method to use item and apply effect to wolf
+    void clear(); // Clear all items from inventory
 };
 
 #endif

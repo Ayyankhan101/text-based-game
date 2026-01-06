@@ -10,8 +10,7 @@
 #include "../include/pack.h"
 #include "../include/action_queue.h"
 
-// Forward declaration for the function defined later
-int calculatePackBenefits(const Pack& pack);
+
 
 class BalanceTester {
 private:
@@ -150,25 +149,7 @@ private:
         return dayCounter >= 30 && wolf.isAlive();
     }
     
-    int calculatePackBenefits(const Pack& pack) {
-        int totalBenefit = 0;
-        PackMember* current = pack.getHead();
-        while (current) {
-            // Different roles provide different benefits
-            if (current->role == "Hunter") {
-                // Hunters improve hunting success and provide food
-                totalBenefit += (current->loyalty / 20); // Higher loyalty = more benefit
-            } else if (current->role == "Scout") {
-                // Scouts provide early warnings and better navigation
-                totalBenefit += (current->loyalty / 25);
-            } else if (current->role == "Guard") {
-                // Guards provide protection
-                totalBenefit += (current->loyalty / 30);
-            }
-            current = current->next;
-        }
-        return totalBenefit;
-    }
+
 };
 
 int main() {

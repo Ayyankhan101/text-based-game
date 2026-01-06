@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ayyan/DSA-LAB-PROJECT
+CMAKE_SOURCE_DIR = /home/ayyan/text-based-game
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ayyan/DSA-LAB-PROJECT/build
+CMAKE_BINARY_DIR = /home/ayyan/text-based-game/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles /home/ayyan/DSA-LAB-PROJECT/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/text-based-game/build/CMakeFiles /home/ayyan/text-based-game/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/DSA-LAB-PROJECT/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ayyan/text-based-game/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -161,8 +161,6 @@ include/moc_game_window.o: include/moc_game_window.cpp.o
 # target to build an object file
 include/moc_game_window.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/include/moc_game_window.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.o
 .PHONY : include/moc_game_window.cpp.o
 
 include/moc_game_window.i: include/moc_game_window.cpp.i
@@ -171,8 +169,6 @@ include/moc_game_window.i: include/moc_game_window.cpp.i
 # target to preprocess a source file
 include/moc_game_window.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/include/moc_game_window.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.i
 .PHONY : include/moc_game_window.cpp.i
 
 include/moc_game_window.s: include/moc_game_window.cpp.s
@@ -181,8 +177,6 @@ include/moc_game_window.s: include/moc_game_window.cpp.s
 # target to generate assembly for a file
 include/moc_game_window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/include/moc_game_window.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/include/moc_game_window.cpp.s
 .PHONY : include/moc_game_window.cpp.s
 
 src/action_queue.o: src/action_queue.cpp.o
@@ -305,8 +299,6 @@ src/game_window.o: src/game_window.cpp.o
 # target to build an object file
 src/game_window.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/src/game_window.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/src/game_window.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/src/game_window.cpp.o
 .PHONY : src/game_window.cpp.o
 
 src/game_window.i: src/game_window.cpp.i
@@ -315,8 +307,6 @@ src/game_window.i: src/game_window.cpp.i
 # target to preprocess a source file
 src/game_window.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/src/game_window.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/src/game_window.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/src/game_window.cpp.i
 .PHONY : src/game_window.cpp.i
 
 src/game_window.s: src/game_window.cpp.s
@@ -325,8 +315,6 @@ src/game_window.s: src/game_window.cpp.s
 # target to generate assembly for a file
 src/game_window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WolfGame.dir/build.make CMakeFiles/WolfGame.dir/src/game_window.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Validator.dir/build.make CMakeFiles/Validator.dir/src/game_window.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BalanceTester.dir/build.make CMakeFiles/BalanceTester.dir/src/game_window.cpp.s
 .PHONY : src/game_window.cpp.s
 
 src/inventory.o: src/inventory.cpp.o

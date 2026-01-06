@@ -1,7 +1,7 @@
 CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/priority_queue.cpp \
+ /home/ayyan/text-based-game/src/priority_queue.cpp \
  /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/priority_queue.h \
+ /home/ayyan/text-based-game/src/../include/priority_queue.h \
  /usr/include/c++/15/string /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \

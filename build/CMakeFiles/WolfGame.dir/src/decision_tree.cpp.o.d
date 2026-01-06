@@ -1,7 +1,7 @@
 CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o: \
- /home/ayyan/DSA-LAB-PROJECT/src/decision_tree.cpp \
+ /home/ayyan/text-based-game/src/decision_tree.cpp \
  /usr/include/stdc-predef.h \
- /home/ayyan/DSA-LAB-PROJECT/src/../include/decision_tree.h \
+ /home/ayyan/text-based-game/src/../include/decision_tree.h \
  /usr/include/c++/15/string /usr/include/c++/15/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h \
