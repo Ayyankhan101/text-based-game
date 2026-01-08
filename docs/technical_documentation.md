@@ -31,7 +31,7 @@ struct DecisionNode {
 ```
 
 **Functionality**:
-- `buildSampleTree()`: Constructs the complete decision tree with 25+ nodes spanning 10 days
+- `buildSampleTree()`: Constructs the complete decision tree with 36+ nodes spanning 10 days
 - `findNodeById()`: Locates a node by its ID for save/load functionality
 - `getCurrentNode()/setCurrentNode()`: Manages current position in the tree
 - **Story Integration**: Nodes include inventory usage, pack recruitment, and resource management
@@ -182,7 +182,7 @@ packMemberCount
 - Validates tree structure and node connectivity
 - Counts total nodes and endings
 - Finds all possible paths through the decision tree
-- Verifies all 5+ endings are reachable
+- Verifies all 22+ endings are reachable
 
 ### 5.2 Balance Tester
 **File**: `balance_tester.cpp`

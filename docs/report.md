@@ -86,7 +86,7 @@ class DecisionTree {
 public:
     void insertNode(DecisionNode* parent, DecisionNode* child, bool isLeft);
     DecisionNode* getCurrentNode();
-    void buildSampleTree(); // 20+ nodes
+    void buildSampleTree(); // 36+ nodes
 };
 ```
 
@@ -172,7 +172,7 @@ Save/Load using std::ofstream/ifstream, storing nodeID and stats.
 ## Testing & Game Balance
 
 ### Testing Checklist
-- [x] Playthrough to each of 8+ endings
+- [x] Playthrough to each of 22+ endings
 - [x] All decision paths functional
 - [x] Stats update correctly (hunger +4/turn)
 - [x] Inventory adds items on scenarios/events

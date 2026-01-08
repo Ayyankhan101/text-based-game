@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2025.11.10)  7 JAN 2026 21:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2025.11.10)  8 JAN 2026 23:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1198,17 +1198,17 @@ d.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `wolf_pack_survival_report.out':
-(rerunfilecheck)             Before: 41B6CD256EA54D690E22225AC9D86D3E;4148
-(rerunfilecheck)             After:  0D254CF696DAFF6F86EBA4D902002243;4382.
+(rerunfilecheck)             Before: 0D254CF696DAFF6F86EBA4D902002243;4382
+(rerunfilecheck)             After:  7AE017681D4803DE7CB76DB5F76F48B7;4392.
  ) 
 Here is how much of TeX's memory you used:
- 27039 strings out of 467748
- 523263 string characters out of 5429607
+ 27040 strings out of 467748
+ 523279 string characters out of 5429607
  1113846 words of memory out of 5000000
- 55234 multiletter control sequences out of 15000+600000
+ 55235 multiletter control sequences out of 15000+600000
  635288 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,11n,97p,773b,999s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,11n,97p,818b,999s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
@@ -1217,10 +1217,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
 fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/c
 m-super/sfrm1200.pfb>
-Output written on wolf_pack_survival_report.pdf (19 pages, 141609 bytes).
+Output written on wolf_pack_survival_report.pdf (19 pages, 142031 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 228 compressed objects within 3 object streams
+ 272 PDF objects out of 1000 (max. 8388607)
+ 232 compressed objects within 3 object streams
  49 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 205 words of extra memory for PDF output out of 10000 (max. 10000000)
 

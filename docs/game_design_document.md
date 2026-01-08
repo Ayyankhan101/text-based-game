@@ -65,9 +65,9 @@ The game is set in a mystical wilderness where ancient spirits and the legendary
 - Face various threats and challenges
 
 ### 4.3 Narrative Structure
-- Branching narrative with 27+ decision nodes
+- Branching narrative with 36+ decision nodes
 - Multiple story paths based on player choices
-- 7 different endings based on decisions and stats
+- 22+ different endings based on decisions and stats
 - Consequences that carry forward through the story
 
 ## 5. Technical Architecture
@@ -115,7 +115,7 @@ The game is set in a mystical wilderness where ancient spirits and the legendary
 ## 8. Content Overview
 
 ### 8.1 Decision Nodes
-- 27+ unique decision scenarios
+- 36+ unique decision scenarios
 - Branching paths with meaningful choices
 - Consequences that affect game state
 - Varied narrative themes and challenges
@@ -128,6 +128,7 @@ The game is set in a mystical wilderness where ancient spirits and the legendary
 - **Supply Discovery**: Find resources for survival
 - **Pup Rescue**: Gain pack allies through compassion
 - **Moon Path**: Discover ancient pack grounds
+- **Plus 15+ additional endings** across all storylines
 
 ## 9. Technical Requirements
 
@@ -152,7 +153,7 @@ The game is set in a mystical wilderness where ancient spirits and the legendary
 - Integration testing of all game systems
 
 ### 10.2 Validation Results
-- Decision tree has 27+ nodes (exceeds 20+ requirement)
-- Game has 7+ endings (exceeds 5+ requirement)
+- Decision tree has 36+ nodes (exceeds 20+ requirement)
+- Game has 22+ endings (exceeds 5+ requirement)
 - All paths and endings are reachable
 - Difficulty balanced for 10-80% survival rate

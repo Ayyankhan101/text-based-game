@@ -12,8 +12,8 @@ Interactive text-based wolf survival game where players control a lone wolf navi
 ## 🎯 Requirements Compliance
 
 ### ✅ Core Features (MUST HAVE)
-- [x] **25+ Decision Nodes**: Extended story with complex branching (25 nodes implemented)
-- [x] **5+ Different Endings**: Multiple story conclusions based on choices
+- [x] **36+ Decision Nodes**: Extended story with complex branching (36+ nodes implemented)
+- [x] **22+ Different Endings**: Multiple story conclusions based on choices
 - [x] **Binary Decision Tree**: Story progression and narrative branching
 - [x] **Priority Queue**: Event management with 3 priority levels
 - [x] **Stack**: Undo functionality (5 levels) for decision backtracking
@@ -148,7 +148,7 @@ int benefit = calculatePackBenefits(pack); // Calculate hunting bonuses
 ## 🧪 Testing & Validation
 
 ### Automated Testing
-- **Decision Tree Validator**: Verifies 25+ nodes and 5+ endings
+- **Decision Tree Validator**: Verifies 84 total nodes and 93 total endings across all storylines (40+ nodes, 61+ endings Classic; 22+ nodes, 16+ endings each for Survival and Pack)
 - **Balance Tester**: Runs 100+ simulations for difficulty tuning
 - **Integration Tests**: All systems working together
 
@@ -227,14 +227,14 @@ make
 
 ## 📊 Project Statistics
 - **Lines of Code**: 2000+ (C++)
-- **Decision Nodes**: 25+ scenarios
-- **Story Endings**: 5+ unique conclusions
+- **Decision Nodes**: 84+ total scenarios (40+ Classic, 22+ Survival, 22+ Pack)
+- **Story Endings**: 93+ total unique conclusions (61+ Classic, 16+ Survival, 16+ Pack)
 - **Data Structures**: 6 different types implemented
 - **Development Time**: 7 days (one week)
 - **Team Size**: 8-10 members
 
 ## 🎖️ Bonus Features Implemented
-- [x] **Extended Story**: 25+ nodes vs required 20+
+- [x] **Extended Story**: 36+ nodes vs required 20+
 - [x] **Rich GUI**: Qt6 interface with animated stat bars
 - [x] **Complete Integration**: All systems working together
 - [x] **Comprehensive Testing**: Automated validation tools
