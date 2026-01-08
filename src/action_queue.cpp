@@ -19,3 +19,9 @@ void ActionQueue::processNext(Wolf& wolf) {
 bool ActionQueue::isEmpty() {
     return actions.empty();
 }
+
+void ActionQueue::clear() {
+    while (!actions.empty()) {
+        actions.pop();
+    }
+}

@@ -1,19 +1,35 @@
 #include "../include/decision_tree.h"
 #include <iostream>
 #include <functional>
+#include <queue>
+#include <set>
 
 DecisionTree::DecisionTree() : root(nullptr), currentNode(nullptr) {}
 
 DecisionTree::~DecisionTree() {
-    deleteTree(root);
+    deleteTree(root, deletedNodes);
+    deletedNodes.clear();
 }
 
-void DecisionTree::deleteTree(DecisionNode* node) {
-    if (node) {
-        deleteTree(node->left);
-        deleteTree(node->right);
-        delete node;
+void DecisionTree::reset() {
+    deleteTree(root, deletedNodes);
+    root = nullptr;
+    currentNode = nullptr;
+    deletedNodes.clear();
+}
+
+void DecisionTree::deleteTree(DecisionNode* node, std::unordered_set<DecisionNode*>& deleted) {
+    if (!node || deleted.count(node) > 0) return;
+    deleted.insert(node);
+    // Recursively delete children first
+    if (node->left && deleted.count(node->left) == 0) {
+        deleteTree(node->left, deleted);
     }
+    if (node->right && deleted.count(node->right) == 0) {
+        deleteTree(node->right, deleted);
+    }
+    // Finally delete the current node
+    delete node;
 }
 
 void DecisionTree::insertNode(DecisionNode* parent, DecisionNode* child, bool isLeft) {
@@ -42,10 +58,13 @@ void DecisionTree::buildSampleTree() {
 }
 
 void DecisionTree::buildClassicStory() {
+    // Reset any existing tree before building new one
+    reset();
+    
     // Day 1: The Awakening - Need Food and Shelter
     root = new DecisionNode();
     root->scenarioID = 1;
-    root->description = "You awaken alone in a snow-covered forest. Your pack is gone, and winter is harsh. Your stomach growls with hunger (60/100). You need food and shelter to survive. In the distance, you smell fresh blood and hear another wolf howling.";
+    root->description = "You awaken alone in a snow-covered forest. Your pack is gone, and winter is harsh. Your throat is parched and stomach growls with hunger (60/100). You need food, water, and shelter to survive. In the distance, you smell fresh blood and hear another wolf howling.";
     root->choiceA_text = "Follow the blood scent to hunt for food";
     root->choiceB_text = "Approach the howling wolf";
     root->isEnding = false;
@@ -53,7 +72,7 @@ void DecisionTree::buildClassicStory() {
     // Hunt Path - Day 1
     DecisionNode* hunt1 = new DecisionNode();
     hunt1->scenarioID = 2;
-    hunt1->description = "You find a wounded rabbit caught in a trap. Easy prey! You devour it quickly. [GAINED: Rabbit Meat x2 to inventory] Your hunger decreases but you're still not full. You notice human footprints near the trap.";
+    hunt1->description = "You find a wounded rabbit caught in a trap. Easy prey! You devour it quickly. [GAINED: Small Fish x2, Fresh Water x1] Your hunger and thirst decrease but you're still not full. You notice human footprints near the trap.";
     hunt1->choiceA_text = "Search for more traps (might find food or danger)";
     hunt1->choiceB_text = "Avoid humans, find shelter for the night";
     hunt1->isEnding = false;
@@ -71,7 +90,7 @@ void DecisionTree::buildClassicStory() {
     // Hunt - Search Traps - Day 2
     DecisionNode* traps1 = new DecisionNode();
     traps1->scenarioID = 4;
-    traps1->description = "You find three more traps! Two have rabbits, one has healing herbs. [GAINED: Rabbit Meat x4, Healing Herbs x2] But you hear human voices approaching. Your pack could help scout for danger.";
+    traps1->description = "You find three more traps! Two have fish, one has healing herbs. [GAINED: Small Fish x3, Winter Berries x2, Common Mallow x1] But you hear human voices approaching. Your pack could help scout for danger.";
     traps1->choiceA_text = "Grab everything and run quickly";
     traps1->choiceB_text = "Take only what you can carry safely";
     traps1->isEnding = false;
@@ -89,7 +108,7 @@ void DecisionTree::buildClassicStory() {
     // Wolf - Help Her - Day 2
     DecisionNode* help1 = new DecisionNode();
     help1->scenarioID = 6;
-    help1->description = "You help treat her wounds with some herbs you find. [USED: Healing Herbs if available] She's grateful and agrees to join your pack! [PACK MEMBER ADDED: Luna - Scout] She tells you about a deer herd nearby.";
+    help1->description = "You help treat her wounds with some herbs you find. [USED: Common Mallow if available] She's grateful and agrees to join your pack! [PACK MEMBER ADDED: Luna - Scout] She tells you about a deer herd nearby.";
     help1->choiceA_text = "Hunt the deer together (pack hunting bonus)";
     help1->choiceB_text = "Rest and recover first, hunt tomorrow";
     help1->isEnding = false;
@@ -98,7 +117,7 @@ void DecisionTree::buildClassicStory() {
     // Wolf - Ignore Her - Day 2
     DecisionNode* ignore1 = new DecisionNode();
     ignore1->scenarioID = 7;
-    ignore1->description = "You leave her behind and continue alone. Your hunger increases (75/100). You find some berries but they're not very filling. [GAINED: Berries x3] Winter is getting harsher.";
+    ignore1->description = "You leave her behind and continue alone. Your hunger increases (75/100). You find some winter berries near a stream. [GAINED: Winter Berries x3, Fresh Water x1] Winter is getting harsher and you need more substantial food.";
     ignore1->choiceA_text = "Search for bigger prey";
     ignore1->choiceB_text = "Look for other wolves to join";
     ignore1->isEnding = false;
@@ -116,7 +135,7 @@ void DecisionTree::buildClassicStory() {
     // Traps - Take Safely - Day 3
     DecisionNode* safe1 = new DecisionNode();
     safe1->scenarioID = 9;
-    safe1->description = "You take 2 rabbits and 1 herb, leaving quietly. [GAINED: Rabbit Meat x2, Healing Herbs x1] The humans pass by without noticing. You're still hungry but safer. You smell a pack of wolves nearby.";
+    safe1->description = "You take 2 small fish and 1 herb, leaving quietly. [GAINED: Small Fish x2, Common Mallow x1] The humans pass by without noticing. You're still hungry but safer. You smell a pack of wolves nearby.";
     safe1->choiceA_text = "Approach the wolf pack";
     safe1->choiceB_text = "Avoid them and continue alone";
     safe1->isEnding = false;
@@ -125,7 +144,7 @@ void DecisionTree::buildClassicStory() {
     // Shelter - Fight Bear - Day 3
     DecisionNode* bear1 = new DecisionNode();
     bear1->scenarioID = 10;
-    bear1->description = "You attack the sleeping bear! It wakes up angry and swipes at you. You're badly injured but manage to drive it away. [Health -40] The cave is yours but you need healing. [USE: Healing Herbs if available]";
+    bear1->description = "You attack the sleeping bear! It wakes up angry and swipes at you. You're badly injured but manage to drive it away. [Health -40] The cave is yours but you need healing. [USE: Common Mallow if available]";
     bear1->choiceA_text = "Use healing herbs to recover";
     bear1->choiceB_text = "Tough it out and rest in the cave";
     bear1->isEnding = false;
@@ -134,7 +153,7 @@ void DecisionTree::buildClassicStory() {
     // Help - Hunt Deer Together - Day 3
     DecisionNode* deer1 = new DecisionNode();
     deer1->scenarioID = 11;
-    deer1->description = "With Luna's scouting, you successfully hunt a large deer! [GAINED: Deer Meat x6] Your pack is well-fed. Luna's loyalty increases. You hear howls from a larger pack in the distance.";
+    deer1->description = "You meet Luna, a skilled lone hunter. She offers to join your pack! Together, you successfully hunt a large deer! [GAINED: Fresh Meat x8, Fresh Water x2] Your pack is well-fed. Luna's loyalty increases. You hear howls from a larger pack in the distance.";
     deer1->choiceA_text = "Investigate the larger pack";
     deer1->choiceB_text = "Stay hidden and build your own pack";
     deer1->isEnding = false;
@@ -144,8 +163,8 @@ void DecisionTree::buildClassicStory() {
     // Day 4: Pack Building
     DecisionNode* pack1 = new DecisionNode();
     pack1->scenarioID = 12;
-    pack1->description = "You encounter a young male wolf being chased by hunters. Luna suggests helping him - he looks strong and could be a good hunter for your pack.";
-    pack1->choiceA_text = "Rescue the young wolf (gain pack member)";
+    pack1->description = "With Luna in your pack, you encounter a young male wolf being chased by hunters. He looks strong and could be a good hunter for your pack.";
+    pack1->choiceA_text = "Rescue the young wolf (gain pack member: Fenris as Scout)";
     pack1->choiceB_text = "Let the hunters take him (avoid danger)";
     pack1->isEnding = false;
     insertNode(deer1, pack1, true);
@@ -153,7 +172,7 @@ void DecisionTree::buildClassicStory() {
     // Day 5: Territory Establishment
     DecisionNode* territory1 = new DecisionNode();
     territory1->scenarioID = 13;
-    territory1->description = "Your pack now has 3 members! You need to establish territory. You find a perfect valley with a stream and plenty of prey. But another pack claims it too.";
+    territory1->description = "You have found Luna, a skilled hunter who joined your pack! Now you need to establish territory. You find a perfect valley with a stream and plenty of prey. But another pack claims it too.";
     territory1->choiceA_text = "Challenge the other pack for territory";
     territory1->choiceB_text = "Negotiate to share the territory";
     territory1->isEnding = false;
@@ -265,25 +284,33 @@ void DecisionTree::buildClassicStory() {
     // Add more branching paths and endings...
     DecisionNode* end3 = new DecisionNode();
     end3->scenarioID = 21;
-    end3->description = "Your pack couldn't survive the harsh winter. You die alone, but your story becomes legend.";
-    end3->isEnding = true;
-    end3->endingText = "TRAGIC HERO: Your sacrifice saved others, even in death.";
+    end3->description = "Your pack struggles to survive the harsh winter. Some members perish, but the core remains. Through hardship, your remaining pack grows stronger and more resilient.";
+    end3->isEnding = false;  // Changed from true - continue to recovery path
+    end3->endingText = "";
     insertNode(crisis1, end3, false);
 
     DecisionNode* end4 = new DecisionNode();
     end4->scenarioID = 22;
-    end4->description = "You successfully negotiate with the rival pack and form an alliance.";
-    end4->isEnding = true;
-    end4->endingText = "DIPLOMATIC ALPHA: United, both packs thrive in the wilderness.";
-    insertNode(threat1, end4, false);
+    end4->description = "You successfully negotiate with the rival pack. They propose an alliance rather than conflict.";
+    end4->choiceA_text = "Accept full alliance - share territory and resources equally";
+    end4->choiceB_text = "Accept limited alliance - maintain clear boundaries";
+    end4->isEnding = false;
+    insertNode(threat1, end4, false);  // Alternative to crisis path
+
+    // Diplomacy finale - unique ending
+    DecisionNode* diplomacyFinale = new DecisionNode();
+    diplomacyFinale->scenarioID = 67;
+    diplomacyFinale->description = "Your wisdom in diplomacy has created something rare in the wilderness - two packs working as one. The forest recognizes your vision for peace, and your combined force becomes unmatched.";
+    diplomacyFinale->isEnding = true;
+    diplomacyFinale->endingText = "DIPLOMATIC MASTER: A true alpha leads not through strength alone, but through understanding and cooperation.";
+    insertNode(end4, diplomacyFinale, true);  // True unique ending from end4
 
     DecisionNode* end5 = new DecisionNode();
     end5->scenarioID = 31;
-    end5->description = "You choose to be selective about new members. Your pack remains small but highly skilled and loyal.";
+    end5->description = "You choose to be selective about new members. Your pack remains small but highly skilled and loyal. Through careful management and selective recruitment, your elite pack becomes legendary.";
     end5->isEnding = true;
     end5->endingText = "ELITE GUARDIANS: Quality over quantity - your pack is legendary for its skill and unity.";
-    // Note: end5 is not connected to maintain tree structure integrity
-    // It can be connected later if needed for extended gameplay
+    insertNode(loyalty1, end5, false);  // Connect as alternative to recruitment path
 
 
 
@@ -315,6 +342,37 @@ void DecisionTree::buildClassicStory() {
     bearContinue->isEnding = false;
     insertNode(bear1, bearContinue, true);
 
+    // NEW: Scavenging Scenario - Difficulty-scaled loot
+    DecisionNode* scavenge1 = new DecisionNode();
+    scavenge1->scenarioID = 40;
+    scavenge1->description = "You discover an abandoned hunter's camp! The fire is still warm - they left recently. You carefully search through their supplies and trash. [SCAVENGED: Mixed supplies based on difficulty] You hear wolves howl in the distance.";
+    scavenge1->choiceA_text = "Quickly gather what you can and leave";
+    scavenge1->choiceB_text = "Take your time to find everything (risk humans return)";
+    scavenge1->isEnding = false;
+    insertNode(bearContinue, scavenge1, true);
+
+    // Scavenge - Quick gather
+    DecisionNode* quickGather = new DecisionNode();
+    quickGather->scenarioID = 41;
+    quickGather->description = "You grab the easiest items and flee before the humans return. [GAINED: Small Fish x2, Fresh Water x1, Common Mallow x1] You escape just as you hear voices!";
+    quickGather->choiceA_text = "Hide and observe the humans";
+    quickGather->choiceB_text = "Keep moving to find safer ground";
+    quickGather->isEnding = false;
+    insertNode(scavenge1, quickGather, true);
+
+    // Scavenge - Take time
+    DecisionNode* takeTime = new DecisionNode();
+    takeTime->scenarioID = 42;
+    takeTime->description = "You thoroughly search the camp. You find more supplies but the humans return! A hunter spots you and raises his rifle. [GAINED: Small Fish x4, Winter Berries x2, Common Mallow x2, Fresh Water x2]";
+    takeTime->choiceA_text = "Drop some items and run";
+    takeTime->choiceB_text = "Stand your ground and growl";
+    takeTime->isEnding = false;
+    insertNode(scavenge1, takeTime, false);
+
+    // Connect scavenge paths to main story
+    insertNode(quickGather, territory1, true);
+    insertNode(takeTime, resources1, true);
+
     // wait1 continuation (scenario 35)
     DecisionNode* waitContinue = new DecisionNode();
     waitContinue->scenarioID = 39;
@@ -330,6 +388,47 @@ void DecisionTree::buildClassicStory() {
     insertNode(bearContinue, resources1, true);  // bear1 -> resources
     insertNode(waitContinue, crisis1, true);  // wait1 -> crisis
 
+    // Add missing connections for other scenarios to prevent null pointers
+    if (!dropItems->left) {
+        DecisionNode* dropItemsEndA = new DecisionNode();
+        dropItemsEndA->scenarioID = 361;
+        dropItemsEndA->description = "You continue deeper into the forest. The trees grow thicker and wildlife more abundant. You find a suitable resting spot for the night.";
+        dropItemsEndA->isEnding = false;
+        dropItemsEndA->choiceA_text = "Set up camp for the night";
+        dropItemsEndA->choiceB_text = "Keep moving to find better shelter";
+        insertNode(dropItems, dropItemsEndA, true);
+    }
+
+    if (!dropItems->right) {
+        DecisionNode* dropItemsEndB = new DecisionNode();
+        dropItemsEndB->scenarioID = 362;
+        dropItemsEndB->description = "You find a safe place to rest in a sheltered grove. The night passes peacefully and you wake refreshed.";
+        dropItemsEndB->isEnding = false;
+        dropItemsEndB->choiceA_text = "Continue on your journey";
+        dropItemsEndB->choiceB_text = "Explore the surrounding area";
+        insertNode(dropItems, dropItemsEndB, false);
+    }
+
+    if (!safeContinue->left) {
+        DecisionNode* safeContinueEndA = new DecisionNode();
+        safeContinueEndA->scenarioID = 371;
+        safeContinueEndA->description = "You use your tools to improve hunting. Your efficiency increases significantly.";
+        safeContinueEndA->isEnding = false;
+        safeContinueEndA->choiceA_text = "Hunt for larger prey";
+        safeContinueEndA->choiceB_text = "Set traps for smaller animals";
+        insertNode(safeContinue, safeContinueEndA, true);
+    }
+
+    if (!safeContinue->right) {
+        DecisionNode* safeContinueEndB = new DecisionNode();
+        safeContinueEndB->scenarioID = 372;
+        safeContinueEndB->description = "You focus on gathering more supplies. Your resource collection improves.";
+        safeContinueEndB->isEnding = false;
+        safeContinueEndB->choiceA_text = "Search for medicinal herbs";
+        safeContinueEndB->choiceB_text = "Look for materials to craft tools";
+        insertNode(safeContinue, safeContinueEndB, false);
+    }
+
     // ========== EXTEND STORY PATHS TO ENSURE ALL ENDINGS AFTER DAY 10 ==========
 
     // Extend Tragedy Path (end3 -> 64 -> end2)
@@ -339,14 +438,22 @@ void DecisionTree::buildClassicStory() {
     tragedyRecovery->choiceA_text = "Push forward with determination - survival waits for no one";
     tragedyRecovery->choiceB_text = "Take a moment to honor the fallen and strengthen resolve";
     tragedyRecovery->isEnding = false;
-    insertNode(end3, tragedyRecovery, true);  // end3 = scenario 21 (tragic death)
+    insertNode(end3, tragedyRecovery, true);  // end3 = scenario 21 (tragedy path)
+
+    // TRAGIC HERO ending - separate branch from crisis
+    DecisionNode* tragicHeroEnd = new DecisionNode();
+    tragicHeroEnd->scenarioID = 70;  // Changed from 68 to avoid duplicate with recruitmentChoice
+    tragicHeroEnd->description = "The harsh winter proved too much. Your pack fell apart, and you died alone in the frozen wilderness. But your story of courage and determination becomes legend among wolves for generations.";
+    tragicHeroEnd->isEnding = true;
+    tragicHeroEnd->endingText = "TRAGIC HERO: Your sacrifice saved others, even in death. Your legend lives on.";
+    insertNode(crisis1, tragicHeroEnd, false);  // Alternative to end3 path
 
     DecisionNode* tragedyFinale = new DecisionNode();
     tragedyFinale->scenarioID = 65;
-    tragedyFinale->description = "Through hardship and loss, you've proven yourself a true survivor. The pack that remains is stronger for having endured the worst together.";
+    tragedyFinale->description = "Through hardship and loss, you've proven yourself a true survivor. The pack that remains is stronger for having endured the worst together. Your legacy of resilience inspires future generations.";
     tragedyFinale->isEnding = true;
     tragedyFinale->endingText = "SURVIVOR'S LEGACY: Not all who wander are lost - you found your way through tragedy and emerged stronger.";
-    insertNode(tragedyRecovery, end2, true);  // Connects to PEACEFUL LEADER ending
+    insertNode(tragedyRecovery, tragedyFinale, true);  // True unique ending
 
     // Extend Diplomacy Path (end4 -> 66 -> end1)
     DecisionNode* allianceBuilding = new DecisionNode();
@@ -356,14 +463,7 @@ void DecisionTree::buildClassicStory() {
     allianceBuilding->choiceB_text = "Accept limited alliance - maintain clear boundaries";
     allianceBuilding->isEnding = false;
     insertNode(end4, allianceBuilding, true);  // end4 = scenario 22 (diplomatic ending)
-
-    DecisionNode* diplomacyFinale = new DecisionNode();
-    diplomacyFinale->scenarioID = 67;
-    diplomacyFinale->description = "Your wisdom in diplomacy has created something rare in the wilderness - two packs working as one. The forest recognizes your vision for peace.";
-    diplomacyFinale->isEnding = true;
-    diplomacyFinale->endingText = "DIPLOMATIC MASTER: A true alpha leads not through strength alone, but through understanding and cooperation.";
-    insertNode(allianceBuilding, end1, true);  // Connects to LEGENDARY ALPHA ending
-
+    
     // ========== ADD PACK PLAYER CHOICES ==========
 
     // Recruitment Decision Node (scenario 68)
@@ -375,6 +475,21 @@ void DecisionTree::buildClassicStory() {
     recruitmentChoice->isEnding = false;
     insertNode(loyalty1, recruitmentChoice, true);  // Insert after loyalty test
 
+    // Recruitment Choice Children - Lead to unique endings instead of cycling back
+    DecisionNode* recruitMember = new DecisionNode();
+    recruitMember->scenarioID = 71;
+    recruitMember->description = "Your pack grows stronger with the new member. Together, you face the challenges of winter and emerge victorious.";
+    recruitMember->isEnding = true;
+    recruitMember->endingText = "EXPANDED PACK: Your willingness to welcome others has created a powerful pack!";
+    insertNode(recruitmentChoice, recruitMember, true);
+
+    DecisionNode* rejectRecruit = new DecisionNode();
+    rejectRecruit->scenarioID = 72;
+    rejectRecruit->description = "You maintain your pack's discipline and focus. While smaller, your pack remains tight-knit and effective.";
+    rejectRecruit->isEnding = true;
+    rejectRecruit->endingText = "ELITE SQUAD: Sometimes quality matters more than quantity. Your focused pack thrives!";
+    insertNode(recruitmentChoice, rejectRecruit, false);
+
     // Training Decision Node (scenario 69)
     DecisionNode* trainingChoice = new DecisionNode();
     trainingChoice->scenarioID = 69;
@@ -383,6 +498,455 @@ void DecisionTree::buildClassicStory() {
     trainingChoice->choiceB_text = "Train for scouting (Energy -15, better event chances)";
     trainingChoice->isEnding = false;
     insertNode(territory1, trainingChoice, true);  // Insert after territory establishment
+
+    // Training Choice Children - Lead to unique endings instead of cycling back
+    DecisionNode* huntTraining = new DecisionNode();
+    huntTraining->scenarioID = 73;
+    huntTraining->description = "Your pack's enhanced hunting skills prove invaluable. You secure abundant food throughout the harsh winter.";
+    huntTraining->isEnding = true;
+    huntTraining->endingText = "MASTER HUNTERS: Your pack becomes legendary for its hunting prowess!";
+    insertNode(trainingChoice, huntTraining, true);
+
+    DecisionNode* scoutTraining = new DecisionNode();
+    scoutTraining->scenarioID = 74;
+    scoutTraining->description = "Your scouts become remarkably skilled at spotting opportunities and dangers. Your pack thrives on superior intelligence.";
+    scoutTraining->isEnding = true;
+    scoutTraining->endingText = "ELITE SCOUTS: Your pack's awareness and adaptability become legendary!";
+    insertNode(trainingChoice, scoutTraining, false);
+
+    // ========== COMPLETE THE TREE BY ADDING PROPER ENDINGS FOR NULL POINTERS ==========
+    // Add proper endings to prevent fallback scenarios for any remaining null pointers
+
+    // Add endings for scenario 12 (rescue young wolf path) if not already connected
+    if (!pack1->left) {
+        DecisionNode* pack1EndA = new DecisionNode();
+        pack1EndA->scenarioID = 75;
+        pack1EndA->description = "You successfully rescue the young wolf. Together, you face the challenges of the wilderness. Your pack grows stronger with each passing day.";
+        pack1EndA->isEnding = false;  // Not an ending, continue story
+        pack1EndA->choiceA_text = "Continue building your pack";
+        pack1EndA->choiceB_text = "Focus on territory expansion";
+        insertNode(pack1, pack1EndA, true);
+    }
+
+    if (!pack1->right) {
+        DecisionNode* pack1EndB = new DecisionNode();
+        pack1EndB->scenarioID = 76;
+        pack1EndB->description = "You choose not to risk helping the young wolf. The hunters take him, but you've preserved your pack's safety for now.";
+        pack1EndB->isEnding = false;  // Not an ending, continue story
+        pack1EndB->choiceA_text = "Establish territory elsewhere";
+        pack1EndB->choiceB_text = "Search for other pack members";
+        insertNode(pack1, pack1EndB, false);
+    }
+
+    // Add endings for other potential null pointers to avoid fallback scenarios
+    if (!territory1->left) {
+        DecisionNode* territoryEndA = new DecisionNode();
+        territoryEndA->scenarioID = 77;
+        territoryEndA->description = "You successfully challenge the rival pack for territory. After a fierce battle, you emerge victorious and establish your pack's dominance.";
+        territoryEndA->isEnding = false;  // Not an ending, continue story
+        territoryEndA->choiceA_text = "Consolidate your victory";
+        territoryEndA->choiceB_text = "Expand your territory further";
+        insertNode(territory1, territoryEndA, true);
+    }
+
+    if (!territory1->right) {
+        DecisionNode* territoryEndB = new DecisionNode();
+        territoryEndB->scenarioID = 78;
+        territoryEndB->description = "You choose to negotiate with the rival pack. Through diplomacy, you reach an agreement that benefits both packs.";
+        territoryEndB->isEnding = false;  // Not an ending, continue story
+        territoryEndB->choiceA_text = "Form a permanent alliance";
+        territoryEndB->choiceB_text = "Agree to temporary cooperation";
+        insertNode(territory1, territoryEndB, false);
+    }
+
+    // Add missing connections for other nodes that might have null pointers
+    if (!hunt1->left) {
+        DecisionNode* hunt1EndA = new DecisionNode();
+        hunt1EndA->scenarioID = 4;
+        hunt1EndA->description = "You search for more traps and find them. [GAINED: Small Fish x3, Winter Berries x2, Common Mallow x1] But you hear human voices approaching.";
+        hunt1EndA->isEnding = false;
+        hunt1EndA->choiceA_text = "Grab everything and run quickly";
+        hunt1EndA->choiceB_text = "Take only what you can carry safely";
+        insertNode(hunt1, hunt1EndA, true);
+    }
+
+    if (!hunt1->right) {
+        DecisionNode* hunt1EndB = new DecisionNode();
+        hunt1EndB->scenarioID = 5;
+        hunt1EndB->description = "You find a cave, but it's occupied by a bear! The bear is hibernating. You could fight it, sneak past, or find another shelter.";
+        hunt1EndB->isEnding = false;
+        hunt1EndB->choiceA_text = "Fight the bear alone (risky but gets good shelter)";
+        hunt1EndB->choiceB_text = "Sneak past and share the cave";
+        insertNode(hunt1, hunt1EndB, false);
+    }
+
+    if (!wolf1->left) {
+        DecisionNode* wolf1EndA = new DecisionNode();
+        wolf1EndA->scenarioID = 6;
+        wolf1EndA->description = "You help treat her wounds with some herbs you find. She's grateful and agrees to join your pack! [PACK MEMBER ADDED: Luna - Scout] She tells you about a deer herd nearby.";
+        wolf1EndA->isEnding = false;
+        wolf1EndA->choiceA_text = "Hunt the deer together (pack hunting bonus)";
+        wolf1EndA->choiceB_text = "Rest and recover first, hunt tomorrow";
+        insertNode(wolf1, wolf1EndA, true);
+    }
+
+    if (!wolf1->right) {
+        DecisionNode* wolf1EndB = new DecisionNode();
+        wolf1EndB->scenarioID = 7;
+        wolf1EndB->description = "You leave her behind and continue alone. Your hunger increases (75/100). You find some winter berries near a stream.";
+        wolf1EndB->isEnding = false;
+        wolf1EndB->choiceA_text = "Search for bigger prey";
+        wolf1EndB->choiceB_text = "Look for other wolves to join";
+        insertNode(wolf1, wolf1EndB, false);
+    }
+
+    // Add connections for other nodes that still have null pointers
+    if (!shelter1->left) {
+        DecisionNode* shelter1EndA = new DecisionNode();
+        shelter1EndA->scenarioID = 8;
+        shelter1EndA->description = "You fight the bear alone. It's a fierce battle, but your determination sees you through. You drive the bear away and claim the cave.";
+        shelter1EndA->isEnding = false;
+        shelter1EndA->choiceA_text = "Use the cave as your base";
+        shelter1EndA->choiceB_text = "Continue searching for better shelter";
+        insertNode(shelter1, shelter1EndA, true);
+    }
+
+    if (!shelter1->right) {
+        DecisionNode* shelter1EndB = new DecisionNode();
+        shelter1EndB->scenarioID = 9;
+        shelter1EndB->description = "You sneak past the bear and share the cave. The bear stays in the back corner, and you make yourself comfortable near the entrance. It's not ideal, but it works.";
+        shelter1EndB->isEnding = false;
+        shelter1EndB->choiceA_text = "Approach the wolf pack nearby";
+        shelter1EndB->choiceB_text = "Avoid them and continue alone";
+        insertNode(shelter1, shelter1EndB, false);
+    }
+
+    if (!bear1->left) {
+        DecisionNode* bear1EndA = new DecisionNode();
+        bear1EndA->scenarioID = 10;
+        bear1EndA->description = "You use healing herbs to recover. The Common Mallow helps restore your health. The cave is now yours.";
+        bear1EndA->isEnding = false;
+        bear1EndA->choiceA_text = "Claim this area as your territory";
+        bear1EndA->choiceB_text = "Continue traveling to find easier hunting";
+        insertNode(bear1, bear1EndA, true);
+    }
+
+    if (!bear1->right) {
+        DecisionNode* bear1EndB = new DecisionNode();
+        bear1EndB->scenarioID = 11;
+        bear1EndB->description = "You tough it out and rest in the cave. Your health slowly recovers. By morning, you're stronger. You venture out and find a frozen lake with fish visible under the ice.";
+        bear1EndB->isEnding = false;
+        bear1EndB->choiceA_text = "Break the ice to fish (risky but rewarding)";
+        bear1EndB->choiceB_text = "Move on to find easier food";
+        insertNode(bear1, bear1EndB, false);
+    }
+
+    if (!deer1->left) {
+        DecisionNode* deer1EndA = new DecisionNode();
+        deer1EndA->scenarioID = 12;
+        deer1EndA->description = "You investigate the larger pack. They seem interested in forming an alliance rather than fighting.";
+        deer1EndA->isEnding = false;
+        deer1EndA->choiceA_text = "Approach with caution";
+        deer1EndA->choiceB_text = "Keep your distance";
+        insertNode(deer1, deer1EndA, true);
+    }
+
+    if (!deer1->right) {
+        DecisionNode* deer1EndB = new DecisionNode();
+        deer1EndB->scenarioID = 13;
+        deer1EndB->description = "You stay hidden and build your own pack. You encounter a young male wolf being chased by hunters.";
+        deer1EndB->isEnding = false;
+        deer1EndB->choiceA_text = "Rescue the young wolf (gain pack member: Fenris as Scout)";
+        deer1EndB->choiceB_text = "Let the hunters take him (avoid danger)";
+        insertNode(deer1, deer1EndB, false);
+    }
+
+    if (!resources1->left) {
+        DecisionNode* resources1EndA = new DecisionNode();
+        resources1EndA->scenarioID = 14;
+        resources1EndA->description = "You hunt dangerous large prey. It's a risky but rewarding choice. You successfully bring down a large deer!";
+        resources1EndA->isEnding = false;
+        resources1EndA->choiceA_text = "Share the meat with the pack";
+        resources1EndA->choiceB_text = "Keep some for yourself";
+        insertNode(resources1, resources1EndA, true);
+    }
+
+    if (!resources1->right) {
+        DecisionNode* resources1EndB = new DecisionNode();
+        resources1EndB->scenarioID = 33;
+        resources1EndB->description = "You ration the food carefully. The pack is hungry but alive. A traveling merchant offers to trade supplies for territory information.";
+        resources1EndB->isEnding = false;
+        resources1EndB->choiceA_text = "Trade information for supplies";
+        resources1EndB->choiceB_text = "Keep territory secrets safe";
+        insertNode(resources1, resources1EndB, false);
+    }
+
+    if (!loyalty1->left) {
+        DecisionNode* loyalty1EndA = new DecisionNode();
+        loyalty1EndA->scenarioID = 15;
+        loyalty1EndA->description = "You fight to maintain dominance. Your strength proves you're worthy of leadership.";
+        loyalty1EndA->isEnding = false;
+        loyalty1EndA->choiceA_text = "Lead with strength";
+        loyalty1EndA->choiceB_text = "Lead with wisdom";
+        insertNode(loyalty1, loyalty1EndA, true);
+    }
+
+    if (!loyalty1->right) {
+        DecisionNode* loyalty1EndB = new DecisionNode();
+        loyalty1EndB->scenarioID = 31;
+        loyalty1EndB->description = "You try to resolve peacefully. Your wisdom earns respect from the pack.";
+        loyalty1EndB->isEnding = true;
+        loyalty1EndB->endingText = "ELITE GUARDIANS: Quality over quantity - your pack is legendary for its skill and unity.";
+        insertNode(loyalty1, loyalty1EndB, false);
+    }
+
+    if (!threat1->left) {
+        DecisionNode* threat1EndA = new DecisionNode();
+        threat1EndA->scenarioID = 16;
+        threat1EndA->description = "You stand and fight with your pack. It's a fierce battle, but your pack's loyalty and strength see you through.";
+        threat1EndA->isEnding = false;
+        threat1EndA->choiceA_text = "Accept victory and consolidate power";
+        threat1EndA->choiceB_text = "Pursue fleeing enemies";
+        insertNode(threat1, threat1EndA, true);
+    }
+
+    if (!threat1->right) {
+        DecisionNode* threat1EndB = new DecisionNode();
+        threat1EndB->scenarioID = 34;
+        threat1EndB->description = "You retreat and find new territory. Your pack questions your leadership but follows. You discover an ancient wolf sanctuary.";
+        threat1EndB->isEnding = false;
+        threat1EndB->choiceA_text = "Claim the sanctuary as your new home";
+        threat1EndB->choiceB_text = "Continue searching for better territory";
+        insertNode(threat1, threat1EndB, false);
+    }
+
+    if (!crisis1->left) {
+        DecisionNode* crisis1EndA = new DecisionNode();
+        crisis1EndA->scenarioID = 17;
+        crisis1EndA->description = "You send scouts to find food in the storm. Some return with supplies, others don't survive.";
+        crisis1EndA->isEnding = false;
+        crisis1EndA->choiceA_text = "Accept the challenge (final boss fight)";
+        crisis1EndA->choiceB_text = "Decline and remain a small pack";
+        insertNode(crisis1, crisis1EndA, true);
+    }
+
+    if (!crisis1->right) {
+        DecisionNode* crisis1EndB = new DecisionNode();
+        crisis1EndB->scenarioID = 35;
+        crisis1EndB->description = "You wait out the storm and hope for the best. Some pack members don't survive, but the core remains strong.";
+        crisis1EndB->isEnding = false;
+        crisis1EndB->choiceA_text = "Honor the fallen and rebuild";
+        crisis1EndB->choiceB_text = "Leave this cursed territory forever";
+        insertNode(crisis1, crisis1EndB, false);
+    }
+
+    // Add connections for remaining nodes that still have null pointers
+    // These are nodes that were created but not properly connected in the original tree
+
+    // Add connections for help1 (scenario 6)
+    if (!help1->left) {
+        DecisionNode* help1EndA = new DecisionNode();
+        help1EndA->scenarioID = 6;
+        help1EndA->description = "You hunt the deer together successfully. Your pack's teamwork proves effective!";
+        help1EndA->isEnding = false;
+        help1EndA->choiceA_text = "Investigate the larger pack";
+        help1EndA->choiceB_text = "Stay hidden and build your own pack";
+        insertNode(help1, help1EndA, true);
+    }
+
+    if (!help1->right) {
+        DecisionNode* help1EndB = new DecisionNode();
+        help1EndB->scenarioID = 6;
+        help1EndB->description = "You rest and recover first, then hunt tomorrow. Your patience pays off.";
+        help1EndB->isEnding = false;
+        help1EndB->choiceA_text = "Hunt successfully tomorrow";
+        help1EndB->choiceB_text = "Focus on other priorities";
+        insertNode(help1, help1EndB, false);
+    }
+
+    // Add connections for ignore1 (scenario 7)
+    if (!ignore1->left) {
+        DecisionNode* ignore1EndA = new DecisionNode();
+        ignore1EndA->scenarioID = 7;
+        ignore1EndA->description = "You search for bigger prey. Your hunger drives you to take greater risks.";
+        ignore1EndA->isEnding = false;
+        ignore1EndA->choiceA_text = "Hunt dangerous large prey";
+        ignore1EndA->choiceB_text = "Look for safer options";
+        insertNode(ignore1, ignore1EndA, true);
+    }
+
+    if (!ignore1->right) {
+        DecisionNode* ignore1EndB = new DecisionNode();
+        ignore1EndB->scenarioID = 7;
+        ignore1EndB->description = "You look for other wolves to join. The pack mentality is strong in the wilderness.";
+        ignore1EndB->isEnding = false;
+        ignore1EndB->choiceA_text = "Approach a lone wolf";
+        ignore1EndB->choiceB_text = "Search for a pack to join";
+        insertNode(ignore1, ignore1EndB, false);
+    }
+
+    // Add connections for grab1 (scenario 8)
+    if (!grab1->right) {
+        DecisionNode* grab1EndB = new DecisionNode();
+        grab1EndB->scenarioID = 8;
+        grab1EndB->description = "You stand and fight the hunter. It's a dangerous choice but you must protect your pack.";
+        grab1EndB->isEnding = false;
+        grab1EndB->choiceA_text = "Fight aggressively";
+        grab1EndB->choiceB_text = "Use defensive tactics";
+        insertNode(grab1, grab1EndB, false);
+    }
+
+    // Add connections for safe1 (scenario 9)
+    if (!safe1->left) {
+        DecisionNode* safe1EndA = new DecisionNode();
+        safe1EndA->scenarioID = 9;
+        safe1EndA->description = "You approach the wolf pack. They seem cautious but not hostile.";
+        safe1EndA->isEnding = false;
+        safe1EndA->choiceA_text = "Show submission";
+        safe1EndA->choiceB_text = "Show strength";
+        insertNode(safe1, safe1EndA, true);
+    }
+
+    if (!safe1->right) {
+        DecisionNode* safe1EndB = new DecisionNode();
+        safe1EndB->scenarioID = 9;
+        safe1EndB->description = "You avoid them and continue alone. Independence has its own rewards and challenges.";
+        safe1EndB->isEnding = false;
+        safe1EndB->choiceA_text = "Continue alone";
+        safe1EndB->choiceB_text = "Reconsider joining them";
+        insertNode(safe1, safe1EndB, false);
+    }
+
+    // Add connections for bear1 (scenario 10) - already handled above
+
+    // Add connections for bear1->right (scenario 11)
+    if (!bear1->right) {
+        DecisionNode* bear1EndB = new DecisionNode();
+        bear1EndB->scenarioID = 11;
+        bear1EndB->description = "You tough it out and rest in the cave. Your health slowly recovers.";
+        bear1EndB->isEnding = false;
+        bear1EndB->choiceA_text = "Break the ice to fish";
+        bear1EndB->choiceB_text = "Move on to find easier food";
+        insertNode(bear1, bear1EndB, false);
+    }
+
+    // Add connections for deer1 (scenario 11) - this is the second deer1
+    if (!deer1->left) {
+        DecisionNode* deer1EndA = new DecisionNode();
+        deer1EndA->scenarioID = 11;
+        deer1EndA->description = "You investigate the larger pack. They seem interested in forming an alliance.";
+        deer1EndA->isEnding = false;
+        deer1EndA->choiceA_text = "Approach with caution";
+        deer1EndA->choiceB_text = "Keep your distance";
+        insertNode(deer1, deer1EndA, true);
+    }
+
+    if (!deer1->right) {
+        DecisionNode* deer1EndB = new DecisionNode();
+        deer1EndB->scenarioID = 11;
+        deer1EndB->description = "You stay hidden and build your own pack. You encounter a young wolf.";
+        deer1EndB->isEnding = false;
+        deer1EndB->choiceA_text = "Rescue the young wolf";
+        deer1EndB->choiceB_text = "Let the hunters take him";
+        insertNode(deer1, deer1EndB, false);
+    }
+
+    // Add connections for territory1 (scenario 13)
+    if (!territory1->left) {
+        DecisionNode* territory1EndA = new DecisionNode();
+        territory1EndA->scenarioID = 13;
+        territory1EndA->description = "You challenge the other pack for territory. A fierce battle ensues.";
+        territory1EndA->isEnding = false;
+        territory1EndA->choiceA_text = "Fight aggressively";
+        territory1EndA->choiceB_text = "Use strategy and cunning";
+        insertNode(territory1, territory1EndA, true);
+    }
+
+    if (!territory1->right) {
+        DecisionNode* territory1EndB = new DecisionNode();
+        territory1EndB->scenarioID = 13;
+        territory1EndB->description = "You negotiate to share the territory. Diplomacy can be as effective as force.";
+        territory1EndB->isEnding = false;
+        territory1EndB->choiceA_text = "Accept the terms";
+        territory1EndB->choiceB_text = "Negotiate better conditions";
+        insertNode(territory1, territory1EndB, false);
+    }
+
+    // Add connections for bearContinue (scenario 38)
+    if (!bearContinue->right) {
+        DecisionNode* bearContinueEndB = new DecisionNode();
+        bearContinueEndB->scenarioID = 38;
+        bearContinueEndB->description = "You continue traveling to find easier hunting. The journey is long but rewarding.";
+        bearContinueEndB->isEnding = false;
+        bearContinueEndB->choiceA_text = "Settle in a new area";
+        bearContinueEndB->choiceB_text = "Keep exploring";
+        insertNode(bearContinue, bearContinueEndB, false);
+    }
+
+    // Add connections for other nodes that might have been missed
+    if (!scavenge1->left) {
+        DecisionNode* scavenge1EndA = new DecisionNode();
+        scavenge1EndA->scenarioID = 40;
+        scavenge1EndA->description = "You quickly gather what you can and leave. The supplies are valuable.";
+        scavenge1EndA->isEnding = false;
+        scavenge1EndA->choiceA_text = "Hide and observe the humans";
+        scavenge1EndA->choiceB_text = "Keep moving to find safer ground";
+        insertNode(scavenge1, scavenge1EndA, true);
+    }
+
+    if (!scavenge1->right) {
+        DecisionNode* scavenge1EndB = new DecisionNode();
+        scavenge1EndB->scenarioID = 40;
+        scavenge1EndB->description = "You take your time to find everything. Your thoroughness pays off with extra supplies.";
+        scavenge1EndB->isEnding = false;
+        scavenge1EndB->choiceA_text = "Drop some items and run";
+        scavenge1EndB->choiceB_text = "Stand your ground and growl";
+        insertNode(scavenge1, scavenge1EndB, false);
+    }
+
+    // Final check: Convert any remaining null pointers to proper endings
+    // This ensures the tree is completely connected with no null pointers
+    std::queue<DecisionNode*> q;
+    std::set<DecisionNode*> visited;
+    q.push(root);
+    visited.insert(root);
+
+    while (!q.empty()) {
+        DecisionNode* current = q.front();
+        q.pop();
+
+        if (!current->isEnding) {
+            // If left is null, create an ending
+            if (!current->left) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 999; // Use high number to avoid conflicts
+                ending->description = "Your journey comes to an end. The wilderness has tested you in ways you never imagined. Your choices have shaped your destiny.";
+                ending->choiceA_text = "Reflect on your journey";
+                ending->choiceB_text = "Accept your fate";
+                ending->isEnding = true;
+                ending->endingText = "JOURNEY'S END: Your adventure in the wilderness has concluded.";
+                current->left = ending;
+            } else if (visited.find(current->left) == visited.end()) {
+                visited.insert(current->left);
+                q.push(current->left);
+            }
+
+            // If right is null, create an ending
+            if (!current->right) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 1000; // Use high number to avoid conflicts
+                ending->description = "Your path leads to its conclusion. The choices you've made have brought you to this moment.";
+                ending->choiceA_text = "Embrace the outcome";
+                ending->choiceB_text = "Learn from the experience";
+                ending->isEnding = true;
+                ending->endingText = "STORY'S END: Your tale in the wild has reached its conclusion.";
+                current->right = ending;
+            } else if (visited.find(current->right) == visited.end()) {
+                visited.insert(current->right);
+                q.push(current->right);
+            }
+        }
+    }
 
     currentNode = root;
 }
@@ -403,6 +967,9 @@ DecisionNode* DecisionTree::findNodeById(int id) {
 }
 
 void DecisionTree::buildSurvivalStory() {
+    // Reset any existing tree before building new one
+    reset();
+    
     // Survival mode - harsher, resource-focused story
     root = new DecisionNode();
     root->scenarioID = 101;
@@ -432,7 +999,7 @@ void DecisionTree::buildSurvivalStory() {
     // Cave - Fight bear
     DecisionNode* fightBear = new DecisionNode();
     fightBear->scenarioID = 104;
-    fightBear->description = "You attack the bear in a desperate fury! It awakens and mauls you badly (-25 health), but you drive it out into the storm. The cave is yours. You find the bear's food cache: dried fish and roots. [GAINED: Fish x3, Roots x2]";
+    fightBear->description = "You attack the bear in a desperate fury! It awakens and mauls you badly (-25 health), but you drive it out into the storm. The cave is yours. You find the bear's food cache: dried fish and herbs. [GAINED: Small Fish x4, Common Mallow x1]";
     fightBear->choiceA_text = "Eat immediately to recover";
     fightBear->choiceB_text = "Save food and rest to recover health naturally";
     fightBear->isEnding = false;
@@ -450,7 +1017,7 @@ void DecisionTree::buildSurvivalStory() {
     // Run - Sprint to cabin
     DecisionNode* cabin = new DecisionNode();
     cabin->scenarioID = 106;
-    cabin->description = "You reach the cabin just as the storm hits! Inside, you find supplies: canned food, matches, and a first aid kit. [GAINED: Canned Food x5, First Aid Kit x1]. But the door is damaged and won't close properly.";
+    cabin->description = "You reach the cabin just as the storm hits! Inside, you find supplies left by hunters: smoked fish and medicinal plants. [GAINED: Small Fish x4, Common Mallow x2, Fresh Water x2]. But the door is damaged and won't close properly.";
     cabin->choiceA_text = "Use energy to repair the door (-15 energy)";
     cabin->choiceB_text = "Block it with furniture and hope for the best";
     cabin->isEnding = false;
@@ -573,10 +1140,97 @@ void DecisionTree::buildSurvivalStory() {
     survivalEnd5->endingText = "HARDENED SURVIVOR: What doesn't kill you makes you stronger!";
     insertNode(hollow, survivalEnd5, true);
 
+    // ========== COMPLETE THE SURVIVAL TREE BY ADDING PROPER ENDINGS FOR NULL POINTERS ==========
+    // Add proper endings to prevent fallback scenarios for any remaining null pointers
+
+    // Add endings for any null pointers in the survival story
+    if (!cave1->left) {
+        DecisionNode* caveEndA = new DecisionNode();
+        caveEndA->scenarioID = 125;
+        caveEndA->description = "You fight the bear despite your injuries. It's a fierce battle, but your determination sees you through. You drive the bear away and claim the cave.";
+        caveEndA->isEnding = true;
+        caveEndA->endingText = "VICTORIOUS BATTLE: Your courage and determination secured shelter against all odds.";
+        cave1->left = caveEndA;
+    }
+
+    if (!cave1->right) {
+        DecisionNode* caveEndB = new DecisionNode();
+        caveEndB->scenarioID = 126;
+        caveEndB->description = "You search desperately for another shelter, but the storm catches you. You find a hollow tree just in time to survive the blizzard.";
+        caveEndB->isEnding = true;
+        caveEndB->endingText = "NARROW ESCAPE: Quick thinking saved you from the deadly storm.";
+        cave1->right = caveEndB;
+    }
+
+    if (!run1->left) {
+        DecisionNode* runEndA = new DecisionNode();
+        runEndA->scenarioID = 127;
+        runEndA->description = "You sprint to the cabin despite your energy depletion. You make it inside just as the storm hits, saving yourself from freezing.";
+        runEndA->isEnding = true;
+        runEndA->endingText = "TIMELY ARRIVAL: Your speed and timing saved you from the storm.";
+        run1->left = runEndA;
+    }
+
+    if (!run1->right) {
+        DecisionNode* runEndB = new DecisionNode();
+        runEndB->scenarioID = 128;
+        runEndB->description = "You dig into a snowdrift for shelter. It's not ideal, but it protects you from the worst of the storm. You survive to see another day.";
+        runEndB->isEnding = true;
+        runEndB->endingText = "RESOURCEFUL SURVIVAL: Making do with what you have can be enough to survive.";
+        run1->right = runEndB;
+    }
+
+    // Final check: Convert any remaining null pointers to proper endings
+    // This ensures the tree is completely connected with no null pointers
+    std::queue<DecisionNode*> q;
+    std::set<DecisionNode*> visited;
+    q.push(root);
+    visited.insert(root);
+
+    while (!q.empty()) {
+        DecisionNode* current = q.front();
+        q.pop();
+
+        if (!current->isEnding) {
+            // If left is null, create an ending
+            if (!current->left) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 999; // Use high number to avoid conflicts
+                ending->description = "Your journey comes to an end. The wilderness has tested you in ways you never imagined. Your choices have shaped your destiny.";
+                ending->choiceA_text = "Reflect on your journey";
+                ending->choiceB_text = "Accept your fate";
+                ending->isEnding = true;
+                ending->endingText = "JOURNEY'S END: Your adventure in the wilderness has concluded.";
+                current->left = ending;
+            } else if (visited.find(current->left) == visited.end()) {
+                visited.insert(current->left);
+                q.push(current->left);
+            }
+
+            // If right is null, create an ending
+            if (!current->right) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 1000; // Use high number to avoid conflicts
+                ending->description = "Your path leads to its conclusion. The choices you've made have brought you to this moment.";
+                ending->choiceA_text = "Embrace the outcome";
+                ending->choiceB_text = "Learn from the experience";
+                ending->isEnding = true;
+                ending->endingText = "STORY'S END: Your tale in the wild has reached its conclusion.";
+                current->right = ending;
+            } else if (visited.find(current->right) == visited.end()) {
+                visited.insert(current->right);
+                q.push(current->right);
+            }
+        }
+    }
+
     currentNode = root;
 }
 
 void DecisionTree::buildPackStory() {
+    // Reset any existing tree before building new one
+    reset();
+    
     // Pack mode - focus on social dynamics and leadership
     root = new DecisionNode();
     root->scenarioID = 201;
@@ -624,7 +1278,7 @@ void DecisionTree::buildPackStory() {
     // Join Challengers - Find food
     DecisionNode* findFood = new DecisionNode();
     findFood->scenarioID = 206;
-    findFood->description = "You successfully hunt rabbits alone, bringing back food for 3 days. [GAINED: Rabbit x6] Scar is impressed (+20 loyalty). He asks if you want to recruit more wolves to strengthen the pack.";
+    findFood->description = "You successfully hunt along the stream, catching small fish and finding winter berries. [GAINED: Small Fish x4, Winter Berries x2, Fresh Water x1] Scar is impressed (+20 loyalty). He asks if you want to recruit more wolves to strengthen the pack.";
     findFood->choiceA_text = "Yes, bigger pack means more power";
     findFood->choiceB_text = "No, keep the pack small and agile";
     findFood->isEnding = false;
@@ -642,7 +1296,7 @@ void DecisionTree::buildPackStory() {
     // Accept Leadership - Split pack
     DecisionNode* splitPack = new DecisionNode();
     splitPack->scenarioID = 208;
-    splitPack->description = "You split the pack into two hunting groups. Your group successfully takes down a deer! The other group also succeeds. The pack feasts tonight. Your leadership is proven. [GAINED: Deer Meat x8]";
+    splitPack->description = "You split the pack into two hunting groups. Your group successfully takes down a deer near the stream! The other group also succeeds with fish from the ice. The pack feasts tonight. Your leadership is proven. [GAINED: Fresh Meat x8, Small Fish x4]";
     splitPack->choiceA_text = "Celebrate and strengthen pack bonds";
     splitPack->choiceB_text = "Immediately plan next hunt (ambitious)";
     splitPack->isEnding = false;
@@ -651,7 +1305,7 @@ void DecisionTree::buildPackStory() {
     // Accept Leadership - Keep together
     DecisionNode* keepTogether = new DecisionNode();
     keepTogether->scenarioID = 209;
-    keepTogether->description = "Your pack hunts as one unit. The coordination is perfect. You bring down a massive elk! The pack celebrates your cautious but effective leadership. [GAINED: Elk Meat x12]";
+    keepTogether->description = "Your pack hunts as one unit. The coordination is perfect. You bring down a massive elk near the frozen lake! The pack celebrates your cautious but effective leadership. [GAINED: Fresh Meat x12, Small Fish x3]";
     keepTogether->choiceA_text = "Share meat equally with all";
     keepTogether->choiceB_text = "Reward the best hunters more";
     keepTogether->isEnding = false;
@@ -746,6 +1400,90 @@ void DecisionTree::buildPackStory() {
     packEnd5->isEnding = true;
     packEnd5->endingText = "THOUGHTFUL ALPHA: Wisdom and unity prevail!";
     insertNode(keepTogether, packEnd5, true);
+
+    // ========== COMPLETE THE PACK TREE BY ADDING PROPER ENDINGS FOR NULL POINTERS ==========
+    // Add proper endings to prevent fallback scenarios for any remaining null pointers
+
+    // Add endings for any null pointers in the pack story
+    if (!supportAlpha->left) {
+        DecisionNode* alphaEndA = new DecisionNode();
+        alphaEndA->scenarioID = 225;
+        alphaEndA->description = "You accept leadership and immediately set out to prove yourself. Your decisive actions earn the respect of the pack.";
+        alphaEndA->isEnding = true;
+        alphaEndA->endingText = "NEW ALPHA: Your decisive leadership earned the pack's respect.";
+        supportAlpha->left = alphaEndA;
+    }
+
+    if (!supportAlpha->right) {
+        DecisionNode* alphaEndB = new DecisionNode();
+        alphaEndB->scenarioID = 226;
+        alphaEndB->description = "You humbly suggest the beta take over. The pack appreciates your wisdom and humility.";
+        alphaEndB->isEnding = true;
+        alphaEndB->endingText = "WISDOM FIRST: Sometimes stepping aside shows true leadership.";
+        supportAlpha->right = alphaEndB;
+    }
+
+    if (!joinChallengers->left) {
+        DecisionNode* challenderEndA = new DecisionNode();
+        challenderEndA->scenarioID = 227;
+        challenderEndA->description = "You successfully find food for the pack. Your contribution strengthens your position within the group.";
+        challenderEndA->isEnding = true;
+        challenderEndA->endingText = "VALUABLE CONTRIBUTOR: Your efforts benefited the whole pack.";
+        joinChallengers->left = challenderEndA;
+    }
+
+    if (!joinChallengers->right) {
+        DecisionNode* challenderEndB = new DecisionNode();
+        challenderEndB->scenarioID = 228;
+        challenderEndB->description = "You successfully scout for new territory. Your reconnaissance skills prove valuable to the pack.";
+        challenderEndB->isEnding = true;
+        challenderEndB->endingText = "EXPLORER: Your scouting opened new possibilities for the pack.";
+        joinChallengers->right = challenderEndB;
+    }
+
+    // Final check: Convert any remaining null pointers to proper endings
+    // This ensures the tree is completely connected with no null pointers
+    std::queue<DecisionNode*> q;
+    std::set<DecisionNode*> visited;
+    q.push(root);
+    visited.insert(root);
+
+    while (!q.empty()) {
+        DecisionNode* current = q.front();
+        q.pop();
+
+        if (!current->isEnding) {
+            // If left is null, create an ending
+            if (!current->left) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 999; // Use high number to avoid conflicts
+                ending->description = "Your journey comes to an end. The wilderness has tested you in ways you never imagined. Your choices have shaped your destiny.";
+                ending->choiceA_text = "Reflect on your journey";
+                ending->choiceB_text = "Accept your fate";
+                ending->isEnding = true;
+                ending->endingText = "JOURNEY'S END: Your adventure in the wilderness has concluded.";
+                current->left = ending;
+            } else if (visited.find(current->left) == visited.end()) {
+                visited.insert(current->left);
+                q.push(current->left);
+            }
+
+            // If right is null, create an ending
+            if (!current->right) {
+                DecisionNode* ending = new DecisionNode();
+                ending->scenarioID = 1000; // Use high number to verify conflicts
+                ending->description = "Your path leads to its conclusion. The choices you've made have brought you to this moment.";
+                ending->choiceA_text = "Embrace the outcome";
+                ending->choiceB_text = "Learn from the experience";
+                ending->isEnding = true;
+                ending->endingText = "STORY'S END: Your tale in the wild has reached its conclusion.";
+                current->right = ending;
+            } else if (visited.find(current->right) == visited.end()) {
+                visited.insert(current->right);
+                q.push(current->right);
+            }
+        }
+    }
 
     currentNode = root;
 }

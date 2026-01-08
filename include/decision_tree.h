@@ -2,6 +2,7 @@
 #define DECISION_TREE_H
 
 #include <string>
+#include <unordered_set>
 
 struct DecisionNode {
     int scenarioID;
@@ -18,19 +19,21 @@ class DecisionTree {
 private:
     DecisionNode* root;
     DecisionNode* currentNode;
-    void deleteTree(DecisionNode* node);  // Helper for destructor
+    std::unordered_set<DecisionNode*> deletedNodes;
+    void deleteTree(DecisionNode* node, std::unordered_set<DecisionNode*>& deleted);  // Helper for destructor
 public:
     DecisionTree();
     ~DecisionTree();
     void insertNode(DecisionNode* parent, DecisionNode* child, bool isLeft);
     DecisionNode* getCurrentNode() const;
-        DecisionNode* getRoot();
-        void setCurrentNode(DecisionNode* node);
-        void buildSampleTree();
-        void buildClassicStory();
-        void buildSurvivalStory();
-        void buildPackStory();
-        DecisionNode* findNodeById(int id);
+    DecisionNode* getRoot();
+    void setCurrentNode(DecisionNode* node);
+    void buildSampleTree();
+    void buildClassicStory();
+    void buildSurvivalStory();
+    void buildPackStory();
+    DecisionNode* findNodeById(int id);
+    void reset();  // Delete tree and reset to empty state for new game
 };
 
 #endif

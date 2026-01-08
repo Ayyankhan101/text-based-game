@@ -25,8 +25,8 @@ private:
         collectAllNodes(node->right);
     }
 
-    void findAllPaths(DecisionNode* node, std::vector<int>& currentPath) {
-        if (!node) return;
+    void findAllPaths(DecisionNode* node, std::vector<int>& currentPath, int depth = 0) {
+        if (!node || depth > 100) return; // Prevent infinite recursion
 
         // Add current node to path
         currentPath.push_back(node->scenarioID);
@@ -40,10 +40,10 @@ private:
 
         // Recursively find paths in left and right subtrees
         if (node->left) {
-            findAllPaths(node->left, currentPath);
+            findAllPaths(node->left, currentPath, depth + 1);
         }
         if (node->right) {
-            findAllPaths(node->right, currentPath);
+            findAllPaths(node->right, currentPath, depth + 1);
         }
 
         // Backtrack
@@ -95,9 +95,9 @@ public:
             std::cout << "✗ No paths found!" << std::endl;
         }
 
-        // Print some sample paths
-        std::cout << "\nSample paths (first 3):" << std::endl;
-        for (int i = 0; i < std::min(3, (int)allPaths.size()); i++) {
+        // Print all paths
+        std::cout << "\nAll paths:" << std::endl;
+        for (int i = 0; i < allPaths.size(); i++) {
             std::cout << "Path " << (i+1) << ": ";
             for (int j = 0; j < allPaths[i].size(); j++) {
                 std::cout << allPaths[i][j];
@@ -134,21 +134,57 @@ int main() {
     std::cout << "Wolf Pack Survival Game - Validator" << std::endl;
     std::cout << "==================================" << std::endl;
 
-    // Create and build the decision tree
+    // Create and build the Classic story decision tree
     DecisionTree tree;
-    tree.buildSampleTree();
+    tree.buildClassicStory();
 
-    // Validate the tree
+    // Validate the Classic tree
+    std::cout << "\n--- CLASSIC STORYLINE ---" << std::endl;
     DecisionTreeValidator validator;
     bool isValid = validator.validateTree(tree);
 
-    if (isValid) {
-        std::cout << "\n✓ All validations passed!" << std::endl;
+    // Create and build the Survival story decision tree
+    DecisionTree tree2;
+    tree2.buildSurvivalStory();
+
+    // Validate the Survival tree
+    std::cout << "\n--- SURVIVAL STORYLINE ---" << std::endl;
+    DecisionTreeValidator validator2;
+    bool isValid2 = validator2.validateTree(tree2);
+
+    // Create and build the Pack story decision tree
+    DecisionTree tree3;
+    tree3.buildPackStory();
+
+    // Validate the Pack tree
+    std::cout << "\n--- PACK STORYLINE ---" << std::endl;
+    DecisionTreeValidator validator3;
+    bool isValid3 = validator3.validateTree(tree3);
+
+    // Summary
+    std::cout << "\n==================================" << std::endl;
+    std::cout << "SUMMARY" << std::endl;
+    std::cout << "==================================" << std::endl;
+    std::cout << "Classic: " << (isValid ? "✓ PASS" : "✗ FAIL") 
+              << " (" << validator.getNodeCount() << " nodes, " 
+              << validator.getEndingCount() << " endings, " 
+              << validator.getPathCount() << " paths)" << std::endl;
+    std::cout << "Survival: " << (isValid2 ? "✓ PASS" : "✗ FAIL") 
+              << " (" << validator2.getNodeCount() << " nodes, " 
+              << validator2.getEndingCount() << " endings, " 
+              << validator2.getPathCount() << " paths)" << std::endl;
+    std::cout << "Pack: " << (isValid3 ? "✓ PASS" : "✗ FAIL") 
+              << " (" << validator3.getNodeCount() << " nodes, " 
+              << validator3.getEndingCount() << " endings, " 
+              << validator3.getPathCount() << " paths)" << std::endl;
+
+    if (isValid && isValid2 && isValid3) {
+        std::cout << "\n✓ All storylines validated!" << std::endl;
     } else {
-        std::cout << "\n✗ Some validations failed!" << std::endl;
+        std::cout << "\n✗ Some storylines failed validation!" << std::endl;
     }
 
     std::cout << "==================================" << std::endl;
 
-    return 0;
+    return (isValid && isValid2 && isValid3) ? 0 : 1;
 }

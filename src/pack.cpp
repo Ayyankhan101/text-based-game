@@ -1,5 +1,14 @@
 #include "../include/pack.h"
 #include <iostream>
+#include <string>
+
+// Color codes for terminal output
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
 
 Pack::Pack() : head(nullptr), size(0) {}
 
@@ -30,16 +39,33 @@ void Pack::addMember(std::string name, std::string role, int loyalty) {
 }
 
 void Pack::displayPack() {
+    std::cout << CYAN << "=== YOUR PACK ===" << RESET << std::endl;
     if (size == 0) {
-        std::cout << "No pack members." << std::endl;
-        return;
+        std::cout << "You have no pack members yet. Recruit wolves to build your pack!" << std::endl;
+    } else {
+        std::cout << "Pack Size: " << size << " member(s)" << std::endl;
+        std::cout << "--------------------" << std::endl;
+        PackMember* current = head;
+        while (current) {
+            std::cout << "• " << current->name << " - " << current->role;
+            if (current->loyalty >= 70) {
+                std::cout << GREEN << " [Loyal: " << current->loyalty << "]" << RESET;
+            } else if (current->loyalty >= 40) {
+                std::cout << YELLOW << " [Loyalty: " << current->loyalty << "]" << RESET;
+            } else {
+                std::cout << RED << " [Unstable: " << current->loyalty << "]" << RESET;
+            }
+            std::cout << std::endl;
+            current = current->next;
+        }
+        std::cout << "--------------------" << std::endl;
+        // Pack benefits summary
+        int benefit = calculatePackBenefits(*this);
+        if (benefit > 0) {
+            std::cout << GREEN << "Pack Bonus: +" << benefit << " to stats" << RESET << std::endl;
+        }
     }
-    PackMember* current = head;
-    std::cout << "Pack Members:" << std::endl;
-    while (current) {
-        std::cout << "- " << current->name << " (" << current->role << ", Loyalty: " << current->loyalty << ")" << std::endl;
-        current = current->next;
-    }
+    std::cout << CYAN << "==================" << RESET << std::endl;
 }
 
 int Pack::getSize() const {
@@ -68,62 +94,43 @@ bool Pack::removeMember(std::string name) {
 }
 
 void Pack::updateLoyalty(int hungerIncrease) {
+    if (hungerIncrease <= 0) return; // Nothing to do if no hunger increase
+
     PackMember* current = head;
+    PackMember* prev = nullptr;
+
     while (current) {
         // Loyalty decreases if wolf's hunger increases (pack doesn't get fed)
-        if (hungerIncrease > 0) {
-            current->loyalty -= hungerIncrease; // Higher hunger increase = more loyalty loss
-            if (current->loyalty < 0) current->loyalty = 0;
+        current->loyalty -= hungerIncrease; // Higher hunger increase = more loyalty loss
+        if (current->loyalty < 0) current->loyalty = 0;
 
-            // If loyalty gets too low, member might leave
-            if (current->loyalty <= 20) {
-                std::cout << current->name << " has left the pack due to low loyalty!" << std::endl;
-                PackMember* next = current->next;
-                if (head == current) {
-                    head = next;
-                    delete current;
-                    current = next;
-                    size--;
-                } else {
-                    PackMember* prev = head;
-                    while (prev && prev->next != current) prev = prev->next;
-                    if (prev) {
-                        prev->next = next;
-                        delete current;
-                        current = next;
-                        size--;
-                    }
-                }
+        // If loyalty gets too low, member might leave
+        if (current->loyalty <= 10) { // Increased threshold from 20 to 10 to make pack more stable
+            std::cout << current->name << " has left the pack due to low loyalty!" << std::endl;
+
+            PackMember* nodeToDelete = current;
+            PackMember* next = current->next;
+
+            if (prev) {
+                // Middle or end of list
+                prev->next = next;
             } else {
-                current = current->next;
+                // Beginning of list
+                head = next;
             }
+
+            delete nodeToDelete;
+            size--;
+
+            current = next; // Move to next node
         } else {
+            // Move to next node only if we didn't delete the current one
+            prev = current;
             current = current->next;
         }
     }
 }
 
-void Pack::displayPackWithLoyalty() {
-    if (size == 0) {
-        std::cout << "No pack members." << std::endl;
-        return;
-    }
-    PackMember* current = head;
-    std::cout << "Pack Members:" << std::endl;
-    while (current) {
-        std::string loyaltyColor = "";
-        std::string loyaltyStatus = "";
-        if (current->loyalty >= 70) {
-            loyaltyStatus = " (Loyal)";
-        } else if (current->loyalty >= 40) {
-            loyaltyStatus = " (Stable)";
-        } else {
-            loyaltyStatus = " (Unstable)";
-        }
-        std::cout << "- " << current->name << " (" << current->role << ", Loyalty: " << current->loyalty << loyaltyStatus << ")" << std::endl;
-        current = current->next;
-    }
-}
 // Function to calculate pack benefits
 int calculatePackBenefits(const Pack& pack) {
     int totalBenefit = 0;

@@ -41,3 +41,14 @@ int GameStack::size() {
     return stack.size();
 }
 
+void GameStack::clear() {
+    // Clean up inventory copies before clearing
+    for (auto& state : stack) {
+        if (state.inventory) {
+            delete state.inventory;
+            state.inventory = nullptr;
+        }
+    }
+    stack.clear();
+}
+

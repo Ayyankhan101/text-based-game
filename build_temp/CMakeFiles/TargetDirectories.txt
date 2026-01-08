@@ -1,0 +1,5 @@
+/home/ayyan/text-based-game/build_temp/CMakeFiles/WolfGame.dir
+/home/ayyan/text-based-game/build_temp/CMakeFiles/Validator.dir
+/home/ayyan/text-based-game/build_temp/CMakeFiles/BalanceTester.dir
+/home/ayyan/text-based-game/build_temp/CMakeFiles/edit_cache.dir
+/home/ayyan/text-based-game/build_temp/CMakeFiles/rebuild_cache.dir

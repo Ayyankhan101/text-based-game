@@ -23,7 +23,6 @@ public:
     bool removeMember(std::string name); // If loyalty low
     PackMember* getHead() const; // Add method to access pack members
     void updateLoyalty(int hungerIncrease); // Update loyalty based on wolf's hunger
-    void displayPackWithLoyalty(); // Display pack with loyalty status
 };
 
 // Utility function to calculate pack benefits

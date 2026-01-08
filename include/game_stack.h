@@ -25,6 +25,7 @@ public:
     GameState pop();
     bool isEmpty();
     int size();
+    void clear(); // Clear all states from the stack
 };
 
 #endif

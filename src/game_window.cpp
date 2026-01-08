@@ -19,12 +19,6 @@
 StatBar::StatBar(const QString& label, QWidget* parent) : QWidget(parent), currentValue(50), labelText(label) {
     setMinimumSize(100, 25);
     setMaximumHeight(25);
-
-    animation = new QPropertyAnimation(this, "value");
-    animation->setDuration(500);
-    connect(animation, &QPropertyAnimation::valueChanged, this, [this]() {
-        update();
-    });
 }
 
 void StatBar::setLabel(const QString& label) {
@@ -39,12 +33,6 @@ int StatBar::value() const {
 void StatBar::setValue(int value) {
     currentValue = value;
     update();
-}
-
-void StatBar::animateTo(int value) {
-    animation->setStartValue(currentValue);
-    animation->setEndValue(value);
-    animation->start();
 }
 
 void StatBar::paintEvent(QPaintEvent* event) {
@@ -118,8 +106,24 @@ void StatBar::paintEvent(QPaintEvent* event) {
     QWidget::paintEvent(event);
 }
 
-GameWindow::GameWindow(Wolf& w, DecisionTree& t, PriorityQueue& e, GameStack& h, ActionQueue& a, Inventory& i, Pack& p, int& d, QWidget* parent)
-    : QMainWindow(parent), wolf(w), tree(t), events(e), history(h), actions(a), inventory(i), pack(p), dayCounter(d) {
+GameWindow::GameWindow(Wolf& w, DecisionTree& t, PriorityQueue& e, GameStack& h, ActionQueue& a, Inventory& i, Pack& p, int& d, Difficulty& diff, Storyline& story, QWidget* parent)
+    : QMainWindow(parent), wolf(w), tree(t), events(e), history(h), actions(a), inventory(i), pack(p), dayCounter(d), difficulty(diff), storyline(story) {
+
+    // Compute difficulty-based settings
+    switch (difficulty) {
+        case EASY:
+            hungerIncrease = 3;
+            eventChance = 0.2f;
+            break;
+        case NORMAL:
+            hungerIncrease = 5;
+            eventChance = 0.3f;
+            break;
+        case HARD:
+            hungerIncrease = 8;
+            eventChance = 0.5f;
+            break;
+    }
 
     qDebug() << "GameWindow constructor start";
 
@@ -132,7 +136,6 @@ GameWindow::GameWindow(Wolf& w, DecisionTree& t, PriorityQueue& e, GameStack& h,
     setupMenuBar();
     setupStatusBar();
     setupCentralWidget();
-    setupSidebar();
 
     // Initialize display
     updateDisplay();
@@ -391,6 +394,7 @@ void GameWindow::setupCentralWidget() {
     loadButton = new QPushButton("📁 Load", centralWidget);
     inventoryButton = new QPushButton("🎒 Inventory", centralWidget);
     packButton = new QPushButton("🐺 Pack", centralWidget);
+    menuButton = new QPushButton("🔙 Menu", centralWidget);  // Add return to menu button
 
     // Style control buttons
     QString controlButtonStyle =
@@ -414,18 +418,21 @@ void GameWindow::setupCentralWidget() {
     loadButton->setStyleSheet(controlButtonStyle);
     inventoryButton->setStyleSheet(controlButtonStyle);
     packButton->setStyleSheet(controlButtonStyle);
+    menuButton->setStyleSheet(controlButtonStyle);  // Style the menu button
 
     connect(undoButton, &QPushButton::clicked, this, &GameWindow::onUndo);
     connect(saveButton, &QPushButton::clicked, this, &GameWindow::onSave);
     connect(loadButton, &QPushButton::clicked, this, &GameWindow::onLoad);
     connect(inventoryButton, &QPushButton::clicked, this, &GameWindow::onInventory);
     connect(packButton, &QPushButton::clicked, this, &GameWindow::onPack);
+    connect(menuButton, &QPushButton::clicked, this, &GameWindow::onReturnToMenu);  // Connect menu button
 
     controlsLayout->addWidget(undoButton);
     controlsLayout->addWidget(saveButton);
     controlsLayout->addWidget(loadButton);
     controlsLayout->addWidget(inventoryButton);
     controlsLayout->addWidget(packButton);
+    controlsLayout->addWidget(menuButton);  // Add menu button to layout
     controlsLayout->addStretch(); // Add stretch to push buttons to the top
 
     controlLayout->addWidget(controlsGroup);
@@ -441,111 +448,106 @@ void GameWindow::setupCentralWidget() {
     setStatusBar(statusBar);
 }
 
-void GameWindow::setupSidebar() {
-    qDebug() << "setupSidebar: sidebar feature disabled in simplified GUI mode";
-    // Note: Sidebar functionality was disabled during debugging to prevent crashes.
-    // If needed in the future, the complete implementation is available in git history.
-    // The sidebar would provide inventory and pack management in a dock widget.
-}
-
 void GameWindow::onChoiceA() {
     qDebug() << "onChoiceA called";
     processChoice(true);
 }
 
 void GameWindow::updateInventoryDisplay() {
-    if (inventoryList) {
-        inventoryList->clear();
-
-        Item* current = inventory.getHead();
-        if (current) {
-            while (current) {
-                QString itemText = QString("%1 (x%2)").arg(QString::fromStdString(current->name)).arg(current->quantity);
-                inventoryList->addItem(itemText);
-                current = current->next;
-            }
-        } else {
-            inventoryList->addItem("No items in inventory");
-        }
-    }
-}
-
-void GameWindow::updatePackDisplaySidebar() {
-    if (packTree) {
-        packTree->clear();
-
-        PackMember* current = pack.getHead();
-        if (current) {
-            while (current) {
-                QTreeWidgetItem* item = new QTreeWidgetItem();
-                item->setText(0, QString::fromStdString(current->name));
-                item->setText(1, QString::fromStdString(current->role));
-                item->setText(2, QString::number(current->loyalty));
-
-                // Color code loyalty
-                if (current->loyalty >= 70) {
-                    item->setForeground(2, QBrush(QColor(0, 255, 0))); // Green for loyal
-                } else if (current->loyalty >= 40) {
-                    item->setForeground(2, QBrush(QColor(255, 255, 0))); // Yellow for stable
-                } else {
-                    item->setForeground(2, QBrush(QColor(255, 0, 0))); // Red for unstable
-                }
-
-                packTree->addTopLevelItem(item);
-                current = current->next;
-            }
-        } else {
-            QTreeWidgetItem* item = new QTreeWidgetItem();
-            item->setText(0, "No pack members");
-            item->setText(1, "");
-            item->setText(2, "");
-            packTree->addTopLevelItem(item);
-        }
-    }
+    // Inventory display is shown via dialog when inventory button is clicked
+    // No sidebar update needed
 }
 
 void GameWindow::updateGameInfo() {
-    if (gameInfoLabel) {
-        QString infoText = QString(
-            "Day: %1\n"
-            "Health: %2\n"
-            "Hunger: %3\n"
-            "Energy: %4\n"
-            "Spirit: %5\n"
-            "Reputation: %6\n"
-            "Pack Size: %7\n"
-            "\n"
-            "Game Status:\n"
-            "%8"
-        ).arg(dayCounter)
-         .arg(wolf.health)
-         .arg(wolf.hunger)
-         .arg(wolf.energy)
-         .arg(wolf.spirit)
-         .arg(wolf.reputation)
-         .arg(pack.getSize())
-         .arg(wolf.isAlive() ? "Alive" : "Dead");
-
-        gameInfoLabel->setText(infoText);
-    }
+    // Game info is displayed in the main stats area
+    // No separate sidebar update needed
 }
 
 void GameWindow::onNewGame() {
+    qDebug() << "onNewGame: starting reset";
+
     // Reset game state
     wolf = Wolf();
     dayCounter = 1;
     inventory = Inventory();
     pack = Pack();
 
-    // Rebuild decision tree
-    tree.buildSampleTree();
+    // Reset fallback nodes and deleted nodes
+    fallbackNodes.clear();
+    deletedNodes.clear();
+    qDebug() << "onNewGame: fallback nodes cleared";
+
+    // Reset achievement flags
+    healthAchieved = false;
+    energyAchieved = false;
+    spiritAchieved = false;
+    pack3Achieved = false;
+    pack5Achieved = false;
+    repAchieved = false;
+    survivor10Achieved = false;
+    survivor15Achieved = false;
+    alphaAchieved = false;
+    explorerAchieved = false;
+    strategistAchieved = false;
+    stoicExplorerAchieved = false;
+    acceptingSpiritAchieved = false;
+
+    // Apply difficulty settings
+    switch (difficulty) {
+        case EASY:
+            // Easy mode adjustments
+            this->hungerIncrease = 3;
+            this->eventChance = 0.2f;
+            break;
+        case NORMAL:
+            // Normal mode (default)
+            this->hungerIncrease = 5;
+            this->eventChance = 0.3f;
+            break;
+        case HARD:
+            // Hard mode adjustments
+            this->hungerIncrease = 8;
+            this->eventChance = 0.5f;
+            break;
+    }
+
+    // Clear any existing fallback nodes first
+    cleanupFallbackNodes();
+
+    // Build appropriate story tree based on storyline
+    switch (storyline) {
+        case CLASSIC:
+            tree.buildClassicStory();
+            break;
+        case SURVIVAL:
+            tree.buildSurvivalStory();
+            wolf.health = 40;
+            wolf.hunger = 80;
+            wolf.energy = 60;
+            break;
+        case PACK:
+            tree.buildPackStory();
+            wolf.reputation = 20;
+            pack.addMember("Beta", "Second-in-Command", 70);
+            pack.addMember("Scout", "Scout", 60);
+            break;
+    }
+
+    // Reset tree to root node
+    DecisionNode* root = tree.getRoot();
+    if (root) {
+        tree.setCurrentNode(root);
+        qDebug() << "onNewGame: tree reset to root node";
+    } else {
+        qDebug() << "onNewGame: ERROR - root node is null!";
+    }
 
     // Update displays
     updateDisplay();
     updateStats();
     updateInventoryDisplay();
-    updatePackDisplaySidebar();
     updateGameInfo();
+    qDebug() << "onNewGame: displays updated";
 
     if (statusBar) {
         statusBar->showMessage("New game started!", 2000);
@@ -569,8 +571,32 @@ void GameWindow::onExit() {
                               QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
-        QApplication::quit();
+        // Instead of quitting the entire application, just close this window
+        // This will return control back to the main menu
+        this->close();
     }
+}
+
+void GameWindow::onReturnToMenu() {
+    // Ask for confirmation before returning to menu
+    QMessageBox::StandardButton reply =
+        QMessageBox::question(this, "Return to Menu",
+                              "Are you sure you want to return to the main menu?\nYour current game will be paused.",
+                              QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        // Emit the return to menu signal before closing
+        emit returnToMenu();
+        // Close the window which will return control to the main menu
+        this->close();
+    }
+}
+
+void GameWindow::closeEvent(QCloseEvent* event) {
+    // Emit the signal to notify that the game window is closing
+    emit gameClosed();
+    // Accept the close event to close the window
+    event->accept();
 }
 
 void GameWindow::onChoiceB() {
@@ -634,71 +660,82 @@ void GameWindow::onSave() {
         int slot = slotSelector->currentIndex() + 1;
         std::string filename = "savegame_" + std::to_string(slot) + ".txt";
         std::ofstream saveFile(filename);
-    if (saveFile.is_open()) {
-        // Save wolf stats
-        saveFile << wolf.health << "\n";
-        saveFile << wolf.hunger << "\n";
-        saveFile << wolf.energy << "\n";
-        saveFile << wolf.reputation << "\n";
-        saveFile << wolf.spirit << "\n";
-        saveFile << dayCounter << "\n";
+        if (saveFile.is_open()) {
+            try {
+                // Save wolf stats
+                saveFile << wolf.health << "\n";
+                saveFile << wolf.hunger << "\n";
+                saveFile << wolf.energy << "\n";
+                saveFile << wolf.reputation << "\n";
+                saveFile << wolf.spirit << "\n";
+                saveFile << dayCounter << "\n";
 
-        // Save current node ID
-        if (tree.getCurrentNode()) {
-            saveFile << tree.getCurrentNode()->scenarioID << "\n";
+                // Save current node ID
+                if (tree.getCurrentNode()) {
+                    saveFile << tree.getCurrentNode()->scenarioID << "\n";
+                } else {
+                    saveFile << "1\n"; // Default to start node if null
+                }
+
+                // Save inventory
+                Item* currentItem = inventory.getHead();
+                int itemCount = 0;
+                // First count items
+                Item* temp = currentItem;
+                while (temp) {
+                    itemCount++;
+                    temp = temp->next;
+                }
+                saveFile << itemCount << "\n";
+
+                // Then save each item
+                currentItem = inventory.getHead();
+                while (currentItem) {
+                    saveFile << currentItem->name << "\n";
+                    // Explicitly cast enum to int to ensure consistent serialization
+                    saveFile << static_cast<int>(currentItem->type) << "\n";
+                    saveFile << currentItem->effect << "\n";
+                    saveFile << currentItem->quantity << "\n";
+                    currentItem = currentItem->next;
+                }
+
+                // Save pack
+                PackMember* currentMember = pack.getHead();
+                int memberCount = 0;
+                // First count members
+                PackMember* tempMember = currentMember;
+                while (tempMember) {
+                    memberCount++;
+                    tempMember = tempMember->next;
+                }
+                saveFile << memberCount << "\n";
+
+                // Then save each pack member
+                currentMember = pack.getHead();
+                while (currentMember) {
+                    saveFile << currentMember->name << "\n";
+                    saveFile << currentMember->role << "\n";
+                    saveFile << currentMember->loyalty << "\n";
+                    currentMember = currentMember->next;
+                }
+
+                // Save storyline and difficulty settings
+                saveFile << static_cast<int>(storyline) << "\n";
+                saveFile << static_cast<int>(difficulty) << "\n";
+
+                saveFile.close();
+                QMessageBox::information(this, "Save", "Game saved successfully!");
+                saveDialog.accept();
+            } catch (const std::exception& e) {
+                saveFile.close();
+                QMessageBox::critical(this, "Save Error", QString("Error during save: ") + e.what());
+                saveDialog.reject();
+            }
         } else {
-            saveFile << "1\n"; // Default to start node if null
+            QMessageBox::critical(this, "Save Error", "Could not open save file for writing.");
+            saveDialog.reject();
         }
-
-        // Save inventory
-        Item* currentItem = inventory.getHead();
-        int itemCount = 0;
-        // First count items
-        Item* temp = currentItem;
-        while (temp) {
-            itemCount++;
-            temp = temp->next;
-        }
-        saveFile << itemCount << "\n";
-
-        // Then save each item
-        currentItem = inventory.getHead();
-        while (currentItem) {
-            saveFile << currentItem->name << "\n";
-            saveFile << currentItem->type << "\n";
-            saveFile << currentItem->effect << "\n";
-            saveFile << currentItem->quantity << "\n";
-            currentItem = currentItem->next;
-        }
-
-        // Save pack
-        PackMember* currentMember = pack.getHead();
-        int memberCount = 0;
-        // First count members
-        PackMember* tempMember = currentMember;
-        while (tempMember) {
-            memberCount++;
-            tempMember = tempMember->next;
-        }
-        saveFile << memberCount << "\n";
-
-        // Then save each pack member
-        currentMember = pack.getHead();
-        while (currentMember) {
-            saveFile << currentMember->name << "\n";
-            saveFile << currentMember->role << "\n";
-            saveFile << currentMember->loyalty << "\n";
-            currentMember = currentMember->next;
-        }
-
-        saveFile.close();
-        QMessageBox::information(this, "Save", "Game saved successfully!");
-        saveDialog.accept();
-    } else {
-        QMessageBox::critical(this, "Save Error", "Could not open save file.");
-        saveDialog.reject();
-    }
-});
+    });
     saveDialog.exec();
 }
 
@@ -736,90 +773,253 @@ void GameWindow::onLoad() {
         int slot = slotSelector->currentIndex() + 1;
         std::string filename = "savegame_" + std::to_string(slot) + ".txt";
         std::ifstream loadFile(filename);
-    if (loadFile.is_open()) {
-        // Load wolf stats
-        loadFile >> wolf.health;
-        loadFile >> wolf.hunger;
-        loadFile >> wolf.energy;
-        loadFile >> wolf.reputation;
-        loadFile >> wolf.spirit;
-        loadFile >> dayCounter;
+        if (loadFile.is_open()) {
+            try {
+                // Load wolf stats with validation
+                if (!(loadFile >> wolf.health)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid health value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+                if (!(loadFile >> wolf.hunger)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid hunger value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+                if (!(loadFile >> wolf.energy)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid energy value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+                if (!(loadFile >> wolf.reputation)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid reputation value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+                if (!(loadFile >> wolf.spirit)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid spirit value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+                if (!(loadFile >> dayCounter)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid day counter value in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
 
-        // Load current node ID
-        int nodeId;
-        loadFile >> nodeId;
+                // Validate loaded values
+                if (wolf.health < 0 || wolf.health > 100 ||
+                    wolf.hunger < 0 || wolf.hunger > 100 ||
+                    wolf.energy < 0 || wolf.energy > 100 ||
+                    wolf.reputation < 0 || wolf.reputation > 100 ||
+                    wolf.spirit < 0 || wolf.spirit > 100 ||
+                    dayCounter < 1) {
+                    QMessageBox::critical(this, "Load Error", "Invalid values in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
 
-        // Find the node in the tree by ID
-        tree.buildSampleTree(); // Rebuild tree to ensure it's populated
-        DecisionNode* foundNode = tree.findNodeById(nodeId);
-        if (foundNode) {
-            tree.setCurrentNode(foundNode);
+                // Load current node ID
+                int nodeId;
+                if (!(loadFile >> nodeId)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid node ID in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+
+                // Build the correct story tree based on storyline (will be set from save file later)
+                // First build Classic as default, then we'll navigate to the correct node
+                tree.buildClassicStory();
+                DecisionNode* foundNode = tree.findNodeById(nodeId);
+                if (foundNode) {
+                    tree.setCurrentNode(foundNode);
+                } else {
+                    // If node not found, go to root
+                    QMessageBox::information(this, "Load", QString("Node ID %1 not found in tree. Loading from start.").arg(nodeId));
+                    tree.setCurrentNode(tree.getRoot());
+                }
+
+                // Clear current inventory
+                Item* current = inventory.getHead();
+                while (current) {
+                    Item* next = current->next;
+                    delete current;
+                    current = next;
+                }
+                inventory = Inventory(); // Reset inventory
+
+                // Load inventory
+                int itemCount;
+                if (!(loadFile >> itemCount)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid item count in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+
+                if (itemCount < 0 || itemCount > 100) { // Reasonable upper limit
+                    QMessageBox::critical(this, "Load Error", QString("Invalid item count %1 in save file.").arg(itemCount));
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+
+                for (int i = 0; i < itemCount; i++) {
+                    std::string name;
+                    int typeInt;
+                    int effect, quantity;
+
+                    if (!(loadFile >> name)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid item name at index %1 in save file.").arg(i));
+                        break;  // Stop loading items but continue with other data
+                    }
+                    if (name.length() > 100) {
+                        QMessageBox::critical(this, "Load Error", "Item name too long in save file.");
+                        break;
+                    }
+                    if (!(loadFile >> typeInt)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid item type at index %1 in save file.").arg(i));
+                        break;
+                    }
+                    if (!(loadFile >> effect)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid item effect at index %1 in save file.").arg(i));
+                        break;
+                    }
+                    if (!(loadFile >> quantity)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid item quantity at index %1 in save file.").arg(i));
+                        break;
+                    }
+
+                    // Validate quantity
+                    if (quantity <= 0) {
+                        QMessageBox::information(this, "Load Warning", QString("Invalid item quantity %1. Skipping item.").arg(quantity));
+                        continue;
+                    }
+
+                    // Validate the enum value before casting
+                    if (typeInt < 0 || typeInt > 2) {  // Assuming 0, 1, 2 are valid enum values for FOOD, HERB, TOOL
+                        QMessageBox::information(this, "Load Warning", QString("Invalid ItemType value %1. Using FOOD as default.").arg(typeInt));
+                        inventory.addItem(name, FOOD, effect, quantity);  // Default to FOOD if invalid
+                    } else {
+                        ItemType type = static_cast<ItemType>(typeInt);
+                        inventory.addItem(name, type, effect, quantity);
+                    }
+                }
+
+                // Clear current pack
+                PackMember* currentMember = pack.getHead();
+                while (currentMember) {
+                    PackMember* next = currentMember->next;
+                    delete currentMember;
+                    currentMember = next;
+                }
+                pack = Pack(); // Reset pack
+
+                // Load pack
+                int memberCount;
+                if (!(loadFile >> memberCount)) {
+                    QMessageBox::critical(this, "Load Error", "Invalid pack member count in save file.");
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+
+                if (memberCount < 0 || memberCount > 20) { // Reasonable upper limit
+                    QMessageBox::critical(this, "Load Error", QString("Invalid pack member count %1 in save file.").arg(memberCount));
+                    loadFile.close();
+                    loadDialog.reject();
+                    return;
+                }
+
+                for (int i = 0; i < memberCount; i++) {
+                    std::string name, role;
+                    int loyalty;
+
+                    if (!(loadFile >> name)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid pack member name at index %1 in save file.").arg(i));
+                        break;
+                    }
+                    if (name.length() > 100) {
+                        QMessageBox::critical(this, "Load Error", "Pack member name too long in save file.");
+                        break;
+                    }
+                    if (!(loadFile >> role)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid pack member role at index %1 in save file.").arg(i));
+                        break;
+                    }
+                    if (role.length() > 50) {
+                        QMessageBox::critical(this, "Load Error", "Pack member role too long in save file.");
+                        break;
+                    }
+                    if (!(loadFile >> loyalty)) {
+                        QMessageBox::critical(this, "Load Error", QString("Invalid pack member loyalty at index %1 in save file.").arg(i));
+                        break;
+                    }
+
+                    // Validate loyalty
+                    if (loyalty < 0 || loyalty > 100) {
+                        QMessageBox::information(this, "Load Warning", QString("Invalid loyalty value %1. Using 50 as default.").arg(loyalty));
+                        loyalty = 50;
+                    }
+
+                    pack.addMember(name, role, loyalty);
+                }
+
+                // Load storyline and difficulty (new format includes these at end of file)
+                int loadedStoryline = -1;
+                int loadedDifficulty = -1;
+                
+                // Try to read storyline - if this fails, it's an old save file
+                if (loadFile >> loadedStoryline) {
+                    // Try to read difficulty
+                    if (loadFile >> loadedDifficulty) {
+                        // Valid new format - set the member variables
+                        if (loadedStoryline >= 0 && loadedStoryline <= 2) {
+                            storyline = static_cast<Storyline>(loadedStoryline);
+                        }
+                        if (loadedDifficulty >= 0 && loadedDifficulty <= 2) {
+                            difficulty = static_cast<Difficulty>(loadedDifficulty);
+                        }
+                    } else {
+                        // Old save file format (no difficulty)
+                        storyline = CLASSIC;
+                        difficulty = NORMAL;
+                        loadFile.clear();
+                    }
+                } else {
+                    // Very old format
+                    loadFile.clear();
+                    loadFile.seekg(0, std::ios::beg);
+                    storyline = CLASSIC;
+                    difficulty = NORMAL;
+                }
+
+                loadFile.close();
+
+                // Update display after loading
+                updateDisplay();
+                updateStats();
+
+                QMessageBox::information(this, "Load", "Game loaded successfully!");
+                loadDialog.accept();
+            } catch (const std::exception& e) {
+                loadFile.close();
+                QMessageBox::critical(this, "Load Error", QString("Error during load: ") + e.what());
+                loadDialog.reject();
+            }
         } else {
-            // If node not found, go to root
-            tree.setCurrentNode(tree.getRoot());
+            QMessageBox::critical(this, "Load Error", "Could not open save file for reading.");
+            loadDialog.reject();
         }
-
-        // Clear current inventory
-        Item* current = inventory.getHead();
-        while (current) {
-            Item* next = current->next;
-            delete current;
-            current = next;
-        }
-        inventory = Inventory(); // Reset inventory
-
-        // Load inventory
-        int itemCount;
-        loadFile >> itemCount;
-        for (int i = 0; i < itemCount; i++) {
-            std::string name;
-            ItemType type;
-            int effect, quantity;
-
-            loadFile >> name;
-            int typeInt;
-            loadFile >> typeInt;
-            type = static_cast<ItemType>(typeInt);
-            loadFile >> effect;
-            loadFile >> quantity;
-
-            inventory.addItem(name, type, effect, quantity);
-        }
-
-        // Clear current pack
-        PackMember* currentMember = pack.getHead();
-        while (currentMember) {
-            PackMember* next = currentMember->next;
-            delete currentMember;
-            currentMember = next;
-        }
-        pack = Pack(); // Reset pack
-
-        // Load pack
-        int memberCount;
-        loadFile >> memberCount;
-        for (int i = 0; i < memberCount; i++) {
-            std::string name, role;
-            int loyalty;
-
-            loadFile >> name >> role >> loyalty;
-
-            pack.addMember(name, role, loyalty);
-        }
-
-        loadFile.close();
-
-        // Update display after loading
-        updateDisplay();
-        updateStats();
-
-        QMessageBox::information(this, "Load", "Game loaded successfully!");
-        loadDialog.accept();
-    } else {
-        QMessageBox::critical(this, "Load Error", "Could not open save file.");
-        loadDialog.reject();
-    }
-});
+    });
     loadDialog.exec();
 }
 
@@ -1088,10 +1288,10 @@ void GameWindow::updateStats() {
     }
 
     // Animate stat bars to new values
-    healthBar->animateTo(wolf.health);
-    hungerBar->animateTo(100 - wolf.hunger); // Invert for hunger (lower is better)
-    energyBar->animateTo(wolf.energy);
-    spiritBar->animateTo(wolf.spirit);
+    healthBar->setValue(wolf.health);
+    hungerBar->setValue(100 - wolf.hunger); // Invert for hunger (lower is better)
+    energyBar->setValue(wolf.energy);
+    spiritBar->setValue(wolf.spirit);
     
     // Update displays
     updateDayDisplay();
@@ -1194,55 +1394,59 @@ void GameWindow::updateStats() {
 
 void GameWindow::updateDisplay() {
     qDebug() << "updateDisplay start";
-    DecisionNode* current = tree.getCurrentNode();
-    qDebug() << "updateDisplay: got current node: " << current;
+    DecisionNode* currentDecisionNode = tree.getCurrentNode();
+    qDebug() << "updateDisplay: got current node: " << currentDecisionNode;
     qDebug() << "updateDisplay: before if current";
-    if (!current) {
+    if (!currentDecisionNode) {
         qDebug() << "updateDisplay: current is null, skipping update";
         return;
     }
     qDebug() << "updateDisplay: current is valid";
-    qDebug() << "updateDisplay: current->isEnding: " << current->isEnding;
-    qDebug() << "updateDisplay: description length: " << current->description.length();
+    qDebug() << "updateDisplay: current->isEnding: " << currentDecisionNode->isEnding;
+    qDebug() << "updateDisplay: description length: " << currentDecisionNode->description.length();
     qDebug() << "updateDisplay: storyLabel pointer: " << (void*)storyLabel;
     qDebug() << "updateDisplay: buttonA pointer: " << (void*)buttonA;
     qDebug() << "updateDisplay: buttonB pointer: " << (void*)buttonB;
     qDebug() << "updateDisplay: before setText";
-    storyLabel->setText(QString::fromStdString(current->description));
+
+    // Validate the node before accessing its properties
+    if (!currentDecisionNode->description.empty()) {
+        storyLabel->setText(QString::fromStdString(currentDecisionNode->description));
+    } else {
+        storyLabel->setText("Current scenario has no description");
+    }
     qDebug() << "updateDisplay: after setText";
 
-    if (current->isEnding) {
+    if (currentDecisionNode->isEnding) {
         qDebug() << "updateDisplay: ending detected";
         buttonA->setEnabled(true);
         buttonB->setEnabled(true);
         buttonA->setText("🔄 New Game");
         buttonB->setText("❌ Exit Game");
-        
+
         // Disconnect old signals to prevent conflicts
         buttonA->disconnect();
         buttonB->disconnect();
-        
+
         // Connect to new ending actions
         connect(buttonA, &QPushButton::clicked, this, &GameWindow::onNewGame);
         connect(buttonB, &QPushButton::clicked, this, [this]() {
             cleanupFallbackNodes();
             qApp->quit();
         });
-        
-        storyLabel->setText(QString::fromStdString(current->description));
 
         // Update wolf graphic based on scenario
-        updateWolfGraphic(current->scenarioID);
+        updateWolfGraphic(currentDecisionNode->scenarioID);
 
         // Unlock appropriate achievement based on ending type
-        if (current->scenarioID == 1000) { // Explorer path
+        if (currentDecisionNode->scenarioID == 1000) { // Explorer path
             bool hasGoodStats = (wolf.health >= 50 && wolf.spirit >= 50 && pack.getSize() >= 2);
             if (hasGoodStats) {
                 qDebug() << "ACHIEVEMENT UNLOCKED: Resilient Explorer - Found hope in unexpected conclusions!";
             } else {
                 qDebug() << "ACHIEVEMENT UNLOCKED: Stoic Explorer - Faced the unknown with quiet determination!";
             }
-        } else if (current->scenarioID == 1001) { // Strategist path
+        } else if (currentDecisionNode->scenarioID == 1001) { // Strategist path
             bool hasGoodStats = (wolf.health >= 50 && wolf.spirit >= 50 && pack.getSize() >= 2);
             if (hasGoodStats) {
                 qDebug() << "ACHIEVEMENT UNLOCKED: Wise Strategist - Found wisdom in thoughtful reflection!";
@@ -1253,9 +1457,9 @@ void GameWindow::updateDisplay() {
 
         // Show ending message with clear conclusion
         QString endingTitle = "🎯 Journey Complete";
-        
+
         // Build detailed ending summary
-        QString endingSummary = QString::fromStdString(current->endingText);
+        QString endingSummary = QString::fromStdString(currentDecisionNode->endingText);
         endingSummary += QString("\n\n📊 Final Statistics:\n"
                                 "Days Survived: %1\n"
                                 "Health: %2\n"
@@ -1271,9 +1475,9 @@ void GameWindow::updateDisplay() {
                            .arg(wolf.spirit)
                            .arg(wolf.reputation)
                            .arg(pack.getSize());
-        
+
         QMessageBox::information(this, endingTitle, endingSummary);
-        
+
         // Update status bar
         if (statusBar) {
             statusBar->showMessage("Game Complete! Choose 'New Game' or 'Exit Game'", 0);
@@ -1282,28 +1486,29 @@ void GameWindow::updateDisplay() {
         bool canChooseA = wolf.canMakeChoice(5);
         bool canChooseB = wolf.canMakeChoice(3);
 
-        buttonA->setText(QString::fromStdString("A: " + current->choiceA_text));
-        buttonB->setText(QString::fromStdString("B: " + current->choiceB_text));
+        // Safely set button text with validation
+        buttonA->setText(QString::fromStdString("A: " + (currentDecisionNode->choiceA_text.empty() ? "Continue" : currentDecisionNode->choiceA_text)));
+        buttonB->setText(QString::fromStdString("B: " + (currentDecisionNode->choiceB_text.empty() ? "Back" : currentDecisionNode->choiceB_text)));
 
         buttonA->setEnabled(canChooseA);
         buttonB->setEnabled(canChooseB);
 
         // Update wolf graphic based on scenario
-        updateWolfGraphic(current->scenarioID);
+        updateWolfGraphic(currentDecisionNode->scenarioID);
     }
 }
 
 void GameWindow::processChoice(bool isA) {
     qDebug() << "processChoice start";
-    DecisionNode* current = tree.getCurrentNode();
-    qDebug() << "current node:" << current;
-    if (!current) {
+    DecisionNode* currentDecisionNode = tree.getCurrentNode();
+    qDebug() << "current node:" << currentDecisionNode;
+    if (!currentDecisionNode) {
         QMessageBox::warning(this, "Error", "No current scenario available.");
         return;
     }
 
     // Check if this is already an ending node
-    if (current->isEnding) {
+    if (currentDecisionNode->isEnding) {
         return; // Don't allow choices on ending nodes
     }
 
@@ -1316,14 +1521,14 @@ void GameWindow::processChoice(bool isA) {
     }
 
     // Push current state before choice (including day and a copy of inventory)
-    history.push({current, wolf.health, wolf.hunger, wolf.energy, dayCounter, inventory.clone()});
+    history.push({currentDecisionNode, wolf.health, wolf.hunger, wolf.energy, dayCounter, inventory.clone()});
 
     DecisionNode* nextNode = nullptr;
     if (isA) {
-        nextNode = current->left;
+        nextNode = currentDecisionNode->left;
         qDebug() << "chose A, next:" << nextNode;
     } else {
-        nextNode = current->right;
+        nextNode = currentDecisionNode->right;
         qDebug() << "chose B, next:" << nextNode;
     }
 
@@ -1389,9 +1594,95 @@ void GameWindow::processChoice(bool isA) {
         return;
     }
 
+    // Add items based on scenario ID (similar to terminal version)
+    if (isA && currentDecisionNode->left && currentDecisionNode->left->scenarioID == 4) {
+        // Add rabbit meat when choosing left path from scenario that leads to scenario 4
+        inventory.addItem("Rabbit Meat", FOOD, -30, 1);
+    }
+    // Also handle other scenario-based item additions
+    if (!isA && currentDecisionNode->right && currentDecisionNode->right->scenarioID == 4) {
+        // Add rabbit meat when choosing right path that leads to scenario 4 (if applicable)
+        inventory.addItem("Rabbit Meat", FOOD, -30, 1);
+    }
+
+    // Add pack members based on scenario ID (similar to terminal version)
+    if (currentDecisionNode->scenarioID == 13) pack.addMember("Luna", "Hunter", 80);
+    if (currentDecisionNode->scenarioID == 16) pack.addMember("Ally", "Guard", 60);
+
+    // Pack player choice effects (similar to terminal version)
+    if (currentDecisionNode->scenarioID == 68 && isA) {
+        // Accepted recruitment
+        pack.addMember("Recruit", "Scout", 65);
+        wolf.updateHunger(10); // More mouths to feed
+    }
+    if (currentDecisionNode->scenarioID == 69) {
+        // Training choice - handled based on which choice was made
+        if (isA) {
+            // Hunting training
+            wolf.energy -= 20;
+        } else {
+            // Scouting training
+            wolf.energy -= 15;
+        }
+    }
+
     // Set the new current node
     tree.setCurrentNode(nextNode);
     dayCounter++;
+
+    // Calculate dynamic hunger increase based on difficulty and pack size
+    int currentHungerIncrease = hungerIncrease;
+    if (pack.getSize() > 0) {
+        currentHungerIncrease = static_cast<int>(currentHungerIncrease * (1.0 + (pack.getSize() * 0.1)));
+    }
+
+    // Update stats
+    wolf.updateHunger(currentHungerIncrease);
+    pack.updateLoyalty(currentHungerIncrease);
+
+    // ========== INVENTORY CONSUMPTION SYSTEM ==========
+    // Food consumption every 5 days
+    if (dayCounter % 5 == 0 && dayCounter > 1) {
+        QString foodMsg = "\n\n[FOOD CONSUMPTION] Day " + QString::number(dayCounter) + " - Time to eat!";
+        QString currentText = storyLabel->text();
+        storyLabel->setText(currentText + foodMsg);
+
+        if (inventory.useItem("Rabbit Meat", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Ate Rabbit Meat (hunger reduced)");
+        } else if (inventory.useItem("Berries", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Ate Berries (hunger reduced)");
+        } else {
+            storyLabel->setText(storyLabel->text() + "\n  ✗ No food! Your pack goes hungry.");
+            wolf.updateHunger(10);  // Extra hunger penalty
+        }
+    }
+
+    // Healing item usage when injured - expanded threshold
+    if (wolf.health < 60 && dayCounter > 1) {  // Lower threshold to make healing more accessible
+        QString healMsg;
+        if (wolf.health < 40) {
+            healMsg = "\n\n[INJURY] Your wolf is critically injured!";
+        } else {
+            healMsg = "\n\n[INJURY] Your wolf needs healing!";
+        }
+        QString currentText = storyLabel->text();
+        storyLabel->setText(currentText + healMsg);
+
+        if (inventory.useItem("Common Mallow", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Used Common Mallow (health restored)");
+        } else if (inventory.useItem("Root Paste", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Used Root Paste (health restored)");
+        } else if (inventory.useItem("Moss Dressing", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Used Moss Dressing (health restored)");
+        } else if (inventory.useItem("Bee Propolis", wolf)) {
+            storyLabel->setText(storyLabel->text() + "\n  ✓ Used Bee Propolis (health restored)");
+        } else {
+            storyLabel->setText(storyLabel->text() + "\n  ✗ No healing items available!");
+        }
+    }
+
+    // Random event check
+    checkEvents();
 
     // Check for day limit
     if (dayCounter >= 30) {
@@ -1408,13 +1699,12 @@ void GameWindow::processChoice(bool isA) {
 
     // Update sidebar information after making a choice
     updateInventoryDisplay();
-    updatePackDisplaySidebar();
     updateGameInfo();
 }
 
 void GameWindow::checkEvents() {
     // Check for random events
-    if (dis(gen) < 0.1) { // 10% chance of event (less frequent)
+    if (dis(gen) < eventChance) { // Difficulty-based chance of event
         if (!events.isEmpty()) {
             Event e = events.extractMin();
             std::string msg = e.name + ": " + e.description;
@@ -1434,13 +1724,31 @@ void GameWindow::checkEvents() {
                 int roleIdx = gen() % 3;
                 int nameIdx = gen() % 5;
                 int loyalty = 50 + (gen() % 30); // Loyalty between 50-80
-                pack.addMember(names[nameIdx] + std::to_string(gen() % 100), roles[roleIdx], loyalty);
+                
+                // Capture actual member name (generated once to avoid mismatch)
+                std::string memberName = names[nameIdx] + std::to_string(gen() % 100);
+                pack.addMember(memberName, roles[roleIdx], loyalty);
 
                 // Update the story label to indicate pack recruitment
                 QString recruitmentMsg = QString("\n\n[RECRUITMENT] %1 has joined your pack as a %2!")
-                                           .arg(QString::fromStdString(names[nameIdx] + std::to_string(gen() % 100)))
+                                           .arg(QString::fromStdString(memberName))
                                            .arg(QString::fromStdString(roles[roleIdx]));
                 storyLabel->setText(currentText + recruitmentMsg);
+            }
+
+            // Add items for found berries event (use difficulty scaling)
+            if (e.name == "Found Berries") {
+                // Add items based on difficulty
+                inventory.addRandomFood(difficulty);
+                if (difficulty == EASY) {
+                    inventory.addItem("Fresh Water", WATER, 0, 2); // Extra water on easy
+                } else {
+                    inventory.addItem("Fresh Water", WATER, 0, 1);
+                }
+                // Update the story label to indicate items found
+                QString itemFoundMsg = QString("\n\n[ITEM FOUND] You found supplies near the stream!");
+                storyLabel->setText(currentText + itemFoundMsg);
+                updateInventoryDisplay(); // Refresh the inventory display
             }
 
             // Put the event back in the queue with reset priority
@@ -1552,54 +1860,50 @@ void GameWindow::checkBasicAchievements() {
     }
 
     // Stat mastery objectives (only unlock if not already achieved in this session)
-    static bool healthAchieved = false, energyAchieved = false, spiritAchieved = false;
-    static bool pack3Achieved = false, pack5Achieved = false, repAchieved = false;
 
-    if (wolf.health >= 90 && !healthAchieved) {
-        healthAchieved = true;
+    if (wolf.health >= 90 && !this->healthAchieved) {
+        this->healthAchieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Health Master - Maintained 90+ health!";
     }
-    if (wolf.energy >= 90 && !energyAchieved) {
-        energyAchieved = true;
+    if (wolf.energy >= 90 && !this->energyAchieved) {
+        this->energyAchieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Energy Expert - Maintained 90+ energy!";
     }
-    if (wolf.spirit >= 90 && !spiritAchieved) {
-        spiritAchieved = true;
+    if (wolf.spirit >= 90 && !this->spiritAchieved) {
+        this->spiritAchieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Spirit Sage - Reached 90+ spirit!";
     }
 
     // Pack building objectives
-    if (pack.getSize() >= 3 && !pack3Achieved) {
-        pack3Achieved = true;
+    if (pack.getSize() >= 3 && !this->pack3Achieved) {
+        this->pack3Achieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Pack Builder - Grew pack to 3+ members!";
     }
-    if (pack.getSize() >= 5 && !pack5Achieved) {
-        pack5Achieved = true;
+    if (pack.getSize() >= 5 && !this->pack5Achieved) {
+        this->pack5Achieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Pack Leader - Built pack of 5+ wolves!";
     }
 
     // Reputation objectives
-    if (wolf.reputation >= 80 && !repAchieved) {
-        repAchieved = true;
+    if (wolf.reputation >= 80 && !this->repAchieved) {
+        this->repAchieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Reputation King - Earned 80+ reputation!";
     }
 
     // Advanced survival objectives (only check once)
-    static bool survivor10Achieved = false, survivor15Achieved = false;
-    static bool alphaAchieved = false;
 
-    if (dayCounter >= 10 && wolf.health >= 70 && wolf.hunger <= 30 && !survivor10Achieved) {
-        survivor10Achieved = true;
+    if (dayCounter >= 10 && wolf.health >= 70 && wolf.hunger <= 30 && !this->survivor10Achieved) {
+        this->survivor10Achieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Elite Survivor - 10 days with high health and low hunger!";
     }
-    if (dayCounter >= 15 && wolf.energy >= 70 && wolf.spirit >= 70 && !survivor15Achieved) {
-        survivor15Achieved = true;
+    if (dayCounter >= 15 && wolf.energy >= 70 && wolf.spirit >= 70 && !this->survivor15Achieved) {
+        this->survivor15Achieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Master Survivor - 15 days with high energy and spirit!";
     }
 
     // Special combination objectives
-    if (pack.getSize() >= 4 && wolf.reputation >= 70 && wolf.spirit >= 70 && !alphaAchieved) {
-        alphaAchieved = true;
+    if (pack.getSize() >= 4 && wolf.reputation >= 70 && wolf.spirit >= 70 && !this->alphaAchieved) {
+        this->alphaAchieved = true;
         qDebug() << "ACHIEVEMENT UNLOCKED: Alpha Leader - Strong pack, high reputation, and spirit!";
     }
 
@@ -1614,21 +1918,26 @@ void GameWindow::cleanupFallbackNodes() {
     // Safely cleanup fallback nodes to prevent memory leaks and double frees
     // These nodes are created dynamically when the tree has null pointers
     for (auto node : fallbackNodes) {
-        if (node) {
-            // Only delete if this node is not part of the main tree
-            // Fallback nodes (scenarioID >= 999) are always safe to delete
-            if (node->scenarioID >= 999) {
-                // Delete child nodes first (exploreNode, restNode)
-                if (node->left && node->left->scenarioID >= 999) {
-                    delete node->left;
-                }
-                if (node->right && node->right->scenarioID >= 999) {
-                    delete node->right;
-                }
-                delete node;
+        if (node && deletedNodes.find(node) == deletedNodes.end()) {
+            // Only delete child nodes if they are also fallback nodes (not part of main tree)
+            // This prevents double deletion of nodes that are part of the main tree structure
+            if (node->left && node->left->scenarioID >= 999 && deletedNodes.find(node->left) == deletedNodes.end()) {
+                delete node->left;
+                deletedNodes.insert(node->left);
+                node->left = nullptr; // Prevent any further access
             }
+            if (node->right && node->right->scenarioID >= 999 && deletedNodes.find(node->right) == deletedNodes.end()) {
+                delete node->right;
+                deletedNodes.insert(node->right);
+                node->right = nullptr; // Prevent any further access
+            }
+
+            // Delete the fallback node itself
+            delete node;
+            deletedNodes.insert(node);
         }
     }
     fallbackNodes.clear();
+    deletedNodes.clear(); // Reset for next cleanup
     qDebug() << "cleanupFallbackNodes: cleaned up fallback nodes";
 }

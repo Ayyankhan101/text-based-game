@@ -1,0 +1,24 @@
+\contentsline {section}{Abstract}{2}{Doc-Start}%
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Project Overview}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Learning Objectives}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Project Structure}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Report Structure}{4}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Game Design Document}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Story Overview and Setting}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Game Mechanics}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Multiple Endings}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}User Interface Design}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}System Architecture}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Overall System Design}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Difficulty-Scaled Inventory System}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Decision Tree Structure}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Priority Queue for Events}{12}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Game State Stack for Undo}{14}{subsection.3.5}%
+\contentsline {section}{\numberline {4}5. Ending Verification and Storyline Analysis}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}5.1 Validator Tool Overview}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}5.2 Classic Storyline Endings (13 Endings)}{15}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}5.3 Survival Storyline Endings (5 Endings)}{16}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}5.4 Pack Storyline Endings (5 Endings)}{16}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Verification Results Summary}{17}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Conclusion and Future Work}{17}{section.5}%

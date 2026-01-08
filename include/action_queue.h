@@ -20,6 +20,7 @@ public:
     void enqueue(Action a);
     void processNext(Wolf& wolf);
     bool isEmpty();
+    void clear(); // Clear all pending actions
 };
 
 #endif

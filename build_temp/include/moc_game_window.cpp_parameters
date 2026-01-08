@@ -1,0 +1,4 @@
+-I/home/ayyan/text-based-game/include
+-o
+/home/ayyan/text-based-game/build_temp/include/moc_game_window.cpp
+/home/ayyan/text-based-game/include/game_window.h

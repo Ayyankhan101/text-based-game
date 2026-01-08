@@ -2,9 +2,11 @@
 #define INVENTORY_H
 
 #include <string>
+#include <vector>
 #include "wolf.h"
+#include "game_types.h"
 
-enum ItemType { FOOD, HERB, TOOL };
+enum ItemType { FOOD, HERB, TOOL, WATER };
 
 struct Item {
     std::string name;
@@ -26,10 +28,25 @@ public:
     void displayInventory();
     bool isFull() const;
     Item* getHead() const;
-    Inventory* clone() const; // Add method to create a deep copy of the inventory
-    void replaceWith(Inventory* other); // Add method to replace contents with another inventory
-    bool useItem(std::string name, Wolf& wolf); // Add method to use item and apply effect to wolf
-    void clear(); // Clear all items from inventory
+    Inventory* clone() const;
+    void replaceWith(Inventory* other);
+    bool useItem(std::string name, Wolf& wolf);
+    void clear();
+    void displayWithNumbers();
+    bool useItemByNumber(int itemNumber, Wolf& wolf);
+    int getCount() const;
+    
+    // Difficulty-scaled item distribution methods
+    void addStartingSupplies(Difficulty diff); // Add starting items based on difficulty
+    void addRandomFood(Difficulty diff);       // Add random food based on difficulty
+    void addRandomHealing(Difficulty diff);    // Add random healing items based on difficulty
+    void addScavengedItems(Difficulty diff);   // Add mixed scavenged items based on difficulty
+    void addHuntLoot(Difficulty diff, int scenarioId); // Add loot from hunting scenarios
+    
+    // Helper methods
+    static int getFoodQuantity(Difficulty diff);     // Get quantity for food drops
+    static int getHealingQuantity(Difficulty diff);  // Get quantity for healing drops
+    static int getScavengeCount(Difficulty diff);    // Get number of scavenged items
 };
 
 #endif

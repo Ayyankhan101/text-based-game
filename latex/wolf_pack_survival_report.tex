@@ -1,0 +1,689 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{trees,shapes,positioning,arrows,decorations.pathreplacing}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% Define custom colors
+\definecolor{lightblue}{rgb}{0.68,0.85,0.9}
+\definecolor{lightgray}{rgb}{0.83,0.83,0.83}
+\definecolor{yellow}{rgb}{1,0.92,0.56}
+\definecolor{orange}{rgb}{1,0.65,0}
+\definecolor{green}{rgb}{0.5,0.88,0.46}
+\definecolor{purple}{rgb}{0.69,0.47,0.84}
+
+\lstset{
+    language=C++,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red!60!black},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    captionpos=b,
+    tabsize=4,
+    breaklines=true
+}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\textbf{Wolf Pack Survival Game - Technical Report}}
+\fancyhead[R]{\textbf{Team A}}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\textbf{January 2026}}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	\vspace*{3cm}
+
+	{\Huge\bfseries Wolf Pack Survival Game \par}
+	\vspace{1cm}
+	{\LARGE Technical Report \par}
+	\vspace{2cm}
+
+	{\Large Data Structures Lab Final Project \par}
+	\vspace{1.5cm}
+
+	{\large Team A \par}
+	\vspace{0.5cm}
+	{\large Submission Date: January 9th, 2026 \par}
+
+	\vfill
+
+	{\large \textbf{Grade Weight: 30 points} \par}
+	{\small Report: 15\% | Implementation: 85\% \par}
+
+	\vspace{2cm}
+
+	\textbf{Project Overview}\\
+	An interactive text-based wolf survival game where players control a lone wolf navigating through dangerous wilderness. Features story-driven decisions, resource management, combat encounters, pack dynamics, and multiple endings using advanced data structures.
+
+	\vfill
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+This report documents the design, implementation, and testing of the Wolf Pack Survival Adventure Game, a text-based survival game built using C++17 and Qt6. The project demonstrates practical applications of fundamental data structures including binary decision trees, priority queues, linked lists, stacks, and queues in a gaming context. Players assume the role of a lone wolf separated from their pack during a harsh winter storm, tasked with surviving 30 days in the wilderness through strategic decision-making, resource management, and pack building. The game features 30+ decision nodes, 23 unique endings across three storylines, and fully integrated GUI and terminal interfaces with difficulty-scaled item drops.
+
+\textbf{Keywords:} Data Structures, Binary Trees, Priority Queues, Linked Lists, Game Development, C++, Qt6, Wolf Survival, Difficulty Scaling
+
+\newpage
+
+\section{Introduction}
+
+\subsection{Project Overview}
+The Wolf Pack Survival Adventure Game is an interactive text-based survival game developed as the final project for the Data Structures Lab course. The game places players in the role of a young wolf separated from their pack during a harsh winter storm. The objective is to survive for 30 days in the wilderness by making critical decisions, managing resources, building alliances, and establishing or finding a new pack.
+
+This project was chosen for its creative potential and the unique opportunity it provides to demonstrate how data structures power game mechanics, AI decision-making, and narrative branching. Unlike typical business applications, this game shows data structures in a gaming context that is both engaging and educational. The project combines logic with creativity, making it fun to build and test while meeting all course requirements.
+
+The development spanned one week with a team structure that distributed responsibilities across story design, character management, combat systems, and GUI implementation. The final product exceeds minimum requirements with 30+ decision nodes (vs. 20 required), 23 endings (vs. 5 required), and full integration of all six required data structures including a difficulty-scaled inventory system.
+
+\subsection{Learning Objectives}
+By completing this project, students gain hands-on experience with:
+\begin{itemize}
+	\item Implementing binary trees for decision-based narratives and branching storylines
+	\item Using priority queues for threat management and event scheduling
+	\item Applying stacks for undo functionality and game state history
+	\item Implementing linked lists for dynamic inventory systems
+	\item Using queues for action sequences and multi-turn activities
+	\item Creating game AI using data structures for event probability
+	\item Building interactive GUI for storytelling with Qt6
+	\item Understanding game state management including save/load functionality
+\end{itemize}
+
+\subsection{Project Structure}
+The project is organized into the following directory structure:
+\begin{itemize}
+	\item \texttt{src/} - Source files (.cpp)
+	\item \texttt{include/} - Header files (.h)
+	\item \texttt{build/} - Build output directory
+	\item \texttt{wolf\_pack\_survival\_report.tex} - LaTeX report
+	\item \texttt{CMakeLists.txt} - CMake build configuration
+\end{itemize}
+
+Build instructions: navigate to the build directory, run \texttt{cmake ..}, then \texttt{make}. The project produces three executables: WolfGame (main game), Validator (decision tree validation), and BalanceTester (game balance testing).
+
+\subsection{Report Structure}
+This report is organized according to the requirements specified in TeamA.txt. Section 2 presents the Game Design Document including story overview, game mechanics, and win/lose conditions. Section 3 describes the System Architecture with detailed explanations of how data structures are used. Section 4 provides the Data Structure Implementation with code examples and complexity analysis. Section 5 presents the Story Flowchart with a visual representation of the decision tree. Section 6 covers Testing and Game Balance results. Section 7 documents the use of AI tools in development. Section 8 provides the conclusion and future improvements.
+
+\newpage
+
+\section{Game Design Document}
+
+\subsection{Story Overview and Setting}
+The game begins with the player character, a young wolf, separated from their pack during a violent winter storm. The wolf awakens disoriented in a snow-covered wilderness, alone and hungry. The pack is nowhere to be seen, and survival becomes the immediate priority. The player must navigate through a dangerous world filled with threats, opportunities, and other wolves who may become allies or rivals.
+
+The narrative is designed to be immersive and realistic to wolf behavior. Every decision reflects the harsh realities of survival in the wild: hunting or scavenging, fighting or fleeing, building relationships or maintaining independence. The story creates meaningful branching paths where each decision has consequences that ripple through the gameplay experience.
+
+The game world is structured around a 30-day survival challenge. Each in-game day represents a series of decisions and actions that the player must manage carefully. The passage of time brings both opportunities and dangers. Players must balance immediate survival needs with long-term goals like building a pack or establishing territory.
+
+The story features multiple narrative threads that intersect based on player choices. Some paths lead to forming a powerful pack and becoming the alpha. Others result in finding the original pack after a long journey. Some endings are tragic - the wolf may starve, freeze, or fall to predators. The richness of the narrative comes from the player's agency in determining which story unfolds.
+
+\subsection{Game Mechanics}
+The game operates on a core loop of decision-making and resource management. At each decision point, the player is presented with a scenario description and two choices (labeled A and B). Each choice leads to a new scenario in the decision tree and affects the player's statistics.
+
+Statistics are the numerical representation of the wolf's condition and capabilities:
+
+\begin{table}[h]
+	\centering
+	\caption{Wolf Statistics}
+	\begin{tabular}{@{}lp{8cm}c@{}}
+		\toprule
+		\textbf{Statistic} & \textbf{Description}                                            & \textbf{Range} \\ \midrule
+		Health             & Physical condition; decreases with injuries, hunger, and combat & 0-100          \\
+		Hunger             & Satiety level; increases with time and effort, death at 100     & 0-100          \\
+		Energy             & Physical and mental stamina; required for choices and actions   & 0-100          \\
+		Reputation         & Social standing; affects pack recruitment and NPC interactions  & 0-100          \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+Statistics are interconnected in their effects. Hunger increases by a base amount of 5 points per decision or action. If hunger exceeds 80, health begins to decrease due to starvation effects. Energy is consumed by actions and restored through rest or pack benefits. Choices have energy requirements - attempting an action without sufficient energy results in an error message.
+
+The difficulty system scales the challenge by adjusting hunger increase rates and event probabilities:
+\begin{itemize}
+	\item Easy mode: adds 3 hunger per action with 20\% event chance
+	\item Normal mode: adds 5 hunger with 30\% event chance
+	\item Hard mode: adds 8 hunger with 50\% event chance
+\end{itemize}
+
+Pack membership adds complexity to resource management. When the player has pack members, hunger increases faster (by 10\% per pack member) because more mouths must be fed. However, pack members provide benefits: hunters increase food acquisition chances, scouts provide early warning of threats, and guards offer protection in combat situations.
+
+The inventory system provides strategic depth beyond statistics. Players collect items through exploration, events, and scenario rewards. The inventory has a maximum capacity of 10 items, forcing players to make choices about what to carry.
+
+\textbf{Inventory Item Types:}
+
+\begin{table}[h]
+	\centering
+	\caption{Inventory Item Categories}
+	\begin{tabular}{@{}lp{8cm}c@{}}
+		\toprule
+		\textbf{Type} & \textbf{Examples}                                      & \textbf{Effect}  \\ \midrule
+		FOOD          & Small Fish, Winter Berries, Bird Egg, Insects, Frog    & Reduces Hunger   \\
+		WATER         & Fresh Water                                            & Thirst Relief    \\
+		HEALING       & Common Mallow, Root Paste, Moss Dressing, Bee Propolis & Restores Health  \\
+		TOOLS         & Hunting Trap, Sharp Rock                               & Special Benefits \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+\textbf{Difficulty-Scaled Item Drops:} The inventory system includes difficulty-scaled methods that adjust item quantities based on the selected difficulty:
+\begin{itemize}
+	\item \textbf{addStartingSupplies()} - Adds starting items based on difficulty:
+	      \begin{itemize}
+		      \item Easy: Small Fish x2, Winter Berries x2, Common Mallow x1
+		      \item Normal: No starting items
+		      \item Hard: Insects x2
+	      \end{itemize}
+	\item \textbf{addRandomFood()} - Random food drops with difficulty scaling
+	\item \textbf{addRandomHealing()} - Random healing drops with difficulty scaling
+	\item \textbf{addScavengedItems()} - Mixed scavenged items based on difficulty
+	\item \textbf{addHuntLoot()} - Scenario-specific loot with difficulty modifiers
+\end{itemize}
+
+The quantity scaling ensures Easy mode provides more abundant resources (3 food, 2 healing, 3 scavenged), while Hard mode offers scarce resources (1 food, 0 healing, 1 scavenged).
+
+The event system introduces randomness and urgency. Random events occur based on a probability check after each decision. Critical events (priority 1) like bear attacks require immediate attention. Urgent events (priority 2) like severe hunger need prompt action. Normal events (priority 3) like weather changes provide information but affect planning. The "Found Berries" event now uses addRandomFood() with difficulty scaling and provides Fresh Water based on difficulty level.
+
+Win and lose conditions determine the game's endpoint. Victory is achieved by surviving 30 days, with the specific ending determined by the player's choices and statistics throughout the game. Defeat occurs if health reaches 0 (death) or hunger reaches 100 (starvation).
+
+\subsection{Multiple Endings}
+The game features 23 unique endings across three storylines, organized into five major categories:
+
+\textbf{Legendary Alpha Ending:} Achieved by building a large, loyal pack (5+ members) with high reputation (80+). The wolf becomes the dominant force in the territory, respected by all and feared by rivals.
+
+\textbf{Peaceful Leader Ending:} Achieved through wisdom and diplomacy rather than strength. The wolf forms alliances, avoids unnecessary conflicts, and builds a harmonious pack.
+
+\textbf{Tragic Hero Ending:} Occurs when the wolf makes noble sacrifices for others but ultimately falls. This might involve defending pack members at personal cost or sharing resources until nothing remains.
+
+\textbf{Diplomatic Alpha Ending:} Achieved by uniting multiple packs or factions through negotiation. The wolf transcends individual pack loyalty to create a larger coalition.
+
+\textbf{Lone Wanderer Ending:} Achieved by rejecting pack formation and surviving alone. While possible, this ending is the most challenging as players forego pack benefits.
+
+Each ending category contains multiple variations based on specific choices and statistics. This variety ensures replayability and rewards multiple playthroughs.
+
+\subsection{User Interface Design}
+The game offers two interface options: terminal mode for text-based gameplay and GUI mode using Qt6 for a graphical experience.
+
+Terminal mode presents a classic text adventure experience with ASCII art representations of scenarios, color-coded statistics output, and keyboard-based input.
+
+GUI mode provides a modern, visual interface with:
+\begin{itemize}
+	\item \textbf{Top Section - Status Panel:} Animated progress bars for stats, day counter, pack size
+	\item \textbf{Middle Section - Story Display:} Scrollable text area for narrative descriptions
+	\item \textbf{Choice Section - Decision Buttons:} Two buttons for A and B choices
+	\item \textbf{Bottom Section - Game Controls:} Menu bar, undo, save/load, inventory, pack buttons
+\end{itemize}
+
+Both modes include save/load functionality with three slots. Auto-save occurs every 5 decisions. The undo feature allows players to reverse their last decision (up to 5 levels deep).
+
+\textbf{Figure 1: GUI Interface Layout}
+\begin{center}
+	\begin{tikzpicture}[node distance=0.5cm, every node/.style={rectangle,draw,align=center}]
+		\node (menubar) [fill=lightgray, minimum width=14cm, minimum height=0.8cm] {Menu Bar};
+		\node (status) [below=of menubar, fill=lightgray!50, minimum width=14cm, minimum height=1.5cm] {Status Panel\\Health Bar | Hunger Bar | Energy Bar | Day Counter | Pack Size};
+		\node (story) [below=of status, fill=yellow!30, minimum width=14cm, minimum height=4cm] {Story Display Area\\Scenario Description Scrollable Text};
+		\node (choices) [below=of story, fill=green!30, minimum width=14cm, minimum height=1.5cm] {Choice Buttons\\ {[Button A: Description]} \hspace{2cm} {[Button B: Description]}};
+		\node (controls) [below=of choices, fill=lightgray!50, minimum width=14cm, minimum height=1cm] {Game Controls\\Undo | Save | Load | Inventory | Pack | Quit};
+
+		\draw[->,thick] (menubar) -- (status);
+		\draw[->,thick] (status) -- (story);
+		\draw[->,thick] (story) -- (choices);
+		\draw[->,thick] (choices) -- (controls);
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Source: Author's creation based on TeamA.txt requirements}
+
+The GUI was implemented using Qt6 Widgets library, chosen for its robust cross-platform support and modern styling capabilities.
+
+\textbf{Table 1: GUI Features vs. Requirements}
+\begin{center}
+	\begin{tabular}{@{}llc@{}}
+		\toprule
+		\textbf{Requirement} & \textbf{Implementation}                    & \textbf{Status} \\ \midrule
+		Status Panel         & Animated progress bars, day counter        & Implemented     \\
+		Story Display        & Scrollable text area, narrative formatting & Implemented     \\
+		Choice Buttons       & 2-4 buttons with labels and disable states & Implemented     \\
+		Game Controls        & Menu bar, direct buttons, undo/save/load   & Implemented     \\
+		Side Panel           & Pack/inventory display, event log          & Implemented     \\
+		Inventory Panel      & Item list with use functionality           & Implemented     \\
+		Achievements         & Popup notifications, tracking system       & Implemented     \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+All requirements from TeamA.txt section on GUI have been fully implemented, with additional features like animated stat bars exceeding minimum expectations.
+
+\newpage
+
+\section{System Architecture}
+
+\subsection{Overall System Design}
+The Wolf Pack Survival Game follows a modular architecture that separates concerns into distinct components: game logic, data structures, user interface, and persistence. This design allows for independent development and testing of each module while ensuring smooth integration during gameplay.
+
+The core game engine handles the main game loop: displaying the current scenario, accepting player input, updating game state based on choices, processing events, and checking win/lose conditions. This loop runs continuously until the player quits, wins, or dies. The game state includes the current decision tree node, wolf statistics, inventory, pack, day counter, and event queue.
+
+Data structures serve as the foundation for game mechanics:
+\begin{itemize}
+	\item Binary decision tree drives narrative progression
+	\item Priority queue manages threat events
+	\item Linked lists handle inventory and pack storage
+	\item Stack implements undo functionality
+	\item Queue sequences multi-turn actions
+\end{itemize}
+
+The user interface layer abstracts game logic from presentation. Both terminal and GUI modes use the same underlying game engine, simply providing different views and input methods.
+
+Persistence is handled through save/load functionality that serializes the complete game state to text files. This includes all statistics, the current tree node ID, inventory items, pack members, and game progress.
+
+\textbf{Figure 2: System Architecture Diagram}
+\begin{center}
+	\begin{tikzpicture}[node distance=1.5cm, every node/.style={rectangle,draw,align=center,minimum width=3cm}]
+		\node (user) [fill=lightblue, minimum width=4cm] {User Input\\(Terminal/GUI)};
+		\node (interface) [below=of user, fill=yellow!50] {User Interface Layer\\(Input Handling, Display)};
+		\node (engine) [below=of interface, fill=green!50] {Game Engine\\Main Loop, State Management};
+		\node (structures) [below=of engine, fill=orange!50] {Data Structures\\Tree, PQ, Lists, Stack, Queue};
+		\node (persistence) [below=of structures, fill=purple!50] {Persistence\\Save/Load Files};
+
+		\draw[->,thick] (user) -- (interface);
+		\draw[->,thick] (interface) -- (engine);
+		\draw[->,thick] (engine) -- (structures);
+		\draw[->,thick] (engine) -- (persistence);
+		\draw[<->,thick,dashed] (structures) -- (persistence);
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Source: Author's creation}
+
+The game initialization process sets up all components before the main loop begins. The decision tree is built based on the selected storyline (Classic, Survival, or Pack). Statistics are initialized based on difficulty and storyline. The event queue is populated with potential threats. The history stack starts empty. The player begins at the root node of the decision tree.
+
+During gameplay, each decision triggers a chain of operations: push current state to history, navigate tree to child node, update statistics, process random events, calculate pack benefits, update display, continue loop.
+
+Game state changes are atomic - either the entire decision process completes or nothing changes. This prevents partial updates that could corrupt game state.
+
+The game handles various error conditions gracefully. Invalid save files result in error messages without crashing. Null decision nodes trigger fallback paths with graceful degradation. Out-of-memory situations are handled through exception catching and user notification.
+
+\subsection{Difficulty-Scaled Inventory System}
+A key enhancement to the game is the difficulty-scaled inventory system that adjusts resource availability based on the selected difficulty level. This system ensures that Easy mode provides a more forgiving experience while Hard mode offers a genuine survival challenge.
+
+The inventory system is implemented using a linked list structure with methods that accept a Difficulty parameter to scale item quantities:
+
+\textbf{Inventory Methods with Difficulty Scaling:}
+
+\begin{table}[h]
+	\centering
+	\caption{Difficulty-Scaled Inventory Methods}
+	\begin{tabular}{@{}lp{6cm}c@{}}
+		\toprule
+		\textbf{Method}       & \textbf{Purpose}                  & \textbf{Parameters} \\ \midrule
+		addStartingSupplies() & Adds initial items at game start  & Difficulty enum     \\
+		addRandomFood()       & Generates random food drops       & Difficulty enum     \\
+		addRandomHealing()    & Generates random healing items    & Difficulty enum     \\
+		addScavengedItems()   & Creates scavenged item bundles    & Difficulty enum     \\
+		addHuntLoot()         & Scenario-specific hunting rewards & Difficulty, int     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+\textbf{Quantity Scaling by Difficulty:}
+
+\begin{table}[h]
+	\centering
+	\caption{Item Quantity Scaling by Difficulty}
+	\begin{tabular}{@{}lccc@{}}
+		\toprule
+		\textbf{Item Type}   & \textbf{Easy} & \textbf{Normal} & \textbf{Hard} \\ \midrule
+		Food Items           & 3             & 1               & 1             \\
+		Healing Items        & 2             & 1               & 0             \\
+		Scavenged Items      & 3             & 1               & 1             \\
+		Starting Supplies    & Full kit      & None            & Minimal       \\
+		Fresh Water (Events) & 2             & 1               & 1             \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+The system is integrated into:
+\begin{itemize}
+	\item Game initialization (addStartingSupplies called at game start)
+	\item Random events (Found Berries event uses addRandomFood)
+	\item Scenario outcomes (scavenging and hunting scenarios)
+	\item Both terminal and GUI interfaces
+\end{itemize}
+
+This scaling mechanism is implemented in inventory.cpp with O(1) complexity for item addition, ensuring no performance impact during gameplay.
+
+\subsection{Decision Tree Structure}
+The decision tree is the core narrative driver. Each node represents a story scenario with two possible choices (A and B), creating a binary branching structure. Leaf nodes represent story endings.
+
+The DecisionNode struct contains:
+\begin{itemize}
+	\item scenarioID: Unique identifier
+	\item description: Narrative text
+	\item choiceA\_text, choiceB\_text: Option texts
+	\item left, right: Child node pointers
+	\item isEnding: Boolean for terminal nodes
+	\item endingText: Victory/defeat message
+\end{itemize}
+
+The tree supports three storylines:
+\begin{itemize}
+	\item \textbf{Classic Story:} Balanced gameplay with standard starting stats
+	\item \textbf{Survival Story:} Challenging mode with lower starting health (40), higher hunger (80)
+	\item \textbf{Pack Story:} Leadership-focused with reputation bonus (20) and pre-recruited pack members
+\end{itemize}
+
+The tree has 30+ total nodes across all storylines with 23 unique paths to endings. Navigation is O(1) per step with direct child pointers. Tree construction is O(n) for n nodes. The Classic storyline includes additional scavenging scenarios (nodes 40-42) that provide difficulty-scaled item rewards.
+
+\textbf{Figure 3: Simplified Decision Tree Structure}
+\begin{center}
+	\begin{tikzpicture}[level distance=2cm, sibling distance=4cm, every node/.style={rectangle,draw,align=center,minimum width=1.5cm}]
+		\node {1: Start\\(Lost Wolf)}
+		child {node {2: Hunt\\(Follow Scent)}
+				child {node {4: Track\\(Deer)}}
+				child {node {5: Wait\\(Howl)}}
+			}
+		child {node {3: Shelter\\(Find Cave)}}
+		;
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Source: Author's creation, inspired by TeamA.txt tree structure}
+
+Safety features include null pointer checks, fallback nodes for unexpected paths, and the validator tool confirming tree integrity.
+
+\subsection{Priority Queue for Events}
+The priority queue implements a min-heap for managing game events by urgency. Events are inserted with priority 1-3 (lower = more urgent), and the queue returns the highest-priority event first.
+
+The Event struct contains:
+\begin{itemize}
+	\item name: Event identifier (e.g., "Bear Attack")
+	\item priority: Integer 1-3
+	\item description: Text displayed to player
+	\item effect: Lambda function modifying wolf statistics
+\end{itemize}
+
+Event categories:
+\begin{itemize}
+	\item \textbf{Priority 1 (Critical):} Bear attack, hunter nearby, severe injury
+	\item \textbf{Priority 2 (Urgent):} Severe hunger, infection, rival pack sighting
+	\item \textbf{Priority 3 (Normal):} Weather change, prey spotted, lone wolf encounter
+\end{itemize}
+
+Heap operations: insert() O(log n), extractMin() O(log n), isEmpty() O(1).
+
+\textbf{Table 2: Event Examples by Priority}
+\begin{center}
+	\begin{tabular}{@{}cllc@{}}
+		\toprule
+		\textbf{Priority} & \textbf{Event}   & \textbf{Effect}                  & \textbf{Probability}  \\ \midrule
+		1                 & Bear Attack      & Health -20, Energy -10           & Low (event chance)    \\
+		1                 & Hunter Nearby    & Spirit -20, Reputation -10       & Low (event chance)    \\
+		2                 & Severe Hunger    & Health -10, Hunger +10           & Medium (event chance) \\
+		2                 & Injury Worsening & Health -15, Energy -10           & Medium (event chance) \\
+		3                 & Weather Change   & Energy -5, Hunger +5             & High (event chance)   \\
+		3                 & Found Berries    & Hunger -10, +Food items (scaled) & High (event chance)   \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+The difficulty setting affects event probability (Easy: 20\%, Normal: 30\%, Hard: 50\%). Additionally, the Found Berries event now applies difficulty-scaled item drops using inventory.addRandomFood(difficulty), providing more food items on Easy mode and Fresh Water (2x on Easy, 1x on Normal/Hard).
+
+\textbf{Figure 4: Priority Queue Event Processing Flow}
+\begin{center}
+	\begin{tikzpicture}[node distance=1.5cm, every node/.style={rectangle,draw,align=center,minimum width=3cm}]
+		\node (decision) [fill=lightblue] {Player Makes\\Decision};
+		\node (randomcheck) [below=of decision, fill=yellow!50] {Random Check\\(< eventChance)?};
+		\node (extract) [below=of randomcheck, fill=orange!50] {extractMin()\\Highest Priority Event};
+		\node (apply) [below=of extract, fill=green!50] {Apply Event\\Effect to Stats};
+		\node (reinsert) [below=of apply, fill=purple!50] {Reinsert Event\\to Queue};
+		\node (continue) [below=of reinsert, fill=lightgray] {Continue\\Game Loop};
+
+		\draw[->,thick] (decision) -- (randomcheck);
+		\draw[->,thick] (randomcheck) -- node[right] {Yes} (extract);
+		\draw[->,thick] (randomcheck) -- node[left] {No} (continue);
+		\draw[->,thick] (extract) -- (apply);
+		\draw[->,thick] (apply) -- (reinsert);
+		\draw[->,thick] (reinsert) -- (continue);
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Source: Author's creation}
+
+Time-based events trigger at specific intervals (every 5 days for food consumption).
+
+\subsection{Game State Stack for Undo}
+The game state stack implements LIFO behavior to provide undo functionality. Before each decision, the current complete game state is pushed onto the stack.
+
+The GameState struct captures:
+\begin{itemize}
+	\item currentNode: Pointer to decision tree node
+	\item health, hunger, energy: Wolf statistics
+	\item day: Current day counter
+	\item inventory: Pointer to cloned inventory state
+\end{itemize}
+
+Operations: push() O(1), pop() O(1), isEmpty() O(1). Maximum depth of 5 levels prevents excessive memory usage.
+
+Inventory cloning is critical - a deep copy of the linked list is created when saving state. When undoing, the current inventory is replaced with the cloned version.
+
+\textbf{Figure 5: Stack Operations for Undo}
+\begin{center}
+	\begin{tikzpicture}[node distance=1cm, every node/.style={rectangle,draw,align=center,minimum width=4cm}]
+		\node (state0) [fill=lightgray!30] {Initial State};
+		\node (state1) [below=of state0, fill=yellow!30] {State 1\\(After Choice A)};
+		\node (state2) [below=of state1, fill=orange!30] {State 2\\(After Choice B)};
+		\node (state3) [below=of state2, fill=green!30] {State 3\\(After Choice A)};
+
+		\draw[->,thick,dashed] ([xshift=-0.5cm] state0.south) -- ([xshift=-0.5cm] state1.north);
+		\draw[->,thick,dashed] ([xshift=-0.5cm] state1.south) -- ([xshift=-0.5cm] state2.north);
+		\draw[->,thick,dashed] ([xshift=-0.5cm] state2.south) -- ([xshift=-0.5cm] state3.north);
+
+		\node (top) [left=of state3, fill=red!20, minimum width=1cm] {TOP};
+		\draw[->,thick] (top) -- (state3);
+
+		\node (bottom) [left=of state0, fill=blue!20, minimum width=1cm] {BOTTOM};
+		\draw[->,thick] (bottom) -- (state0);
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Source: Author's creation}
+
+Memory management requires careful attention - each pushed state includes a dynamically allocated inventory clone that must be deleted when popped.
+
+The action queue complements the stack by handling sequential multi-turn activities using FIFO ordering. When a player chooses a complex action like hunting a deer, the action is broken into steps that process in subsequent turns.
+
+Complexity analysis confirms O(1) push/pop operations. Inventory cloning is O(n) where n is the number of items (max 10). The fixed maximum depth of 5 ensures bounded memory usage.
+
+Edge cases handled: undo after save/load (empty stack), undo at maximum depth, undo after game over, and invalid state detection from corrupted save files.
+
+This implementation demonstrates practical application of stack data structure principles in a real-world gaming context, providing essential undo functionality while maintaining performance and stability.
+
+\section{5. Ending Verification and Storyline Analysis}
+
+\subsection{5.1 Validator Tool Overview}
+A dedicated Validator tool was developed to verify the decision tree structure and ensure all endings are reachable. The Validator performs the following checks:
+\begin{itemize}
+	\item Counts total unique nodes to verify 20+ requirement
+	\item Counts total endings to verify 5+ requirement
+	\item Traces all possible paths from root to endings
+	\item Reports all ending IDs for completeness verification
+\end{itemize}
+
+The Validator was enhanced to test all three storylines (Classic, Survival, Pack) independently, ensuring each meets project requirements.
+
+\textbf{Table 5: Storyline Validation Results}
+\begin{center}
+	\begin{tabular}{@{}lcccc@{}}
+		\toprule
+		\textbf{Storyline} & \textbf{Nodes} & \textbf{Endings} & \textbf{Paths} & \textbf{Status} \\ \midrule
+		Classic Storyline  & 30             & 13               & 13             & \checkmark PASS \\
+		Survival Storyline & 20             & 5                & 5              & \checkmark PASS \\
+		Pack Storyline     & 20             & 5                & 5              & \checkmark PASS \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\subsection{5.2 Classic Storyline Endings (13 Endings)}
+The Classic storyline features 13 unique endings reachable through various choice combinations:
+
+\textbf{Table 6: Classic Storyline Endings}
+\begin{center}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{@{}ccp{3cm}p{5cm}@{}}
+			\toprule
+			\textbf{ID} & \textbf{Ending Name} & \textbf{Description}                         & \textbf{Path}                                   \\ \midrule
+			19          & LEGENDARY ALPHA      & Defeated the legendary alpha, strongest pack & 16$\rightarrow$17$\rightarrow$18$\rightarrow$19 \\
+			20          & PEACEFUL LEADER      & Chose peace over dominance                   & 16$\rightarrow$17$\rightarrow$18$\rightarrow$20 \\
+			68          & TRAGIC HERO          & Pack fell in harsh winter, legend lives on   & 16$\rightarrow$17$\rightarrow$68                \\
+			31          & ELITE GUARDIANS      & Quality over quantity, legendary skills      & 14$\rightarrow$15$\rightarrow$31                \\
+			67          & DIPLOMATIC MASTER    & United two packs through wisdom              & 16$\rightarrow$22$\rightarrow$67                \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{Classic Storyline Path Examples:}
+\begin{enumerate}
+	\item Path: 1 $\rightarrow$ 2 $\rightarrow$ 4 $\rightarrow$ 8 $\rightarrow$ 36 $\rightarrow$ 13 $\rightarrow$ 32 $\rightarrow$ 16 $\rightarrow$ 17 $\rightarrow$ 18 $\rightarrow$ 19 (LEGENDARY ALPHA)
+	\item Path: 1 $\rightarrow$ 2 $\rightarrow$ 4 $\rightarrow$ 8 $\rightarrow$ 36 $\rightarrow$ 13 $\rightarrow$ 32 $\rightarrow$ 16 $\rightarrow$ 17 $\rightarrow$ 68 (TRAGIC HERO)
+	\item Path: 1 $\rightarrow$ 2 $\rightarrow$ 5 $\rightarrow$ 10 $\rightarrow$ 38 $\rightarrow$ 14 $\rightarrow$ 15 $\rightarrow$ 31 (ELITE GUARDIANS)
+\end{enumerate}
+
+All 13 endings satisfy the requirement of 5+ endings with meaningful branching paths.
+
+\subsection{5.3 Survival Storyline Endings (5 Endings)}
+The Survival storyline focuses on endurance with 5 distinct endings:
+
+\textbf{Table 7: Survival Storyline Endings}
+\begin{center}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{@{}ccp{3cm}p{5cm}@{}}
+			\toprule
+			\textbf{ID} & \textbf{Ending Name} & \textbf{Description}                                & \textbf{Path}                                                       \\ \midrule
+			120         & SURVIVOR'S TRIUMPH   & Conquered wilderness through pure survival instinct & 101$\rightarrow$103$\rightarrow$106$\rightarrow$112$\rightarrow$120 \\
+			121         & PACK SURVIVOR        & Joined pack, together overcame wilderness           & 101$\rightarrow$103$\rightarrow$107$\rightarrow$114$\rightarrow$121 \\
+			122         & LONE SURVIVOR        & Thrived alone in harsh conditions                   & 101$\rightarrow$102$\rightarrow$104$\rightarrow$108$\rightarrow$122 \\
+			123         & WISE SURVIVOR        & Balance between caution and boldness                & 101$\rightarrow$102$\rightarrow$104$\rightarrow$109$\rightarrow$123 \\
+			124         & HARDENED SURVIVOR    & Persevered through impossible odds                  & 101$\rightarrow$102$\rightarrow$105$\rightarrow$110$\rightarrow$124 \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{center}
+
+\vspace{0.3cm}
+
+The Survival storyline tests player resourcefulness with challenging starting conditions (health: 40, hunger: 80, energy: 60).
+
+\subsection{5.4 Pack Storyline Endings (5 Endings)}
+The Pack storyline emphasizes leadership with 5 endings:
+
+\textbf{Table 8: Pack Storyline Endings}
+\begin{center}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{@{}ccp{3cm}p{5cm}@{}}
+			\toprule
+			\textbf{ID} & \textbf{Ending Name} & \textbf{Description}             & \textbf{Path}                                                       \\ \midrule
+			220         & LEGENDARY ALPHA      & Most powerful pack in the region & 201$\rightarrow$203$\rightarrow$206$\rightarrow$212$\rightarrow$220 \\
+			221         & WISE DIPLOMAT        & Peaceful alliance between packs  & 201$\rightarrow$202$\rightarrow$205$\rightarrow$211$\rightarrow$221 \\
+			222         & ELITE PACK           & Small but highly efficient pack  & 201$\rightarrow$203$\rightarrow$206$\rightarrow$213$\rightarrow$222 \\
+			223         & BOLD LEADER          & Decisive action proved strength  & 201$\rightarrow$202$\rightarrow$204$\rightarrow$208$\rightarrow$223 \\
+			224         & THOUGHTFUL ALPHA     & Wisdom and unity prevail         & 201$\rightarrow$202$\rightarrow$204$\rightarrow$209$\rightarrow$224 \\
+			\bottomrule
+		\end{tabular}
+	}
+\end{center}
+
+\vspace{0.3cm}
+
+Pack storyline starts with pre-recruited members (Beta and Scout) and higher reputation bonus (20).
+
+\subsection{Verification Results Summary}
+All storylines pass validation with:
+\begin{itemize}
+	\item 20+ nodes (requirement satisfied: Classic 30, Survival 20, Pack 20)
+	\item 5+ endings (requirement satisfied: Classic 13, Survival 5, Pack 5)
+	\item All paths validated (requirement satisfied: 13+5+5 = 23 total paths)
+	\item No unreachable endings or broken paths
+\end{itemize}
+
+The Validator tool confirmed that all decisions lead to logical outcomes and all endings are accessible through valid game choices.
+
+\section{Conclusion and Future Work}
+
+The Wolf Pack Survival Adventure Game successfully demonstrates practical applications of fundamental data structures in an engaging gaming context. The project meets or exceeds all requirements specified in TeamA.txt, including:
+
+\begin{itemize}
+	\item Binary decision tree with 20+ nodes (implemented: 30 nodes)
+	\item Priority queue for event management
+	\item Linked lists for inventory and pack systems
+	\item Stack for undo functionality
+	\item Queue for action sequencing
+	\item GUI interface with Qt6
+	\item Save/load functionality
+	\item Multiple storylines and endings
+\end{itemize}
+
+\textbf{Achievements:}
+\begin{itemize}
+	\item Exceeded minimum requirements (30+ nodes vs 20 required, 23 endings vs 5 required)
+	\item Three distinct storylines (Classic, Survival, Pack)
+	\item Difficulty-scaled inventory system with starting supplies and random drops
+	\item New scavenging scenarios with difficulty-based item rewards
+	\item Comprehensive testing with Validator tool
+	\item Enhanced UI with achievements and stat tracking
+\end{itemize}
+
+\textbf{Future Improvements:}
+\begin{itemize}
+	\item Additional storylines and scenarios
+	\item Enhanced graphics and animations
+	\item Sound effects and background music
+	\item Online multiplayer pack survival mode
+	\item Procedural generation for infinite scenarios
+\end{itemize}
+
+The project demonstrates strong integration of computer science fundamentals with creative storytelling, providing an educational and entertaining experience.
+
+\textbf{Acknowledgments:} Developed as a final project for Data Structures Lab, demonstrating practical applications of CS concepts in game development.
+
+\end{document}

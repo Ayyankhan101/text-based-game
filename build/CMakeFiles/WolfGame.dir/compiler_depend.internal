@@ -6,6 +6,7 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /home/ayyan/text-based-game/include/action_queue.h
  /home/ayyan/text-based-game/include/decision_tree.h
  /home/ayyan/text-based-game/include/game_stack.h
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/game_window.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/pack.h
@@ -120,6 +121,7 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/c++/15/bits/uniform_int_dist.h
  /usr/include/c++/15/bits/unique_ptr.h
  /usr/include/c++/15/bits/unordered_map.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -198,6 +200,7 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
  /usr/include/c++/15/unordered_map
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/utility
  /usr/include/c++/15/variant
  /usr/include/c++/15/vector
@@ -319,14 +322,17 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPropertyAnimation
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QList
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QRect
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QSize
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QSizeF
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QTimer
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20functional.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20iterator.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20memory.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20type_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q23utility.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qalgorithms.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h
@@ -361,7 +367,6 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdeadlinetimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qelapsedtimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qendian.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qeventloop.h
@@ -404,7 +409,6 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qprocessordetection.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpropertyanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrefcount.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h
@@ -456,17 +460,20 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qutf8stringview.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariantanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvarlengtharray.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qversiontagging.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qyieldcpu.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/QCloseEvent
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QPainter
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/QTransform
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qbitmap.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontinfo.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontmetrics.h
@@ -474,6 +481,7 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication_platform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputmethod.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpaintdevice.h
@@ -483,10 +491,13 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixelformat.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qrgb.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qrgba64.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen_platform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextcursor.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextdocument.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h
@@ -496,6 +507,8 @@ CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvector2d.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qwindowdefs.h
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QApplication
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QComboBox
@@ -882,6 +895,7 @@ CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o
  /usr/include/c++/15/bits/string_view.tcc
  /usr/include/c++/15/bits/stringfwd.h
  /usr/include/c++/15/bits/unordered_map.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -924,6 +938,7 @@ CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
  /usr/include/c++/15/unordered_map
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/vector
  /usr/include/ctype.h
  /usr/include/endian.h
@@ -1031,6 +1046,7 @@ CMakeFiles/WolfGame.dir/src/decision_tree.cpp.o
 CMakeFiles/WolfGame.dir/src/game_stack.cpp.o
  /home/ayyan/text-based-game/src/game_stack.cpp
  /home/ayyan/text-based-game/include/game_stack.h
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/wolf.h
  /usr/include/alloca.h
@@ -1191,6 +1207,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /home/ayyan/text-based-game/include/action_queue.h
  /home/ayyan/text-based-game/include/decision_tree.h
  /home/ayyan/text-based-game/include/game_stack.h
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/game_window.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/pack.h
@@ -1305,6 +1322,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/c++/15/bits/uniform_int_dist.h
  /usr/include/c++/15/bits/unique_ptr.h
  /usr/include/c++/15/bits/unordered_map.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -1384,6 +1402,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
  /usr/include/c++/15/unordered_map
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/utility
  /usr/include/c++/15/variant
  /usr/include/c++/15/vector
@@ -1507,7 +1526,6 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QList
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPropertyAnimation
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QRect
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QSize
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QSizeF
@@ -1517,7 +1535,6 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20memory.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20type_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q23utility.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qalgorithms.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h
@@ -1552,7 +1569,6 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdeadlinetimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qelapsedtimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qendian.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qeventloop.h
@@ -1595,7 +1611,6 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qprocessordetection.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpropertyanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrefcount.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h
@@ -1646,11 +1661,11 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qutf8stringview.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariantanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvarlengtharray.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qversiontagging.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qyieldcpu.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/QCloseEvent
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QGuiApplication
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QLinearGradient
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QPainter
@@ -1662,6 +1677,8 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontinfo.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontmetrics.h
@@ -1669,6 +1686,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication_platform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputmethod.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpaintdevice.h
@@ -1679,6 +1697,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixelformat.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qrgb.h
@@ -1694,6 +1713,8 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvector2d.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qwindowdefs.h
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QApplication
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QComboBox
@@ -1780,6 +1801,7 @@ CMakeFiles/WolfGame.dir/src/game_window.cpp.o
 
 CMakeFiles/WolfGame.dir/src/inventory.cpp.o
  /home/ayyan/text-based-game/src/inventory.cpp
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/wolf.h
  /usr/include/alloca.h
@@ -1833,12 +1855,15 @@ CMakeFiles/WolfGame.dir/src/inventory.cpp.o
  /usr/include/c++/15/bits/requires_hosted.h
  /usr/include/c++/15/bits/std_abs.h
  /usr/include/c++/15/bits/stl_algobase.h
+ /usr/include/c++/15/bits/stl_bvector.h
  /usr/include/c++/15/bits/stl_construct.h
  /usr/include/c++/15/bits/stl_function.h
  /usr/include/c++/15/bits/stl_iterator.h
  /usr/include/c++/15/bits/stl_iterator_base_funcs.h
  /usr/include/c++/15/bits/stl_iterator_base_types.h
  /usr/include/c++/15/bits/stl_pair.h
+ /usr/include/c++/15/bits/stl_uninitialized.h
+ /usr/include/c++/15/bits/stl_vector.h
  /usr/include/c++/15/bits/streambuf.tcc
  /usr/include/c++/15/bits/streambuf_iterator.h
  /usr/include/c++/15/bits/string_view.tcc
@@ -1846,6 +1871,7 @@ CMakeFiles/WolfGame.dir/src/inventory.cpp.o
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
+ /usr/include/c++/15/bits/vector.tcc
  /usr/include/c++/15/bits/version.h
  /usr/include/c++/15/cctype
  /usr/include/c++/15/cerrno
@@ -1880,6 +1906,7 @@ CMakeFiles/WolfGame.dir/src/inventory.cpp.o
  /usr/include/c++/15/tuple
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
+ /usr/include/c++/15/vector
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -1990,6 +2017,7 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /home/ayyan/text-based-game/include/ascii_art.h
  /home/ayyan/text-based-game/include/decision_tree.h
  /home/ayyan/text-based-game/include/game_stack.h
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/game_window.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/pack.h
@@ -2106,6 +2134,7 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/c++/15/bits/uniform_int_dist.h
  /usr/include/c++/15/bits/unique_ptr.h
  /usr/include/c++/15/bits/unordered_map.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -2186,6 +2215,7 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
  /usr/include/c++/15/unordered_map
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/utility
  /usr/include/c++/15/variant
  /usr/include/c++/15/vector
@@ -2307,14 +2337,17 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/c++/15/bits/os_defines.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPropertyAnimation
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QList
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QRect
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QSize
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QSizeF
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QTimer
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20functional.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20iterator.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20memory.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q20type_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/q23utility.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qalgorithms.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h
@@ -2349,7 +2382,6 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdeadlinetimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qelapsedtimer.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qendian.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qeventloop.h
@@ -2392,7 +2424,6 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qprocessordetection.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpropertyanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qrefcount.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h
@@ -2443,17 +2474,20 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qutf8stringview.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariantanimation.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvarlengtharray.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qversiontagging.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qyieldcpu.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/QCloseEvent
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QPainter
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/QTransform
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qbitmap.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontinfo.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qfontmetrics.h
@@ -2461,6 +2495,7 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication_platform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputmethod.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpaintdevice.h
@@ -2470,10 +2505,13 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixelformat.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qrgb.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qrgba64.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen_platform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextcursor.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextdocument.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h
@@ -2483,6 +2521,8 @@ CMakeFiles/WolfGame.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvector2d.h
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qwindowdefs.h
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QApplication
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QComboBox

@@ -7,7 +7,7 @@ echo "=================================="
 
 # Test 1: Build the game
 echo "Test 1: Building the game..."
-cd /home/ayyan/DSA-LAB-PROJECT/build
+cd /home/ayyan/text-based-game/build
 make clean
 make
 

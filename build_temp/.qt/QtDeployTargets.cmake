@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_WolfGame_FILE /home/ayyan/text-based-game/build_temp/WolfGame)
+set(__QT_DEPLOY_TARGET_WolfGame_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_Validator_FILE /home/ayyan/text-based-game/build_temp/Validator)
+set(__QT_DEPLOY_TARGET_Validator_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_BalanceTester_FILE /home/ayyan/text-based-game/build_temp/BalanceTester)
+set(__QT_DEPLOY_TARGET_BalanceTester_TYPE EXECUTABLE)

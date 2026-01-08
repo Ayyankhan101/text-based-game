@@ -303,6 +303,7 @@ CMakeFiles/Validator.dir/src/decision_tree.cpp.o
  /usr/include/c++/15/bits/string_view.tcc
  /usr/include/c++/15/bits/stringfwd.h
  /usr/include/c++/15/bits/unordered_map.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -345,6 +346,7 @@ CMakeFiles/Validator.dir/src/decision_tree.cpp.o
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
  /usr/include/c++/15/unordered_map
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/vector
  /usr/include/ctype.h
  /usr/include/endian.h
@@ -452,6 +454,7 @@ CMakeFiles/Validator.dir/src/decision_tree.cpp.o
 CMakeFiles/Validator.dir/src/game_stack.cpp.o
  /home/ayyan/text-based-game/src/game_stack.cpp
  /home/ayyan/text-based-game/include/game_stack.h
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/wolf.h
  /usr/include/alloca.h
@@ -608,6 +611,7 @@ CMakeFiles/Validator.dir/src/game_stack.cpp.o
 
 CMakeFiles/Validator.dir/src/inventory.cpp.o
  /home/ayyan/text-based-game/src/inventory.cpp
+ /home/ayyan/text-based-game/include/game_types.h
  /home/ayyan/text-based-game/include/inventory.h
  /home/ayyan/text-based-game/include/wolf.h
  /usr/include/alloca.h
@@ -661,12 +665,15 @@ CMakeFiles/Validator.dir/src/inventory.cpp.o
  /usr/include/c++/15/bits/requires_hosted.h
  /usr/include/c++/15/bits/std_abs.h
  /usr/include/c++/15/bits/stl_algobase.h
+ /usr/include/c++/15/bits/stl_bvector.h
  /usr/include/c++/15/bits/stl_construct.h
  /usr/include/c++/15/bits/stl_function.h
  /usr/include/c++/15/bits/stl_iterator.h
  /usr/include/c++/15/bits/stl_iterator_base_funcs.h
  /usr/include/c++/15/bits/stl_iterator_base_types.h
  /usr/include/c++/15/bits/stl_pair.h
+ /usr/include/c++/15/bits/stl_uninitialized.h
+ /usr/include/c++/15/bits/stl_vector.h
  /usr/include/c++/15/bits/streambuf.tcc
  /usr/include/c++/15/bits/streambuf_iterator.h
  /usr/include/c++/15/bits/string_view.tcc
@@ -674,6 +681,7 @@ CMakeFiles/Validator.dir/src/inventory.cpp.o
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
+ /usr/include/c++/15/bits/vector.tcc
  /usr/include/c++/15/bits/version.h
  /usr/include/c++/15/cctype
  /usr/include/c++/15/cerrno
@@ -708,6 +716,7 @@ CMakeFiles/Validator.dir/src/inventory.cpp.o
  /usr/include/c++/15/tuple
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
+ /usr/include/c++/15/vector
  /usr/include/ctype.h
  /usr/include/endian.h
  /usr/include/errno.h
@@ -1207,6 +1216,7 @@ CMakeFiles/Validator.dir/src/validator.cpp.o
  /usr/include/c++/15/bits/cxxabi_forced.h
  /usr/include/c++/15/bits/cxxabi_init_exception.h
  /usr/include/c++/15/bits/deque.tcc
+ /usr/include/c++/15/bits/enable_special_members.h
  /usr/include/c++/15/bits/erase_if.h
  /usr/include/c++/15/bits/exception.h
  /usr/include/c++/15/bits/exception_defines.h
@@ -1214,6 +1224,8 @@ CMakeFiles/Validator.dir/src/validator.cpp.o
  /usr/include/c++/15/bits/functexcept.h
  /usr/include/c++/15/bits/functional_hash.h
  /usr/include/c++/15/bits/hash_bytes.h
+ /usr/include/c++/15/bits/hashtable.h
+ /usr/include/c++/15/bits/hashtable_policy.h
  /usr/include/c++/15/bits/invoke.h
  /usr/include/c++/15/bits/ios_base.h
  /usr/include/c++/15/bits/istream.tcc
@@ -1258,6 +1270,7 @@ CMakeFiles/Validator.dir/src/validator.cpp.o
  /usr/include/c++/15/bits/streambuf_iterator.h
  /usr/include/c++/15/bits/string_view.tcc
  /usr/include/c++/15/bits/stringfwd.h
+ /usr/include/c++/15/bits/unordered_set.h
  /usr/include/c++/15/bits/uses_allocator.h
  /usr/include/c++/15/bits/uses_allocator_args.h
  /usr/include/c++/15/bits/utility.h
@@ -1300,6 +1313,7 @@ CMakeFiles/Validator.dir/src/validator.cpp.o
  /usr/include/c++/15/tuple
  /usr/include/c++/15/type_traits
  /usr/include/c++/15/typeinfo
+ /usr/include/c++/15/unordered_set
  /usr/include/c++/15/utility
  /usr/include/c++/15/vector
  /usr/include/ctype.h
