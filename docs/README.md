@@ -2,12 +2,12 @@
 **DSA Lab Final Project - Team A Implementation**
 
 ## 📋 Project Overview
-Interactive text-based wolf survival game where players control a lone wolf navigating through dangerous wilderness over 10+ days. Features story-driven decisions, resource management, pack dynamics, and multiple endings using advanced data structures.
+Interactive text-based wolf survival game where players control a lone wolf navigating through dangerous wilderness over 30+ days. Features story-driven decisions, resource management, pack dynamics, achievements, and multiple endings using advanced data structures.
 
-**Duration**: 10-day survival progression  
-**Technology**: C++17 with Qt6 GUI  
-**Team Size**: 8-10 members  
-**Submission Deadline**: January 9th, 2026
+**Duration**: 30-day survival progression
+**Technology**: C++17 with Qt6 GUI
+**Team Size**: 8-10 members
+**Submission Deadline**: January 10th, 2026
 
 ## 🎯 Requirements Compliance
 
@@ -34,11 +34,11 @@ Interactive text-based wolf survival game where players control a lone wolf navi
 
 ## 🎮 Game Features
 
-### Story Structure (10-Day Progression)
-- **Days 1-2**: Basic Survival (food, shelter, first pack member)
-- **Days 3-5**: Pack Building (recruit Luna the Scout, Fenrir the Hunter)
-- **Days 6-8**: Territory & Leadership (establish territory, manage resources)
-- **Days 9-10**: Final Challenges (rival packs, legendary alpha encounter)
+### Story Structure (30-Day Progression)
+- **Days 1-5**: Basic Survival (food, shelter, first pack member)
+- **Days 6-15**: Pack Building (recruit Luna the Scout, Fenris the Scout, and others)
+- **Days 16-25**: Territory & Leadership (establish territory, manage resources)
+- **Days 26-30**: Final Challenges (rival packs, legendary alpha encounter)
 
 ### Wolf Statistics
 - **Health**: 0-100 (death at 0, affected by combat/injuries)
@@ -48,29 +48,45 @@ Interactive text-based wolf survival game where players control a lone wolf navi
 - **Spirit**: 0-100 (morale system affecting pack loyalty)
 
 ### Pack System
-- **Pack Members**: Luna (Scout), Fenrir (Hunter), and others
+- **Pack Members**: Luna (Hunter), Fenris (Scout), Beta (Second-in-Command), Scout, Guard, and others
 - **Roles**: Hunter (hunting bonuses), Scout (early warnings), Guard (protection)
 - **Loyalty System**: 0-100 per member, affects pack effectiveness
 - **Pack Benefits**: Combat bonuses, hunting success, resource sharing
 
 ### Inventory System
-- **Food Items**: Rabbit Meat, Deer Meat, Berries (reduce hunger)
-- **Medicine**: Healing Herbs (restore health)
-- **Tools**: Territory Maps, Wolf Scent Markers (aid recruitment/navigation)
-- **Capacity**: Maximum 10 items with strategic usage decisions
+- **Food Items**: Small Fish, Winter Berries, Fresh Water, Bird Egg, Insects, Frog, Fresh Meat (reduce hunger)
+- **Medicine**: Common Mallow, Root Paste, Moss Dressing, Bee Propolis (restore health)
+- **Capacity**: Dynamic storage with strategic usage decisions
 
 ### Multiple Endings
-1. **Legendary Alpha**: Defeat final boss, become dominant pack leader
-2. **Peaceful Leader**: Lead through wisdom rather than strength
-3. **Tragic Hero**: Sacrifice for pack survival
-4. **Diplomatic Alpha**: Unite multiple packs through negotiation
-5. **Wise Leader**: Prosper through intelligence and resource management
+1. **Survival Victory**: Survive 30 days in the wilderness
+2. **Pack Integration**: Successfully lead your pack to prosperity
+3. **Legendary Alpha**: Become the dominant pack leader
+4. **Tragic Hero**: Sacrifice for pack survival
+5. **Diplomatic Alpha**: Unite multiple packs through negotiation
+
+### Achievements System
+- **Survival Achievements**: Survive for 10, 20, and 30 days
+- **Pack Achievements**: Recruit first pack member, form pack of 5
+- **Stat Achievements**: Maintain health above 80, energy mastery
+- **Item Achievements**: Collect first item, fill inventory
+
+### Game Modes
+- **Terminal Mode**: Text-based interface with ASCII art
+- **GUI Mode**: Qt6-based graphical interface with visual stat bars
+- **Three Storylines**: Classic (balanced adventure), Survival (extreme difficulty), Pack (leadership focus)
+
+### Difficulty Levels
+- **Easy**: Lower hunger increase, fewer events
+- **Normal**: Balanced gameplay
+- **Hard**: Higher hunger increase, more events
 
 ## 🏗️ Technical Architecture
 
 ### Build System
 ```bash
 # Build the project
+mkdir build
 cd build
 cmake ..
 make
@@ -83,7 +99,7 @@ make
 
 ### File Structure
 ```
-DSA-LAB-PROJECT/
+text-based-game/
 ├── src/                    # Source files (.cpp)
 │   ├── main.cpp           # Main game loop
 │   ├── decision_tree.cpp  # Binary tree implementation
@@ -132,33 +148,34 @@ eventQueue.insert(weatherChange); // Priority 3 - processed later
 ### Inventory Management
 ```cpp
 // Dynamic item storage
-inventory.addItem("Rabbit Meat", FOOD, 20, 2);  // Add 2 rabbit meat
-inventory.useItem("Healing Herbs");              // Use herbs to heal
+inventory.addItem("Small Fish", FOOD, -30, 1);  // Add 1 small fish that reduces hunger by 30
+inventory.useItem("Common Mallow");              // Use herbs to heal
 inventory.displayInventory();                    // Show all items
 ```
 
 ### Pack Management
 ```cpp
 // Pack member recruitment and management
-pack.addMember("Luna", "Scout", 85);      // Add Luna with 85 loyalty
-pack.addMember("Fenrir", "Hunter", 90);   // Add Fenrir with 90 loyalty
+pack.addMember("Luna", "Hunter", 80);      // Add Luna with 80 loyalty
+pack.addMember("Fenris", "Scout", 70);     // Add Fenris with 70 loyalty
 int benefit = calculatePackBenefits(pack); // Calculate hunting bonuses
 ```
 
 ## 🧪 Testing & Validation
 
 ### Automated Testing
-- **Decision Tree Validator**: Verifies 84 total nodes and 93 total endings across all storylines (40+ nodes, 61+ endings Classic; 22+ nodes, 16+ endings each for Survival and Pack)
-- **Balance Tester**: Runs 100+ simulations for difficulty tuning
+- **Decision Tree Validator**: Verifies complete trees with no missing paths
+- **Balance Tester**: Runs simulations for difficulty tuning
 - **Integration Tests**: All systems working together
 
 ### Manual Testing Checklist
-- [ ] All 5+ endings reachable
-- [ ] Inventory system functional in story
-- [ ] Pack recruitment and loyalty system working
-- [ ] Save/load preserves complete game state
-- [ ] Undo system works for 5 levels
-- [ ] GUI responsive and user-friendly
+- [x] All 3 storylines functional
+- [x] Inventory system functional in both modes
+- [x] Pack recruitment and loyalty system working
+- [x] Save/load preserves complete game state
+- [x] Undo system works for game history
+- [x] GUI responsive and user-friendly
+- [x] Achievements system tracking progress
 
 ## 📚 Documentation
 
@@ -194,7 +211,7 @@ brew install qt6 cmake
 ```bash
 # Clone and build
 git clone <repository-url>
-cd DSA-LAB-PROJECT
+cd text-based-game
 mkdir build && cd build
 cmake ..
 make
@@ -206,10 +223,10 @@ make
 ### Playing the Game
 1. **Start**: Begin as a lone wolf in winter forest
 2. **Survive**: Make decisions to maintain health, manage hunger
-3. **Build Pack**: Recruit wolves like Luna and Fenrir
+3. **Build Pack**: Recruit wolves like Luna and Fenris
 4. **Manage Resources**: Use inventory items strategically
 5. **Lead**: Guide your pack through challenges
-6. **Achieve Ending**: Reach one of 5+ different conclusions
+6. **Achieve Ending**: Survive 30 days to reach victory
 
 ## 🏆 Educational Objectives
 
@@ -227,8 +244,8 @@ make
 
 ## 📊 Project Statistics
 - **Lines of Code**: 2000+ (C++)
-- **Decision Nodes**: 84+ total scenarios (40+ Classic, 22+ Survival, 22+ Pack)
-- **Story Endings**: 93+ total unique conclusions (61+ Classic, 16+ Survival, 16+ Pack)
+- **Decision Nodes**: 84+ total scenarios across all storylines
+- **Story Endings**: 93+ total unique conclusions across all storylines
 - **Data Structures**: 6 different types implemented
 - **Development Time**: 7 days (one week)
 - **Team Size**: 8-10 members
@@ -239,9 +256,12 @@ make
 - [x] **Complete Integration**: All systems working together
 - [x] **Comprehensive Testing**: Automated validation tools
 - [x] **Professional Documentation**: Complete technical docs
+- [x] **Achievements System**: Track player progress and accomplishments
+- [x] **Auto-Save**: Automatic game saves every 5 decisions
+- [x] **Multiple Storylines**: Classic, Survival, and Pack storylines
 
 ---
 
-**Team A - DSA Lab Final Project**  
-**Submission Date**: January 9th, 2026  
+**Team A - DSA Lab Final Project**
+**Submission Date**: January 10th, 2026
 **Grade Weight**: 30 points total (Report: 15%, Implementation: 85%)
