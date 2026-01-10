@@ -1,9 +1,25 @@
-100
+54
+34
+88
+20
+62
+7
+1000
+2
+Small Fish
 0
-90
+-15
+1
+Winter Berries
 0
-50
+-8
 2
 2
-0
+Beta
+Second-in-Command
+27
+Scout
+Scout
+17
+2
 0

@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2025.11.10)  8 JAN 2026 23:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.1.10)  10 JAN 2026 21:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **wolf_pack_survival_report.tex
 (./wolf_pack_survival_report.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -29,7 +29,7 @@ Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@posthook=\toks18
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
@@ -93,8 +93,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -126,7 +126,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 106.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen158
 \Gin@req@width=\dimen159
@@ -543,12 +543,13 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
 
 (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+Package: xkeyval 2025/11/04 v2.10 package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks37
 \XKV@tempa@toks=\toks38
+\XKV@tempb@toks=\toks39
 )
 \XKV@depth=\count321
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -597,7 +598,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count324
 \lst@gtempboxa=\box89
-\lst@token=\toks39
+\lst@token=\toks40
 \lst@length=\count325
 \lst@currlwidth=\dimen301
 \lst@column=\count326
@@ -609,19 +610,25 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \lst@maxwidth=\dimen304
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty
-File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 \c@lstnumber=\count330
 \lst@skipnumbers=\count331
 \lst@framebox=\box90
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2024/09/23 1.10c listings configuration
+File: listings.cfg 2025/11/14 1.11b listings configuration
 ))
-Package: listings 2024/09/23 1.10c (Carsten Heinz)
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
 
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 
@@ -669,7 +676,7 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 \c@section@level=\count332
 )
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count333
 )
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty
@@ -767,7 +774,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen314
 \Gm@layouthoffset=\dimen315
 \Gm@layoutvoffset=\dimen316
-\Gm@dimlist=\toks40
+\Gm@dimlist=\toks41
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
@@ -786,7 +793,7 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthL=\skip66
 \f@nch@widthC=\skip67
 \f@nch@widthR=\skip68
-\@temptokenb=\toks41
+\@temptokenb=\toks42
 )
 (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
@@ -795,22 +802,22 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \aftertitleunit=\skip70
 \ttl@plus=\dimen317
 \ttl@minus=\dimen318
-\ttl@toksa=\toks42
+\ttl@toksa=\toks43
 \titlewidth=\dimen319
 \titlewidthlast=\dimen320
 \titlewidthfirst=\dimen321
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
+File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
+File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count347
 )
 (./wolf_pack_survival_report.aux)
@@ -842,12 +849,12 @@ LaTeX Font Info:    ... okay on input line 52.
 \scratchbox=\box92
 \nofMPsegments=\count349
 \nofMParguments=\count350
-\everyMPshowfont=\toks43
+\everyMPshowfont=\toks44
 \MPscratchCnt=\count351
 \MPscratchDim=\dimen323
 \MPnumerator=\count352
 \makeMPintoPDFobject=\count353
-\everyMPtoPDFconversion=\toks44
+\everyMPtoPDFconversion=\toks45
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -899,8 +906,6 @@ Package hyperref Info: Link coloring OFF on input line 52.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
@@ -914,12 +919,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
-\tf@toc=\write5
-\openout5 = `wolf_pack_survival_report.toc'.
-
-
-
+)
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -932,8 +932,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.85 \newpage
-              [1]
+l.42 ...Conclusion and Future Work}{33}{section.8}
+                                                  % [1])
+\tf@toc=\write5
+\openout5 = `wolf_pack_survival_report.toc'.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -944,15 +947,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [2]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[3{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-
+[3]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -962,7 +963,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [4]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -970,6 +970,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
+Underfull \hbox (badness 1490) in paragraph at lines 160--160
+[]\OT1/cmr/m/n/12 Wolf's morale and men-tal state; af-fects
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -980,7 +983,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [6]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -989,7 +991,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [7]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -997,6 +998,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1007,11 +1010,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [9]
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -1019,6 +1017,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [10]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1028,12 +1028,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [11]
-Overfull \hbox (13.56294pt too wide) in paragraph at lines 450--461
- [] 
- []
-
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1042,6 +1036,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [12]
+Overfull \hbox (13.56294pt too wide) in paragraph at lines 470--481
+ [] 
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1052,7 +1049,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [13]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -1060,47 +1056,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-[]\OT1/cmr/m/n/12 Defeated the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-[]\OT1/cmr/m/n/12 Chose peace
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-[]\OT1/cmr/m/n/12 Pack fell in
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-\OT1/cmr/m/n/12 harsh win-ter,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-[]\OT1/cmr/m/n/12 Quality over
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-\OT1/cmr/m/n/12 quan-tity, leg-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-[]\OT1/cmr/m/n/12 United two
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
-\OT1/cmr/m/n/12 packs through
- []
-
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1109,56 +1064,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 610--610
-[]\OT1/cmr/m/n/12 Conquered
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 610--610
-\OT1/cmr/m/n/12 wilder-ness
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 610--610
-\OT1/cmr/m/n/12 through pure
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 610--610
-\OT1/cmr/m/n/12 cau-tion and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 610--610
-[]\OT1/cmr/m/n/12 Persevered
- []
-
-
-Underfull \hbox (badness 3884) in paragraph at lines 610--610
-\OT1/cmr/m/n/12 through im-pos-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-[]\OT1/cmr/m/n/12 Most pow-er-ful
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-\OT1/cmr/m/n/12 pack in the
- []
-
-
-Underfull \hbox (badness 7963) in paragraph at lines 633--633
-[]\OT1/cmr/m/n/12 Decisive ac-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 633--633
-[]\OT1/cmr/m/n/12 Wisdom and
- []
-
-
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 573.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 574.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1169,7 +1078,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [16]
 
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -1178,6 +1086,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [17]
 
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1185,42 +1100,260 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[18] (./wolf_pack_survival_report.aux)
+[19]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[21]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[22]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[23]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[24]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[25]
+Overfull \hbox (28.46797pt too wide) in paragraph at lines 1067--1068
+[]\OT1/cmr/bx/n/12 Solution: \OT1/cmr/m/n/12 Added val-i-da-tion in \OT1/cmtt/m
+/n/12 updateHealth()\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 updateHunger()\OT1/cmr/m
+/n/12 , and \OT1/cmtt/m/n/12 updateEnergy()
+ []
+
+
+Overfull \hbox (1.81386pt too wide) in paragraph at lines 1074--1075
+[]\OT1/cmr/bx/n/12 Solution: \OT1/cmr/m/n/12 Im-ple-mented proper deep copy and
+ cleanup in \OT1/cmtt/m/n/12 GameStack \OT1/cmr/m/n/12 and \OT1/cmtt/m/n/12 Inv
+entory
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[26]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+[]\OT1/cmr/m/n/12 Defeated the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+[]\OT1/cmr/m/n/12 Chose peace
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+[]\OT1/cmr/m/n/12 Pack fell in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+\OT1/cmr/m/n/12 harsh win-ter,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+[]\OT1/cmr/m/n/12 Quality over
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+\OT1/cmr/m/n/12 quan-tity, leg-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+[]\OT1/cmr/m/n/12 United two
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1204
+\OT1/cmr/m/n/12 packs through
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
+[]\OT1/cmr/m/n/12 Conquered
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
+\OT1/cmr/m/n/12 wilder-ness
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
+\OT1/cmr/m/n/12 through pure
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
+\OT1/cmr/m/n/12 cau-tion and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1234
+[]\OT1/cmr/m/n/12 Persevered
+ []
+
+
+Underfull \hbox (badness 3884) in paragraph at lines 1234--1234
+\OT1/cmr/m/n/12 through im-pos-
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 1257--1257
+[]\OT1/cmr/m/n/12 Most pow-er-ful
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1257--1257
+\OT1/cmr/m/n/12 pack in the
+ []
+
+
+Underfull \hbox (badness 7963) in paragraph at lines 1257--1257
+[]\OT1/cmr/m/n/12 Decisive ac-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1257--1257
+[]\OT1/cmr/m/n/12 Wisdom and
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[30]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[31]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[32]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[33]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[34] (./wolf_pack_survival_report.aux)
  ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-14>
  ***********
-
-
-Package rerunfilecheck Warning: File `wolf_pack_survival_report.out' has change
-d.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `wolf_pack_survival_report.out':
-(rerunfilecheck)             Before: 0D254CF696DAFF6F86EBA4D902002243;4382
-(rerunfilecheck)             After:  7AE017681D4803DE7CB76DB5F76F48B7;4392.
+Package rerunfilecheck Info: File `wolf_pack_survival_report.out' has not chang
+ed.
+(rerunfilecheck)             Checksum: F85EE0A5CA11335EC424D950AD78D090;7642.
  ) 
 Here is how much of TeX's memory you used:
- 27040 strings out of 467748
- 523279 string characters out of 5429607
- 1113846 words of memory out of 5000000
- 55235 multiletter control sequences out of 15000+600000
- 635288 words of font info for 68 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 84i,11n,97p,818b,999s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfrm1200.pfb>
-Output written on wolf_pack_survival_report.pdf (19 pages, 142031 bytes).
+ 27963 strings out of 469476
+ 533420 string characters out of 5468988
+ 1421859 words of memory out of 5000000
+ 55822 multiletter control sequences out of 15000+600000
+ 635456 words of font info for 69 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 84i,12n,104p,890b,2210s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/ayyan/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600
+pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/symbols/msam10.pfb>
+Output written on wolf_pack_survival_report.pdf (35 pages, 222592 bytes).
 PDF statistics:
- 272 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
- 205 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 762 PDF objects out of 1000 (max. 8388607)
+ 699 compressed objects within 7 object streams
+ 345 named destinations out of 1000 (max. 500000)
+ 349 words of extra memory for PDF output out of 10000 (max. 10000000)
 
