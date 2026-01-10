@@ -710,12 +710,12 @@ void showMenu() {
 ╚═══════════════════════════════════════════╝
 )" << RESET << std::endl;
 
-    std::cout << "  " << BOLD << GREEN << "▶ Start New Game (Terminal)" << RESET << std::endl;
-    std::cout << "    Load Game (Terminal)" << std::endl;
-    std::cout << "  " << BOLD << GREEN << "▶ Start New Game (GUI)" << RESET << std::endl;
-    std::cout << "    Load Game (GUI)" << std::endl;
-    std::cout << "  " << YELLOW << "⚙️ Settings" << RESET << std::endl;
-    std::cout << "  " << RED << "❌ Quit" << RESET << std::endl;
+    std::cout << "  " << BOLD << GREEN << "1.▶ Start New Game (Terminal)" << RESET << std::endl;
+    std::cout << "    2.Load Game (Terminal)" << std::endl;
+    std::cout << "  " << BOLD << GREEN << "3.▶ Start New Game (GUI)" << RESET << std::endl;
+    std::cout << "    4.Load Game (GUI)" << std::endl;
+    std::cout << "  " << YELLOW << "5.⚙️ Settings" << RESET << std::endl;
+    std::cout << "  " << RED << "6.❌ Quit" << RESET << std::endl;
     std::cout << std::endl << CYAN << "Choose an option: " << RESET;
 }
 
@@ -728,7 +728,7 @@ void showSettings() {
 ╚═══════════════════════════════════════════╝
 )" << RESET << std::endl;
 
-    std::cout << "  " << GREEN << "⚔️ Difficulty: " << RESET;
+    std::cout << "  " << GREEN << "1.⚔️ Difficulty: " << RESET;
     switch (difficulty) {
         case EASY: std::cout << GREEN << "[EASY]" << RESET; break;
         case NORMAL: std::cout << YELLOW << "[NORMAL]" << RESET; break;
@@ -736,7 +736,7 @@ void showSettings() {
     }
     std::cout << std::endl;
 
-    std::cout << "  " << BLUE << "📖 Storyline: " << RESET;
+    std::cout << "  " << BLUE << "2.📖 Storyline: " << RESET;
     switch (storyline) {
         case CLASSIC: std::cout << CYAN << "[CLASSIC]" << RESET; break;
         case SURVIVAL: std::cout << GREEN << "[SURVIVAL]" << RESET; break;
@@ -744,7 +744,7 @@ void showSettings() {
     }
     std::cout << std::endl;
 
-    std::cout << std::endl << "  " << RED << "⬅️ Back" << RESET << std::endl;
+    std::cout << std::endl << "  " << RED << "3.⬅️ Back" << RESET << std::endl;
     std::cout << std::endl << CYAN << "Choose an option: " << RESET;
 }
 

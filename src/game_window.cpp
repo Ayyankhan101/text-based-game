@@ -238,14 +238,8 @@ void GameWindow::setupCentralWidget() {
 
     // Create title with wolf ASCII art
     QLabel* titleLabel = new QLabel(centralWidget);
-    titleLabel->setText(
-        "🌲🌲🌲 WOLF PACK SURVIVAL ADVENTURE 🌲🌲🌲\n"
-        "           /\\   /\\   \n"
-        "          (  . .)  \n"
-        "           )   (   \n"
-        "          (  v  )  \n"
-        "         ^^  ^  ^^"
-    );
+ titleLabel->setText(R"(🌲🌲🌲 WOLF PACK SURVIVAL ADVENTURE 🌲🌲🌲)");
+
     titleLabel->setAlignment(Qt::AlignCenter);
     titleLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #f39c12; padding: 10px;");
     mainLayout->addWidget(titleLabel);
@@ -301,8 +295,8 @@ void GameWindow::setupCentralWidget() {
 
     // Animated wolf graphic area
     wolfGraphic = new QLabel(centralWidget);
-    wolfGraphic->setMinimumSize(200, 200);
-    wolfGraphic->setMaximumSize(200, 200);
+    wolfGraphic->setMinimumSize(800, 200);
+    wolfGraphic->setMaximumSize(800, 200);
     wolfGraphic->setStyleSheet(R"(
         background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
             stop:0 #27ae60, stop:0.5 #2ecc71, stop:1 #27ae60);

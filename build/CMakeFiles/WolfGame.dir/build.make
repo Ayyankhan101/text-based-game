@@ -228,11 +228,11 @@ WolfGame: CMakeFiles/WolfGame.dir/src/priority_queue.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/include/moc_game_window.cpp.o
 WolfGame: CMakeFiles/WolfGame.dir/build.make
 WolfGame: CMakeFiles/WolfGame.dir/compiler_depend.ts
-WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.8.2
-WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.8.2
+WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Widgets.so.6.9.2
+WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.9.2
 WolfGame: /usr/lib/x86_64-linux-gnu/libGLX.so
 WolfGame: /usr/lib/x86_64-linux-gnu/libOpenGL.so
-WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.8.2
+WolfGame: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.9.2
 WolfGame: CMakeFiles/WolfGame.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ayyan/text-based-game/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable WolfGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/WolfGame.dir/link.txt --verbose=$(VERBOSE)
